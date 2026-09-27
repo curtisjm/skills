@@ -9,8 +9,8 @@ You are creating a phased implementation plan based on research findings and des
 
 ## Input
 
-- If only a directory is provided, or a directory is not provided, check the task's artifact directory from your prompt: `ls -La .humanlayer/tasks/<task slug>`. Do NOT use grep or glob or `ls` or `ls -l`, as the directory may be a symlink.
-- If not directory is provided, and you do not know the task's artifact directory, you should ask the user what artifacts they would like for you to create the outline from.
+- If only a directory is provided, or a directory is not provided, check the task directory: `ls -la {TASKDIR}`.
+- If no directory is provided, and you do not know the task directory, you should ask the user what documents they would like for you to create the outline from.
 
 ## Steps
 
@@ -21,7 +21,7 @@ You are creating a phased implementation plan based on research findings and des
    - **DO NOT read research questions documents** - research questions are inputs to the research phase only. Use the completed research document instead.
 
 2. **Check for related task content**:
-   - If a path in `.humanlayer/tasks/TASKNAME` is mentioned, use `ls -La .humanlayer/tasks/TASKNAME`
+   - If a path in `{TASKDIR}` is mentioned, use `ls -la {TASKDIR}`
    - Read all files in the task directory except research questions documents
    - Read relevant files mentioned in the task files
 
@@ -86,21 +86,13 @@ These are intended to be **illustrative**. Not all work lends itself to this typ
    - Format: `- [ ] Phase N: [Title]`
    - These get checked off as phases complete during implementation
 
-
 ## Output Document
 
 1. **Read the structure outline template**
 
 `Read({SKILLBASE}/references/structure_outline_template.md)`
 
-2. **Write the structure outline** to `.humanlayer/tasks/ENG-XXXX-description/NN-structure-outline-DESCRIPTION.md`
-   - First, find the task directory: `ls -La .humanlayer/tasks | grep -i "eng-XXXX"`
-   - If the directory doesn't exist, create: `.humanlayer/tasks/ENG-XXXX-description/`
-   - Format: `NN-structure-outline-DESCRIPTION.md` where NN is a zero-padded chronological index and DESCRIPTION is a 2-4 word kebab-case slug
-   - **Chronological indexing**: `ls -La` the task directory, find the highest existing NN- prefix, and use the next number. First document = `01-`, second = `02-`, etc.
-   - Directory naming:
-     - With ticket: `.humanlayer/tasks/ENG-1478-parent-child-tracking/04-structure-outline-parent-child-tracking.md`
-     - Without ticket: `.humanlayer/tasks/improve-error-handling/04-structure-outline-error-handling.md`
+2. **Write the structure outline** to `{TASKDIR}/structure-outline.md`
 
 3. **Check whether you are already in a worktree**:
 
@@ -122,7 +114,7 @@ Bash(git rev-parse --git-dir)
 
 Never suggest setting up a worktree when you are already in one.
 
-5. Respond following the template exactly. Do not include a summary or other information. Include cloud permalinks if available.
+5. Respond following the template exactly. Do not include a summary or other information.
 
 ## Work with the user to iterate on the design
 
@@ -135,13 +127,6 @@ Never suggest setting up a worktree when you are already in one.
    - Update the structure according to the user's feedback
 
 <guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-
 ## Markdown Formatting
 
 When writing markdown files that contain code blocks showing other markdown (like README examples or SKILL.md templates), use 4 backticks (````) for the outer fence so inner 3-backtick code blocks don't prematurely close it:
@@ -156,9 +141,8 @@ npm install example
 
 ## Phase changes should be concise but clear
 
-The goal of this document is to be concise and human readable. 
+The goal of this document is to be concise and human readable.
 Be tasteful and thoughtful about how and where you include code snippets, and prefer highlighting signature changes rather than entire code blocks, unless the user explicitly asks for them. The structure outline is our "c header files", the plan will include the function definitions.
-
 
 ## Phase Validation Design
 
@@ -166,7 +150,7 @@ Each phase has a `### Validation` section with two subsections:
 - `#### Automated Verification`: runnable commands (typecheck, tests, lint)
 - `#### Manual Verification`: steps requiring human judgment
 
-Not every phase requires manual validation — don't add manual steps just to have them. 
+Not every phase requires manual validation — don't add manual steps just to have them.
 If a phase cannot be manually checked, it may be too small or not vertical enough.
 The goal is to catch issues early, not at the end of a 1000+ line change.
 

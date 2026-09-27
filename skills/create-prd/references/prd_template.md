@@ -1,5 +1,5 @@
 ---
-task: eng-xxxx-description
+task: [task slug]
 type: design-prd
 repo: [current repository]
 branch: [current branch name]
@@ -18,7 +18,6 @@ sha: [result of git rev-parse HEAD]
 - ..
 
 [if appropriate, mermaid diagram of logic flow or user workflow or business process that demonstrates the "Problem to Solve"]
-
 
 ### What does business success look like, and how can we measure it?
 
@@ -52,10 +51,8 @@ sha: [result of git rev-parse HEAD]
 
 [if appropriate, mermaid diagram of logic flow or user workflow or business process that demonstrates the "Proposed Solution"]
 
-[if appropriate, inline html mockup]
-```task-artifact
-.humanlayer/tasks/{task-slug}/mockup-{description}.html
-```
+[if appropriate, link to an html mockup]
+[{TASKDIR}/mockup-{description}.html]({TASKDIR}/mockup-{description}.html)
 
 [Explanation of mockup and any behavioral notes]
 

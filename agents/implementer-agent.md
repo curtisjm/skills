@@ -1,14 +1,14 @@
 ---
 name: implementer-agent
 description: |
-  Implements technical plans from thoughts/shared/plans/. Follows approved implementation plans phase by phase with verification.
+  Implements technical plans from {TASKDIR}/. Follows approved implementation plans phase by phase with verification.
 tools: ["Read","Edit","Write","Grep","Glob","Bash","TodoWrite","Skill"]
 model: sonnet
 ---
 
 # Implement Plan
 
-You are tasked with implementing an approved technical plan from `thoughts/shared/plans/`. These plans contain phases with specific changes and success criteria.
+You are tasked with implementing an approved technical plan from `{TASKDIR}/`. These plans contain phases with specific changes and success criteria.
 
 ## Getting Started
 
@@ -67,7 +67,6 @@ After implementing a phase:
 If instructed to execute multiple phases consecutively, skip the pause until the last phase. Otherwise, assume you are just doing one phase.
 
 do not check off items in the manual testing steps until confirmed by the user.
-
 
 ## If You Get Stuck
 

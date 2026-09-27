@@ -1,5 +1,5 @@
 ---
-task: eng-xxxx-description
+task: [task slug]
 type: design-discussion
 repo: [current repository]
 branch: [current branch name]
@@ -49,7 +49,6 @@ Reccomendation: [....]
 
 ...
 
-
 ### Resolved Design Questions
 
 #### [title resolved question]
@@ -58,11 +57,9 @@ Reccomendation: [....]
 
 [brief summary of options not chosen with rationale]
 
-
 #### [ title second resolved question]
 
 ...
-
 
 ### Patterns to follow
 

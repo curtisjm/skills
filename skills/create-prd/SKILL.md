@@ -19,20 +19,20 @@ You run the PRD as a guided conversation. You settle the **foundation** - the pr
 
 **The doc is always a cohesive description of what's known - never a log.** At any point, the PRD should read like a spec someone wrote on purpose: high-level, coherent, and current - not a list of answers, and not a changelog of decisions. Treat each answer as a reason to re-paint: restructure, reorder, and rebuild the section so it stays a clean, unified description of everything decided so far. **Rewriting entire sections as you go is expected, not exceptional.**
 
-**Show, don't tell.** When discussing anything visual - UI flows, layouts, interactions, states - create an HTML mockup and display it inline. A quick sketch communicates more than paragraphs of prose. Keep mockups up to date as decisions evolve.
+**Show, don't tell.** When discussing anything visual - UI flows, layouts, interactions, states - create an HTML mockup and link to it. A quick sketch communicates more than paragraphs of prose. Keep mockups up to date as decisions evolve.
 
 **Make it read like a document a human designed for other humans.** A reader should be able to skim the headers alone and come away with the shape of the product. Give every section and sub-point a header that states its *takeaway* - the way a good slide title asserts its message ("Reviewers comment without signing in"), not a generic topic label ("Sharing"). Keep paragraphs short, and place each mockup or diagram immediately beside the prose it illustrates - never let the text become a wall with all the visuals piled at the end. Lead with the point, then support it.
 
 **Stay in product space.** Only ask product questions - user experience, functionality, and behavior. If you find yourself reaching for database schemas, storage locations, or implementation architecture, note it in a "Deferred to TDD" section and move on.
 
-**Get more context when you need it.** When a decision depends on how the product or codebase actually works, spawn Agent() calls (codebase-locator, codebase-analyzer, codebase-pattern-finder, web-search-researcher, or the library researcher) before presenting options. Fold any new findings back into the research artifact.
+**Get more context when you need it.** When a decision depends on how the product or codebase actually works, spawn Agent() calls (codebase-locator, codebase-analyzer, codebase-pattern-finder, web-search-researcher) before presenting options. Fold any new findings back into the research artifact.
 
 ---
 
 <step index="1" name="understand-the-context">
 
 <instructions>
-- Find the task directory: `ls -La .humanlayer/tasks/TASKNAME` (use Bash `ls -La` - not Grep/Glob - the directory may be a symlink).
+- Find the task directory: `ls -la {TASKDIR}`.
 - Read every relevant file in the task directory **fully** (Read with no limit/offset), excluding research-questions docs.
 - Read the PRD template: `Read({SKILLBASE}/references/prd_template.md)`.
 </instructions>
@@ -59,7 +59,7 @@ If the work touches UI/UX, your mockups should match the **user's product** - it
 <step index="2" name="write-the-skeleton">
 
 <instructions>
-Write the doc to `.humanlayer/tasks/ENG-XXXX-description/NN-prd-DESCRIPTION.md` (next zero-padded `NN-` index in the task dir; `DESCRIPTION` is a 2-4 word kebab-case slug).
+Write the doc to `{TASKDIR}/prd.md`.
 
 **Keep the skeleton as minimal as possible. No preamble, no setup, no summaries.** The faster you reach the first question, the more the user stays engaged in building the PRD. Write only:
 - Frontmatter with `type: design-prd`, plus the top-level title
@@ -68,7 +68,7 @@ Write the doc to `.humanlayer/tasks/ENG-XXXX-description/NN-prd-DESCRIPTION.md` 
 
 Then respond immediately by opening the foundation with the **first question** - at most one short orienting line, then the question. Quote the actual "Problem to Solve" content you drafted so the user reacts to the exact wording, not a summary. For example:
 
-> I've started the PRD - you can view it in the right sidebar. First question: does this **Problem to Solve** sound right?
+> I've started the PRD at `{TASKDIR}/prd.md`. First question: does this **Problem to Solve** sound right?
 >
 > > ...your statement of the problem...
 >
@@ -111,7 +111,7 @@ Now grill the solution. **Ask exactly one question per message, walking down eac
 
 For each decision: present a single decision with options and your recommendation (for UI questions, show the options as mockups - "Option A vs Option B" with an inline mockup for each) -> work back and forth until the decision is resolved (clarifying questions and pushback are part of this, not a cue to patch) -> only then re-work the **Solution Details** so it absorbs the decision, keeping it one coherent spec. Reach for a mockup or diagram whenever it captures the decision best.
 
-When an answer reshapes the work, touch every affected section in the same pass: refine **Proposed Solution** if the high-level approach changed, move ruled-out paths into **Out of Scope**, and keep mockups in sync with the prose. If the user requests changes to a mockup, pause the question flow, iterate on the mockup until they approve it, then resume. When a mockup is approved, embed it in the document with a `task-artifact` block if it isn't already there.
+When an answer reshapes the work, touch every affected section in the same pass: refine **Proposed Solution** if the high-level approach changed, move ruled-out paths into **Out of Scope**, and keep mockups in sync with the prose. If the user requests changes to a mockup, pause the question flow, iterate on the mockup until they approve it, then resume. When a mockup is approved, link it from the document if it isn't already linked.
 
 **Stay in product space.** Only ask product questions. If a question is really about schemas, storage, or implementation architecture, note it under a "Deferred to TDD" section and move on.
 </instructions>
@@ -121,14 +121,12 @@ When an answer reshapes the work, touch every affected section in the same pass:
 
 Mockups are how you communicate visually - use them liberally when discussing UI.
 
-- Write HTML files to `.humanlayer/tasks/{task-slug}/mockup-{description}.html`
+- Write HTML files to `{TASKDIR}/mockup-{description}.html`
 - Follow the **user's product** design system (colors, fonts, components) found in Step 1; use realistic labels, not lorem ipsum
 - Keep each mockup focused on the decision at hand
 
-Display inline:
-```task-artifact
-.humanlayer/tasks/{task-slug}/mockup-{description}.html
-```
+Link from the document:
+[{TASKDIR}/mockup-{description}.html]({TASKDIR}/mockup-{description}.html)
 
 Update mockups as decisions evolve; the final PRD should embed the "winning" versions.
 </guidance>
@@ -150,7 +148,7 @@ Wait for the user's approval and incorporate any fixes they raise.
 <step index="6" name="wrap-up">
 
 <instructions>
-When the solution is approved, read the final answer template and follow it exactly (it points to the next step - the TDD): `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`. Include cloud permalinks if available.
+When the solution is approved, read the final answer template and follow it exactly (it points to the next step - the TDD): `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`.
 </instructions>
 
 </step>

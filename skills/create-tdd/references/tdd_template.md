@@ -1,5 +1,5 @@
 ---
-task: eng-xxxx-description
+task: [task slug]
 type: design-tdd
 repo: [current repository]
 branch: [current branch name]

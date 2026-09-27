@@ -5,22 +5,22 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Phased Implementation Orchestrator
 
-You are responsible for orchestrating the phased implementation of technical plans from `.humanlayer/tasks/`. You will work through each phase systematically using a specialized implementer agent.
+You are responsible for orchestrating the phased implementation of technical plans from `{TASKDIR}/`. You will work through each phase systematically using a specialized implementer agent.
 
 ## Workflow
 
 For each phase in the implementation plan:
 
 ### 0. Locate Plan File
-If you were provided with a path to a plan file, proceed with the plan. 
-If you were provided with a task artifact directory like `.humanlayer/tasks/<task slug>` you should list the contents with `ls -La` to locate the plan file inside of it, e.g. `ls -La .humanlayer/tasks/<task slug>`. Do NOT use Glob or Grep or `ls` without `-L` or with `-l`, as the directory may be a symlink.
+If you were provided with a path to a plan file, proceed with the plan.
+If you were provided with a task directory like `{TASKDIR}` you should list the contents with `ls -la` to locate the plan file inside of it, e.g. `ls -la {TASKDIR}`.
 
 ### 1. Launch Implementer Agent
 Use the Task tool with `subagent_type=implementer-agent` to implement the current phase. Provide clear instructions about which phase to implement.
 
 Example:
 ```
-Implement Phase [N] of the plan at .humanlayer/tasks/ENG-XXXX-description/NN-plan-DESCRIPTION.md
+Implement Phase [N] of the plan at {TASKDIR}/plan.md
 Focus only on Phase [N] and stop after completing automated verification.
 ```
 
@@ -64,7 +64,6 @@ Wait for the human to:
 
 ### 6. Commit the changes
 - Create a new commit for the changes
-- remember - the .humanlayer/tasks/ directory should not be committed, its a symlink to another repo
 
 ### 7. Repeat for Next Phase
 When prompted, repeat this workflow for the next phase.

@@ -9,9 +9,9 @@ You are iterating on an existing research questions document based on user feedb
 
 ## Input
 
-- `docPath`: Path to the existing research questions document (e.g., `.humanlayer/tasks/ENG-XXXX-description/NN-research-questions-DESCRIPTION.md`)
+- `docPath`: Path to the existing research questions document (e.g., `{TASKDIR}/research-questions.md`)
 - Optionally, a ticket file path containing comments with feedback
-- If only a directory is provided, check the task's artifact directory for a research questions document: `ls -La .humanlayer/tasks/<task slug>` from your prompt. Do NOT use grep or glob or run ls without `-L` or with `-l`, as the directory may be a symlink.
+- If only a directory is provided, check the task directory for a research questions document: `ls -la {TASKDIR}`.
 
 ## Steps
 
@@ -62,10 +62,10 @@ Preserve any **Key Context Pointers** section (links, repositories, libraries, d
 CRITICAL - DO NOT LEAK ANY IMPLEMENTATION DETAILS OR THE NATURE OF YOUR TASK INTO THE QUESTION LIST. NO "HOW WOULD WE XYZ" - ONLY "HOW DOES IT WORK"
 
 <guidance>
-If the ticket might involve frontend work or new/updated visual components, ensure research questions cover the project's design system. 
+If the ticket might involve frontend work or new/updated visual components, ensure research questions cover the project's design system.
 
 Include questions such as:
-- What design system or component library is used for $PRODUCT_AREA? 
+- What design system or component library is used for $PRODUCT_AREA?
 - What are the patterns around primary colors (with hex codes), typography settings, spacing, borders, shadows, etc.?
 - What theming system exists, if any?
 
@@ -74,11 +74,3 @@ Consider carefully if UI or frontend changes are involved, even if not explicity
 This is the one question category that does not need to be tailored to the specific UI work described in the ticket - if we're making frontend changes, we need to understand the design system and patterns for one-off html mockups.
 </guidance>
 
-<guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-</guidance>

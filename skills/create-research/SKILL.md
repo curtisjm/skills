@@ -18,16 +18,16 @@ You are tasked with conducting comprehensive research across the codebase to ans
 
 ## Initial Setup:
 
-When this command is invoked, check the task artifact directory from your system prompt for documents like `*research-questions*.md` with `ls -La` (the directory may be a symlink - do NOT use regular `ls` or grep/glob tools). If you find one, read it and proceed with the contents as the research query. 
+When this command is invoked, check the task directory for documents like `research-questions.md` with `ls -la`. If you find one, read it and proceed with the contents as the research query.
 
-If you see several, ask the user which one to proceed with before reading any of them. 
+If you see several, ask the user which one to proceed with before reading any of them.
 
-If you do not know what the task artifact directory is from your system prompt, respond with:
+If you do not know what the task directory is, respond with:
 ```
 I'm ready to research the codebase. Please provide your research question or area of interest, and I'll analyze it thoroughly by exploring relevant components and connections.
 ```
 
-**IMPORTANT**: You may NEVER read `ticket.md`/`task.md` files or other files from the artifact directory which do not match the `research-questions` pattern above unless such a file is explicitly asked for by the user.
+**IMPORTANT**: You may NEVER read `ticket.md`/`task.md` files or other files from the task directory which do not match the `research-questions` pattern above unless such a file is explicitly asked for by the user.
 
 Then wait for the user's research query.
 
@@ -50,16 +50,15 @@ Then wait for the user's research query.
 3. **Spawn parallel sub-agent tasks for comprehensive research:**
    - Create multiple Task agents to research different aspects concurrently
    - Use only the specialized research agents listed below. Do not use other agent types, including `general-purpose`, `Explore`, or `Plan`.
-   - Agent names differ by runtime. Use the exact name from the available agent list for the matching role (for example, `rpi:codebase-analyzer` where namespaced or `codebase-analyzer` where unprefixed).
+   - Agent names differ by runtime. Use the exact name from the available agent list for the matching role.
 
    **For codebase research:**
    - Use the **codebase-locator** agent to find WHERE files and components live
-   - Use the **codebase-analyzer** agent to understand HOW specific code works 
-   - Use the **codebase-pattern-finder** agent to find examples of existing patterns 
+   - Use the **codebase-analyzer** agent to understand HOW specific code works
+   - Use the **codebase-pattern-finder** agent to find examples of existing patterns
 
    **For web research and researching libraries & dependencies (if applicable):**
    - Use the **web-search-researcher** agent for external documentation and resources
-   - You _may_ see a humanlayer library researcher tool. If you do, you should use this to answer any research questions about dependencies and libraries that are in scope for the research. If the tool is not present, do not mention it.
    - IF you use web-research agents, instruct them to return LINKS with their findings, and please INCLUDE those links in your final report
 
    The key is to use these agents intelligently:
@@ -77,19 +76,11 @@ Then wait for the user's research query.
    - Prioritize live codebase findings as primary source of truth
    - Connect findings across different components
    - Include specific file paths and line numbers for reference
-   - Verify all rpi/ paths are correct (task-specific files go in .humanlayer/tasks/)
    - Highlight patterns, connections, and architectural decisions
    - Answer the user's specific questions with concrete evidence
 
 5. **Gather metadata for the research document:**
-   - Filename: `.humanlayer/tasks/TASKNAME/NN-research-DESCRIPTION.md`
-     - First, check the task directory in your system prompt. If you do not see it, find the task directory: `ls -La .humanlayer/tasks | grep -i "eng-XXXX"`
-     - If the directory doesn't exist, create: `.humanlayer/tasks/ENG-XXXX-description/`
-     - Format: `NN-research-DESCRIPTION.md` where NN is a zero-padded chronological index and DESCRIPTION is a 2-4 word kebab-case slug
-     - **Chronological indexing**: `ls -La` the task directory, find the highest existing NN- prefix, and use the next number. First document = `01-`, second = `02-`, etc.
-     - Directory naming:
-       - With ticket: `.humanlayer/tasks/ENG-1478-parent-child-tracking/02-research-parent-child-tracking.md`
-       - Without ticket: `.humanlayer/tasks/authentication-flow/02-research-auth-flow.md`
+   - Filename: `{TASKDIR}/research.md`
 
 6. **Generate research document:**
    - Use the metadata gathered in step 4
@@ -97,24 +88,22 @@ Then wait for the user's research query.
 
    `Read({SKILLBASE}/references/research_template.md)`
 
-   - Write the document to `.humanlayer/tasks/TASKNAME/NN-research-DESCRIPTION.md`
+   - Write the document to `{TASKDIR}/research.md`
 
 7. **Attempt to answer open questions**
    - if there are open questions in the doc you write, dispatch subagents to additional targeted research AFTER you write the doc
-   - update the doc with your findings, removing and open questions that now have answers - don't append to the end, 
-   - do at most one additional pass to find more information, if your second group of subagents can't find all the answers, leave the remaining questions as open and proceed to the final answer 
+   - update the doc with your findings, removing and open questions that now have answers - don't append to the end,
+   - do at most one additional pass to find more information, if your second group of subagents can't find all the answers, leave the remaining questions as open and proceed to the final answer
 
-8. **Note cloud permalinks:**
-   Cloud permalinks are automatically provided when you write artifacts. Include them in your final output.
-
-   For code references in the synclayer repo (if on main or pushed):
+8. **Note GitHub permalinks:**
+   For code references (if the commit is on main or pushed):
    - Get repo info: `gh repo view --json owner,name`
    - Create permalinks: `https://github.com/{owner}/{repo}/blob/{commit}/{file}#L{line}`
 
 9. **Respond to the user according to the template**
    - Read the final output template:
    `Read({SKILLBASE}/references/research_final_answer.md)`
-   - Respond following the template exactly, include cloud permalinks if you have them.
+   - Respond following the template exactly.
 
 10. **Handle follow-up questions:**
    - If the user has follow-up questions for you to investigate
@@ -163,7 +152,7 @@ prose it illustrates — never let the text become a wall with all the visuals p
 
 Reach for a high-bandwidth visual whenever it conveys structure faster than prose would. Don't rely
 solely on bullet lists — mix prose, tables, diagrams, and code. Technical depth and thoroughness
-must not be sacrificed for readability — do both. 
+must not be sacrificed for readability — do both.
 
 Pick the views that make each part of the story clearest:
 
@@ -257,8 +246,8 @@ Pick the views that make each part of the story clearest:
   - ALWAYS wait for all sub-agents to complete before synthesizing (step 4)
   - ALWAYS gather metadata before writing the document (step 5 before step 6)
   - NEVER write the research document with placeholder values
-- **Path handling**: Task-specific research goes in .humanlayer/tasks/
-  - Use `.humanlayer/tasks/ENG-XXXX-description/NN-research-DESCRIPTION.md` for task research
+- **Path handling**: Task-specific research goes in {TASKDIR}/
+  - Use `{TASKDIR}/research.md` for task research
 
 ## Response
 
@@ -277,13 +266,6 @@ There are N open questions that you should review, you can
 - tell me they are irrelevant and I'll remove them
 ```
 </important>
-
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
 
 ## Markdown Formatting
 

@@ -11,9 +11,8 @@ An implementation plan was implemented and a user has follow-on feedback - it mi
 
 1. **Read all input files FULLY**:
    - Use Read tool WITHOUT limit/offset to read the plan document and any other provided paths
-   - If a ticket like ENG-1234 or a task is mentioned, find the task directory: `ls -La .humanlayer/tasks/ | grep -i TEAMID-XXX` - you must use Bash(ls | grep) for this as your glob/grep tools don't traverse symlinks
-   - `ls -La .humanlayer/tasks/TASKNAME` to find all related documents in the task directory. Do NOT use the grep or glob tools or `ls` without `-L` or with a lowercase `-l` as the directory may be a symlink.
-   - Read the plan file (e.g. `NN-plan-DESCRIPTION.md`) to understand the work that was prescribed
+   - `ls -la {TASKDIR}` to find all related documents in the task directory.
+   - Read the plan file (e.g. `plan.md`) to understand the work that was prescribed
    - Read prior artifacts in the task directory for context: `ticket.md` or `task.md`, research documents, design discussion, and structure outline
    - **If no plan exists**, read the ticket, structure outline, design discussion, and research documents instead
 
@@ -22,14 +21,14 @@ An implementation plan was implemented and a user has follow-on feedback - it mi
    - find the commit that marks the end of implementation
    - read and understand and commits since then - the content of what changed
    - understand what phases of the plan were already implemented - the user might be giving you feedback in the middle of a plan implementation
-   - **If the user wants to implement an unstarted phase**: use `Agent` tool with `subagent_type: "rpi:implementer-agent"` — don't implement phases inline. Example prompt when no plan exists:
+   - **If the user wants to implement an unstarted phase**: use `Agent` tool with `subagent_type: "implementer-agent"` — don't implement phases inline. Example prompt when no plan exists:
      <example_subagent_prompt>
      Implement Phase [N] from the structure outline at [outline path]
-     
+
      Companion documents (read these for context):
      - Research: [research path]
      - Design discussion: [design path]
-     
+
      Structure outline takes precedence if documents conflict.
      </example_subagent_prompt>
 
@@ -53,15 +52,7 @@ An implementation plan was implemented and a user has follow-on feedback - it mi
 6. **Update the user**
    - Respond following the template exactly. Include next steps for verification.
 
-
 <guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-
 ## Markdown Formatting
 
 When writing markdown files that contain code blocks showing other markdown (like README examples or SKILL.md templates), use 4 backticks (````) for the outer fence so inner 3-backtick code blocks don't prematurely close it:

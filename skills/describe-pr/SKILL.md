@@ -39,22 +39,14 @@ Create or update the pull request for the current task with a concise descriptio
    - Keep each view focused on the calls, files, fields, components, and boundaries a reviewer needs. Omit categories that did not change.
    - Do not add walkthrough artifacts, exhaustive implementation narratives, verification checklists, changelog text, or plan-deviation sections.
 
-5. Stamp the session trailer:
-   - Read the session deep-link from the environment with `printf '%s' "$HUMANLAYER_SESSION_URL"`. The daemon sets it for every session it runs, the same way it feeds the `HumanLayer-Session` commit trailer.
-   - When the environment value is empty, fall back to the branch commits: `git log {baseRefName}..HEAD --format=%B | grep -i '^humanlayer-session:' | head -1` and use the URL from the newest stamped commit. This covers a PR described outside the session that wrote the commits.
-   - When either source yields a URL, end the PR body with the session footer from the template: a horizontal rule, a `HumanLayer | open session` badge that links to the URL, and a hidden HTML comment whose middle line is exactly `HumanLayer-Session: {url}`. The comment is the machine-readable trailer, the same line the commit stamper writes, and it must be the last thing in the body.
-   - When neither source yields a URL, or the existing PR body already carries a `HumanLayer-Session:` line for this URL, add nothing. Never invent or guess a session URL.
-   - Keep the footer out of the body's prose, headings, and link line. It is attribution, not part of the description.
-
-6. Save and publish the description:
-   - Use `.humanlayer/tasks/{task-slug}/pr-description.md` when the task directory exists; otherwise use `.humanlayer/tasks/pr-{number}/description.md`.
+5. Save and publish the description:
+   - Write the description to `{TASKDIR}/pr-description.md`.
    - Update the PR with `gh pr edit {number} --body-file {output-path}`.
    - Confirm the update succeeded.
 
-7. Report completion:
-   - Read key task artifacts briefly to capture their cloud URLs.
+6. Report completion:
    - Read `{SKILLBASE}/references/describe_pr_final_answer.md`.
-   - Respond using that final answer template with the PR URL, saved description URL, and concise list of changed files.
+   - Respond using that final answer template with the PR URL, saved description path, and concise list of changed files.
 
 Always read and follow `{SKILLBASE}/references/pr_description_template.md`. Do not expand the PR body beyond that template.
 
