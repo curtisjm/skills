@@ -1,0 +1,146 @@
+# Workflow
+
+How a task moves from an idea to merged, promoted, validated code using the skills in this repo. Skills read this file for shared vocabulary; humans read it to know which skill to invoke next. The diagram at `docs/workflow-map.html` draws the same thing.
+
+T3 Code is the harness that runs the threads. A thread may run Claude or Codex; the skills do not care which. Skills refer to T3 tools by name (`t3_thread_launch`, `delegate_task`, `t3_thread_send`).
+
+## Placeholders
+
+- `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it.
+- `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it.
+- `{SKILLBASE}` — directory containing the current skill's `SKILL.md`. `{SKILLBASE}/references/...` are that skill's templates.
+- `{REPOBASENAME}` — basename of a repository directory. Repos live at `~/dev/valency/{REPOBASENAME}`.
+
+## Paths
+
+A **path** is the chain of steps a task follows. A **step** is one T3 thread running one skill. Every path ends the same way: a PR that has been through the review loop, merged by the user.
+
+| Path | When | Steps |
+|---|---|---|
+| Triage | Something came up; not scoping it now | `triage` → stop |
+| Quick | Small, understood, one PR | `quick-task` (one thread: mini research + plan in `task.md`, worktree, implement, review loop, `describe-pr`) |
+| Standard | Needs research and a plan | `task-start` → `create-research-questions` → `create-research` → `create-design-discussion` → `create-plan` → `publish` → `implement` → `close-task` |
+| Long | Standard, plus product and technical design docs | as Standard, with `create-prd` → `create-tdd` replacing `create-design-discussion` |
+
+Quick is chosen at entry. Standard vs Long is recommended by `create-research` and confirmed by the user. There is no greenfield path.
+
+Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference — Linear issue, GitHub issue, Asana task, URL — plus whatever the user says about it. Triage files a well-formed issue in the Linear triage project and stops; promoting it means invoking `task-start` or `quick-task` with that issue.
+
+### Relay
+
+Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
+
+## `task.md`
+
+Created by the entry skill, read first by every skill.
+
+```yaml
+---
+slug: hub-source-toggles
+path: standard          # quick | standard | long
+phase: plan             # the step currently running or last completed
+repos: [valency-mcp-server, valency-hub]
+source: https://linear.app/.../CUR-123     # entry reference, any tracker
+linear_project: Hub source toggles         # Standard/Long only
+linear_issue: CUR-123                      # Quick only, when source is a Linear issue; else absent
+created: 2026-10-04
+---
+```
+
+Body: `## Goal` (the user's words verbatim), `## Source` (issue text pulled in), `## Scope notes`, `## Decisions` (one line per ruling, appended by any step). Quick adds `## Research` and `## Plan`. No links to artifacts; each document owns its own.
+
+## Documents
+
+One document per type per task, no numeric prefixes: `research-questions.md`, `research.md`, `design-discussion.md`, `prd.md`, `tdd.md`, `plan.md`. If a second of the same type seems needed, ask.
+
+Every planning document is reviewed through Plannotator (`annotate --gate --json`) before the step hands off. Plan approval is the last planning gate.
+
+HTML artifacts (mockups, diagrams, explainers) live in `{TASKDIR}/html/` and are opened from disk. `publish-internal-artifact` is used only when the user explicitly asks to publish one.
+
+### Syncing to Linear
+
+On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project and kept identical to the local files. Each `create-*` skill re-syncs its document after the gate passes; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
+
+### `plan.md`
+
+The plan is read by the orchestrator, so it carries a table:
+
+| phase | id | repo | title | type | est. LOC |
+|---|---|---|---|---|---|
+| 1 | 1-1-add-toggle-column | valency-mcp-server | add toggle column | pr | 200 |
+| 1 | 1-2-hub-settings-ui | valency-hub | hub settings UI | pr | 600 |
+| 2 | 2-1-staging-pin | valency-foundation | staging pin | ops | 20 |
+| 2 | 2-2-staging-smoke | — | staging smoke | test | — |
+
+- A **phase** is a vertical slice: the set of items that can run in parallel. Phases are sequential. Two items that cannot run in parallel belong in different phases.
+- Each `pr` item targets under 1000 lines. Files it will touch may be named in prose as indicative, never as a binding list.
+- `type`: `pr` (code), `ops` (promotion pin PRs in `valency-foundation`, activation, database scripts — the prose row says which), `test` (verifying the real system: AWS logs, walking user flows; not writing more tests).
+- `## Rollout` states environments, promotion order and how each step is validated. Rollout items sit in the same table, either inside implementation phases or as phases of their own.
+- `## Phase transitions` states, with no default, one of: merge every phase before the next; stack all phases; mixed, annotated per phase. A stacked item names the single prior PR it branches from. An item depending on several prior PRs cannot stack.
+
+## Implementation
+
+`publish` runs unattended after plan approval: it creates the issue tree below from the plan table, moves the project to Implementing, and launches the orchestrator. Documents are already mirrored on the project by then (see Syncing to Linear).
+
+The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch`, each with its own worktree:
+
+- thread title `PR 1.2 hub settings UI` (`PROMO 2.1 …` / `TEST 2.2 …` for ops and test items)
+- `workspaceStrategy: {type: worktree, baseRef, branch}`; worktree `{TASKDIR}/repos/{REPOBASENAME}-1-2`, branch `{TASKSLUG}/1-2-hub-settings-ui`, base `origin/main` or the named parent PR branch when stacking
+- the launch creates the checkout and runs the repo setup script; the item thread never runs a worktree step and nothing is copied between worktrees (secrets come from AWS)
+
+All items of a phase launch together; there is no concurrency cap.
+
+An **item thread**: read its plan row and sub-issue → implement → inner loop (roborev refine and CodeRabbit CLI locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
+
+The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-plan`: read the phase's reports, apply what they change to `plan.md` and the next phase's sub-issue bodies, then dispatch the next phase — on its own if the plan stacks, otherwise when the user says go after merging. If its context grows long, `handoff` rolls it to a fresh thread.
+
+`revise-plan` rules:
+
+- `plan.md` is always the current plan and nothing else. No strikethroughs, no "changed from", no dated notes, no commentary about earlier versions.
+- Every change is recorded in `{TASKDIR}/plan-changelog.md`, newest first: when (after which phase, date), what changed (rows added, removed, re-estimated, moved between phases; prose sections rewritten), why (which report or ruling drove it), and anything the user must decide. One entry per revision.
+- Changes stay within the approved scope. A report that implies new scope or a different approach becomes a question to the user in the changelog entry and a pause, not a silent plan edit.
+- Completed phases are not rewritten; their reports are the record.
+- After the edit, `plan.md` and `plan-changelog.md` are re-synced to the Linear project.
+
+**Agents never merge.** The user merges every PR, including promotion pins, and runs every promotion action. An ops thread may open a production pin PR; opening is harmless.
+
+## Linear
+
+Linear is personal work management; the user is the only one on the team using it. Issue identifiers and links never appear in code, commits, PR titles or bodies, or branch names. There is no Linear↔GitHub integration.
+
+- Triage project collects unscoped issues.
+- Standard/Long: one project per task, created by `task-start`; documents mirrored onto it as they pass their gates; one issue per phase and one sub-issue per plan item, created by `publish`. Project statuses: Researching / Planning / Implementing / In Review / Blocked / Done.
+- Sub-issue flow, all written by the orchestrator: Todo → In Progress (thread launched) → In Review (PR open, loop converged) → Done (user reports the merge or tells the orchestrator to continue). Phase issue In Progress at its first item, Done when all sub-issues are Done.
+- Quick: no project. If `source` is a Linear issue, the Quick thread moves that issue In Progress → In Review in place and the user marks it Done at merge. Any other source means no Linear writes.
+
+## Gates
+
+Human: every planning document; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
+
+Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the review loop, `revise-plan` within scope.
+
+`close-task` is user-invoked after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro to the Linear project. Quick has no close; the merge is the close.
+
+## Skills
+
+User-invoked: entry points and step heads. Model-invoked: building blocks other skills call.
+
+| Skill | Kind | Status |
+|---|---|---|
+| `triage`, `task-start`, `quick-task` | user | to write |
+| `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
+| `iterate-*` | — | retire; folded into `create-*` |
+| `publish` | user | to write |
+| `implement` (orchestrator), item thread head | user | to write; replaces `implement-plan` |
+| `revise-plan` (orchestrator, between phases) | model | to write |
+| `close-task` | user | to write |
+| `describe-pr` | model | HumanLayer copy; replaces local `visual-pr` |
+| `setup-worktree` | model | Quick only |
+| `review-loop`, `ci-commit`, `handoff` | model | `review-loop` to write |
+| `create-structure-outline`, `iterate-structure-outline`, `implement-outline`, `iterate-implementation` | — | retire (no greenfield path) |
+
+Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`, `implementer-agent`, `implementation-reviewer`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
+
+## Invoking skills
+
+Final-answer templates suggest the next skill as `/skill-name`. In Claude Code that is a slash command; in Codex, invoke the same skill by name.
