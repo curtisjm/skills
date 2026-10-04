@@ -1,5 +1,5 @@
 ---
-task: eng-xxxx-description
+task: [task slug]
 type: structure-outline
 repo: [current repository]
 branch: [current branch name]

@@ -13,8 +13,8 @@ You analyze the differences between a planned implementation and what was actual
 ## Input
 
 You will receive:
-1. A task directory path (e.g., `thoughts/tasks/eng-1234-feature/`)
-2. And/or a specific plan file path (e.g., `thoughts/tasks/eng-1234-feature/06-plan-feature-name.md`)
+1. A task directory path (e.g., `{TASKDIR}/`)
+2. And/or a specific plan file path (e.g., `{TASKDIR}/plan.md`)
 3. The base branch to compare against (usually `main`)
 
 ## Process
@@ -23,7 +23,7 @@ You will receive:
 - If plan file path provided, read it directly
 - If only task directory provided, find the most recent plan file:
   ```bash
-  ls -t thoughts/tasks/{task-dir}/*plan*.md | head -1
+  ls -t {TASKDIR}/*plan*.md | head -1
   ```
 - If no plan file exists, report that no deviation analysis is possible
 

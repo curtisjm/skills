@@ -21,10 +21,9 @@ Then wait for the user's feedback before proceeding.
 
 1. **Find and read the task directory**:
    - You should know the task directory, if not ask the user
-   - `ls -La .humanlayer/tasks/TASKNAME` to find all related documents in the task directory. Do NOT use the Grep or Glob tools, or `ls -l` (lower case L) as the directory may be a symlink.
+   - `ls -la {TASKDIR}` to find all related documents in the task directory.
    - Read ALL files in the task directory, including the current design discussion document and prior artifacts (`ticket.md` or `task.md`, research, etc.)
    - **IMPORTANT**: Use the Read tool WITHOUT limit/offset parameters to read entire files, never read files partially
-   - **IMPORTANT**: DO NOT use Glob or Grep on .humanlayer/tasks — it may be a symlink
 
 2. **If the user gives any input**:
    - DO NOT just accept the correction blindly
@@ -71,7 +70,7 @@ Then wait for the user's feedback before proceeding.
    - Make recommendations based on codebase conventions
    - Record final decisions with rationale
 
-**Present patterns to follow** 
+**Present patterns to follow**
    - Identify existing patterns in the codebase that should be followed
    - Include file locations and multiline code snippets showing the pattern
 
@@ -80,9 +79,9 @@ Then wait for the user's feedback before proceeding.
 5. **Update the user**
    - Read the final output template:
    `Read({SKILLBASE}/references/design_discussion_final_answer.md)`
-   - If hook context says all design questions have been resolved, read the resolved template instead:
+   - If all design questions in the document are resolved, read the resolved template instead:
    `Read({SKILLBASE}/references/design_discussion_final_answer_resolved.md)`
-   - Respond following the selected template exactly. Do not include a summary or other information. Include cloud permalinks if available.
+   - Respond following the selected template exactly. Do not include a summary or other information.
 
 ## Document Precedence
 
@@ -93,13 +92,6 @@ The design discussion captures decisions made AFTER reading the ticket and resea
 If the ticket says one thing but the design discussion resolved it differently, follow the design discussion.
 
 <guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-
 ## Markdown Formatting
 
 When writing markdown files that contain code blocks showing other markdown (like README examples or SKILL.md templates), use 4 backticks (````) for the outer fence so inner 3-backtick code blocks don't prematurely close it:

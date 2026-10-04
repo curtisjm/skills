@@ -1,4 +1,4 @@
-[{TICKET_ID}]({TICKET_URL}) | [HumanLayer Task]({TASK URL}) | [PR Walkthrough (alpha)]({PR_WALKTHROUGH_URL})
+[{TICKET_ID}]({TICKET_URL})
 
 ## Why the change
 
@@ -30,13 +30,11 @@
 {Show concise pseudocode for the changed behavior.}
 ```
 
-
 {...short-description...}
 
 ```diff
 {Show a shallow file tree with changed responsibilities.}
 ```
-
 
 {...short-description...}
 
@@ -51,13 +49,3 @@
 ```
 
 {Tell the story in the order that makes it easiest to understand. It may make sense to show files first, or it may make sense to establish a data structure, SQL table, or API contract first. All views and subheadings are optional. Use only the views that help explain the pr, and name or order them based on the change rather than a fixed template. It should be written as one human would write to another. Use `diff` for a focused change to an existing shape. Show the complete target shape in a language-specific or `text` block when it is new, high-level, or clearer without diff notation.}
-
-{The footer below closes the body. Take the URL from `$HUMANLAYER_SESSION_URL`, or when that is unset, from the newest `HumanLayer-Session` trailer in the branch's commits; omit the whole footer when neither exists. The badge is what people see; the hidden comment is the same `HumanLayer-Session` trailer the commit stamper writes, so the PR links back to the session that produced it.}
-
----
-
-[![HumanLayer session](https://img.shields.io/badge/HumanLayer-open_session-1f6feb?style=flat-square)]({HUMANLAYER_SESSION_URL})
-
-<!--
-HumanLayer-Session: {HUMANLAYER_SESSION_URL}
--->

@@ -1,5 +1,5 @@
 ---
-task: eng-xxxx-description
+task: [task slug]
 type: plan
 repo: [current repository]
 branch: [current branch name]
@@ -52,16 +52,15 @@ sha: [result of git rev-parse HEAD]
 + export function [name]() {
      // existing logic...
 +    [code changes to make]
-+ 
++
 + }
 
-export interface [name]{ 
+export interface [name]{
    // existing fiels (a, b, c, d, e)
 +  [new fields to add]
 +  [new fields to add]
 }
 ```
-
 
 #### 1.2 [Another Component/File Group]
 

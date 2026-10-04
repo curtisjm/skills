@@ -15,7 +15,7 @@ You are refining an existing Product Requirements Document (PRD) based on the us
 
 **Run each decision as an interview loop; patch the doc only once the decision is resolved.** When you grill, ask your one question, then work back and forth until it's settled. The user won't always answer outright - they may push back, think out loud, or ask a clarifying question of their own ("well, how would it work if quality finding = 'passing'?"). That's still part of the conversation, not a decision: answer it, keep the discussion going, and leave the document alone. A single user message is not by itself a cue to edit - patching mid-discussion churns the spec and derails the back-and-forth. Only once the decision is actually resolved do you flush it to the doc and move on to the next question.
 
-**Show, don't tell.** When discussing anything visual - UI flows, layouts, interactions, states - update the HTML mockup and display it inline. A quick sketch communicates more than paragraphs of prose.
+**Show, don't tell.** When discussing anything visual - UI flows, layouts, interactions, states - update the HTML mockup and link to it. A quick sketch communicates more than paragraphs of prose.
 
 **Make it read like a document a human designed for other humans.** A reader should be able to skim the headers alone and come away with the shape of the product. Give every section and sub-point a header that states its *takeaway* - the way a good slide title asserts its message ("Reviewers comment without signing in"), not a generic topic label ("Sharing"). Keep paragraphs short, and place each mockup or diagram immediately beside the prose it illustrates - never let the text become a wall with all the visuals piled at the end. When you re-paint a section, fix these too: split walls of text, add takeaway headers, and pull mockups up next to their prose.
 
@@ -58,10 +58,9 @@ If the user asks to "continue working through questions" or "keep grilling" or s
 
 1. **Find and read the task directory**:
    - You should know the task directory, if not ask the user
-   - `ls -La .humanlayer/tasks/TASKNAME` to find all related documents in the task directory. Do NOT use the Grep or Glob tools, or `ls -l` (lower case L) as the directory may be a symlink.
+   - `ls -la {TASKDIR}` to find all related documents in the task directory.
    - Read ALL files in the task directory, including the current PRD and prior artifacts (`ticket.md` or `task.md`, research, design discussion if present, mockups, etc.)
    - **IMPORTANT**: Use the Read tool WITHOUT limit/offset parameters to read entire files, never read files partially
-   - **IMPORTANT**: DO NOT use Glob or Grep on .humanlayer/tasks — it may be a symlink
 
 2. **If the user gives any input**:
    - DO NOT just accept the correction blindly
@@ -100,7 +99,7 @@ If the user asks to "continue working through questions" or "keep grilling" or s
 
 5. **Update mockups** (if feedback involves visual changes):
    - Update the HTML mockup files to reflect the feedback
-   - Re-embed updated mockups in the PRD using ```task-artifact blocks
+   - Make sure the PRD links to the updated mockups
    - If feedback introduces entirely new UI elements, create new mockup files
 
 6. **Stop and ask what's next**:
@@ -131,7 +130,7 @@ If the user asks to "continue working through questions" or "keep grilling" or s
 
 7. **When the user says they're done or the solution is fully fleshed out**, read the final output template:
    `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`
-   - Respond following the selected template exactly. Do not include a summary or other information. Include cloud permalinks if available.
+   - Respond following the selected template exactly. Do not include a summary or other information.
 
 ## Document Precedence
 
@@ -147,27 +146,18 @@ If the ticket says one thing but the PRD resolved it differently, follow the PRD
 Mockups are how you communicate visually. Use them liberally when discussing UI.
 
 **Creating mockups:**
-- Write HTML files to `.humanlayer/tasks/{task-slug}/mockup-{description}.html`
+- Write HTML files to `{TASKDIR}/mockup-{description}.html`
 - Check research for design system details (colors, fonts, components) - follow those patterns
 - Keep mockups focused on the decision at hand
 - Use realistic labels, not lorem ipsum
 
-**Displaying mockups inline:**
-```task-artifact
-.humanlayer/tasks/{task-slug}/mockup-{description}.html
-```
+**Linking mockups from the document:**
+[{TASKDIR}/mockup-{description}.html]({TASKDIR}/mockup-{description}.html)
 
 **Iterating:** Update mockups as decisions evolve. The final PRD should embed the "winning" versions.
 </guidance>
 
 <guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-
 ## Markdown Formatting
 
 When writing markdown files that contain code blocks showing other markdown (like README examples or SKILL.md templates), use 4 backticks (````) for the outer fence so inner 3-backtick code blocks don't prematurely close it:

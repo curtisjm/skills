@@ -9,27 +9,25 @@ You are iterating on an existing research document based on user feedback.
 
 ## Initial Setup:
 
-When this command is invoked, check the task artifact directory from your system prompt for documents like `*research*.md` (NOT `*research-questions*.md` - `research-questions` documents are EXCLUDED) with `ls -La` (the directory may be a symlink - do NOT use regular `ls` or grep/glob tools). If you find a research document, read it and proceed. 
+When this command is invoked, check the task directory for documents like `research.md` (NOT `research-questions.md` - `research-questions` documents are EXCLUDED) with `ls -la`. If you find a research document, read it and proceed.
 
-If you see several research documents, ask the user which one to proceed with before reading any of them. 
+If you see several research documents, ask the user which one to proceed with before reading any of them.
 
-If you do not know what the artifact task directory is from your system prompt, respond with:
+If you do not know what the task directory is, respond with:
 ```
 I'm ready to iterate on researching the codebase. Please provide your research question or area of interest, and I'll analyze it thoroughly by exploring relevant components and connections.
 ```
 
-**IMPORTANT**: You may NEVER read `ticket.md`/`task.md` files or other files from the artifact directory which do not match the `*research*.md` pattern above unless such a file is explicitly asked for by the user.
+**IMPORTANT**: You may NEVER read `ticket.md`/`task.md` files or other files from the task directory which do not match the `research.md` pattern above unless such a file is explicitly asked for by the user.
 
 ## Steps
 
 1. **Read the existing document FULLY**:
    - Use Read tool WITHOUT limit/offset to read the entire document at `docPath`
    - Understand what research was previously conducted
-   - Don't read any other files in the rpi/ directory for the task, focus on the research document and the provided feedback.
    - **DO NOT read ticket files** - research must stay objective about the current codebase.
    - **If a document path was not provided:**
-         - List the contents of the task's artifact directory from your propmt. Run `ls -La .humanlayer/tasks/<task slug>` to find all related documents in the task directory. Do not use glob or grep, or use `ls -l` or `ls` without `-L` as the directory may be a symlink.
-
+         - Run `ls -la {TASKDIR}` to find all related documents in the task directory.
 
 2. **Process the feedback**:
    - If user requested additional research: Spawn sub-agents to investigate
@@ -39,7 +37,7 @@ I'm ready to iterate on researching the codebase. Please provide your research q
 3. **Conduct additional research** (if needed):
    - Spawn parallel sub-agent tasks for comprehensive research
    - Use only the specialized research agents listed below. Do not use other agent types, including `general-purpose`, `Explore`, or `Plan`.
-   - Agent names differ by runtime. Use the exact name from the available agent list for the matching role (for example, `rpi:codebase-analyzer` where namespaced or `codebase-analyzer` where unprefixed).
+   - Agent names differ by runtime. Use the exact name from the available agent list for the matching role.
 
    **For codebase research:**
    - **codebase-locator**: Find WHERE files and components live
@@ -72,7 +70,7 @@ I'm ready to iterate on researching the codebase. Please provide your research q
 5. **Update the user**
    - Read the final output template:
    `Read({SKILLBASE}/references/research_final_answer.md)`
-   - Respond following the template exactly, include cloud permalinks if you have them.
+   - Respond following the template exactly.
 
 ## Research Guidelines
 
@@ -174,13 +172,6 @@ Pick the views that make each part of the story clearest:
   ```
 
 <guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-
 ## Markdown Formatting
 
 When writing markdown files that contain code blocks showing other markdown (like README examples or SKILL.md templates), use 4 backticks (````) for the outer fence so inner 3-backtick code blocks don't prematurely close it:
@@ -209,10 +200,9 @@ npm install example
   - ALWAYS wait for all sub-agents to complete before synthesizing (step 4)
   - ALWAYS gather metadata before writing the document (step 5 before step 6)
   - NEVER write the research document with placeholder values
-- **Path handling**: Task-specific research goes in .humanlayer/tasks/
-  - Use `.humanlayer/tasks/ENG-XXXX-description/NN-research-DESCRIPTION.md` for task research
+- **Path handling**: Task-specific research goes in {TASKDIR}/
+  - Use `{TASKDIR}/research.md` for task research
 </guidance>
-
 
 Remember, you must respond to the user according to the output template at `{SKILLBASE}/references/research_final_answer.md`
 

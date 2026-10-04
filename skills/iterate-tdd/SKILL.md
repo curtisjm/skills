@@ -15,7 +15,7 @@ You are refining an existing Technical Design Document (TDD) based on the user's
 
 **Run each decision as an interview loop; patch the doc only once the decision is resolved.** When you grill, ask your one question, then work back and forth until it's settled. The user won't always answer outright - they may push back, think out loud, or ask a clarifying question of their own. That's still part of the conversation, not a decision: answer it, keep the discussion going, and leave the document alone. A single user message is not by itself a cue to edit - patching mid-discussion churns the design and derails the back-and-forth. Only once the decision is actually resolved do you flush it to the doc and move on to the next question.
 
-**Show, don't tell.** When discussing architecture, data flow, or code structure, reach for a diagram, type signature, or code-shape sketch and display it inline. A quick diagram communicates more than paragraphs of prose.
+**Show, don't tell.** When discussing architecture, data flow, or code structure, reach for a diagram, type signature, or code-shape sketch. A quick diagram communicates more than paragraphs of prose.
 
 **Make it read like a document a human designed for other humans.** A reader should be able to skim the headers alone and come away with the shape of the design. Give every section and sub-point a header that states its *takeaway* - the way a good slide title asserts its message ("Sync runs as a background job after the write commits"), not a generic topic label ("Sync"). Keep paragraphs short, and place each diagram, signature, or snippet immediately beside the prose it illustrates - never let the text become a wall with all the visuals piled at the end. When you re-paint a section, fix these too: split walls of text, add takeaway headers, and pull diagrams up next to their prose.
 
@@ -62,10 +62,9 @@ If the user asks to "continue working through questions" or "keep grilling" or s
 
 1. **Find and read the task directory**:
    - You should know the task directory, if not ask the user
-   - `ls -La .humanlayer/tasks/TASKNAME` to find all related documents in the task directory. Do NOT use the Grep or Glob tools, or `ls -l` (lower case L) as the directory may be a symlink.
+   - `ls -la {TASKDIR}` to find all related documents in the task directory.
    - Read ALL files in the task directory, including the current TDD and prior artifacts (`ticket.md` or `task.md`, research, design discussion, PRD if present, etc.)
    - **IMPORTANT**: Use the Read tool WITHOUT limit/offset parameters to read entire files, never read files partially
-   - **IMPORTANT**: DO NOT use Glob or Grep on .humanlayer/tasks — it may be a symlink
 
 2. **If the user gives any input**:
    - DO NOT just accept the correction blindly
@@ -131,7 +130,7 @@ If the user asks to "continue working through questions" or "keep grilling" or s
 
 7. **When the user says they're done or the design is fully fleshed out**, read the final output template:
    `Read({SKILLBASE}/references/tdd_final_answer_resolved.md)`
-   - Respond following the selected template exactly. Do not include a summary or other information. Include cloud permalinks if available.
+   - Respond following the selected template exactly. Do not include a summary or other information.
 
 ## Document Precedence
 
@@ -149,7 +148,7 @@ Diagrams are how you communicate architecture visually. Use them liberally when 
 **Creating diagrams:**
 - Use mermaid syntax directly in markdown
 - Keep diagrams focused on the decision at hand
-- For diagrams or concepts too complex for Mermaid or plain text, get creative with a one-off HTML artifact displayed inline with ```task-artifact syntax
+- For diagrams or concepts too complex for Mermaid or plain text, get creative with a one-off HTML artifact and link to it
 - Common diagram types:
   - `flowchart` for control flow and data flow
   - `sequenceDiagram` for component interactions
@@ -175,15 +174,13 @@ sequenceDiagram
 Use HTML artifacts when a concept is too complex for Mermaid or plain text, especially when you need to combine code shape, data flow, UI structure, colors, annotations, or side-by-side comparisons.
 
 **Creating HTML artifacts:**
-- Write HTML files to `.humanlayer/tasks/{task-slug}/diagram-{description}.html`
+- Write HTML files to `{TASKDIR}/diagram-{description}.html`
 - Read `{SKILLBASE}/references/artifact_template.html` and follow it - copy its `<style>` block and build your content with its prose elements and utility classes so the artifact matches this application's visual language, not the codebase the TDD is about
 - Keep each artifact focused on the decision at hand
 - Use realistic labels, not lorem ipsum
 
-**Displaying HTML artifacts inline:**
-```task-artifact
-.humanlayer/tasks/{task-slug}/diagram-{description}.html
-```
+**Linking HTML artifacts from the document:**
+[{TASKDIR}/diagram-{description}.html]({TASKDIR}/diagram-{description}.html)
 </guidance>
 
 <guidance>
@@ -263,13 +260,6 @@ If no PRD exists:
 </guidance>
 
 <guidance>
-## Cloud Permalinks
-
-When you write or edit documents in .humanlayer/tasks/, a cloud permalink is automatically provided in the hook response.
-- The permalink appears as `additionalContext` after Write/Edit/MultiEdit/Read operations
-- Use this permalink in your final output for easy navigation
-- Example format: `http(s)://{DOMAIN}/artifacts/{artifactId}`
-
 ## Markdown Formatting
 
 When writing markdown files that contain code blocks showing other markdown (like README examples or SKILL.md templates), use 4 backticks (````) for the outer fence so inner 3-backtick code blocks don't prematurely close it:
