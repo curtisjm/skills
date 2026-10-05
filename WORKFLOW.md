@@ -132,7 +132,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `create-research-questions`, `create-research` | user | done |
 | `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
 | `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions`, `iterate-research` done) |
-| `publish` | user | to write |
+| `publish` | user | done |
 | `implement` (orchestrator), item thread head | user | to write; replaces `implement-plan` |
 | `revise-plan` (orchestrator, between phases) | model | to write |
 | `close-task` | user | to write |
