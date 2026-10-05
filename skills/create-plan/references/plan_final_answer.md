@@ -1,8 +1,8 @@
 ## Next Steps
 
-The plan has been created. When you're ready to proceed to set up a worktree, create a new session with the following command:
+The plan is approved.
 
-```text
-/setup-worktree
-```
+- Local: `{TASKDIR}/plan.md`
+- Linear: [plan.md]({url of the Linear document})
 
+Publish has been launched in thread `publish {TASKSLUG}`; it will create the issue tree and start the orchestrator.
