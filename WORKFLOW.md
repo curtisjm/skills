@@ -18,7 +18,7 @@ A **path** is the chain of steps a task follows. A **step** is one T3 thread run
 | Path | When | Steps |
 |---|---|---|
 | Triage | Something came up; not scoping it now | `triage` → stop |
-| Quick | Small, understood, one PR | `quick-task` (one thread: mini research + plan in `task.md`, worktree, implement, review loop, `describe-pr`) |
+| Quick | Small, understood, one thread, one or a few PRs | `quick-task` (one thread: mini research + plan in `task.md`, worktree, implement, review loop, `describe-pr`) |
 | Standard | Needs research and a plan | `task-start` → `create-research-questions` → `create-research` → `create-design-discussion` → `create-plan` → `publish` → `implement` → `close-task` |
 | Long | Standard, plus product and technical design docs | as Standard, with `create-prd` → `create-tdd` replacing `create-design-discussion` |
 
