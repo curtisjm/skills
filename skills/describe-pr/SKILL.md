@@ -1,6 +1,6 @@
 ---
 name: describe-pr
-description: Only use when the user explicitly invokes this skill by name.
+description: Write or rewrite the current branch's PR description from the template, with screenshots when UI changed. Use when opening a PR or after its scope changes.
 ---
 
 # Describe a Pull Request
