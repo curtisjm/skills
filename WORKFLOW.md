@@ -22,7 +22,7 @@ A **path** is the chain of steps a task follows. A **step** is one T3 thread run
 | Standard | Needs research and a plan | `task-start` → `create-research-questions` → `create-research` → `create-design-discussion` → `create-plan` → `publish` → `implement` → `close-task` |
 | Long | Standard, plus product and technical design docs | as Standard, with `create-prd` → `create-tdd` replacing `create-design-discussion` |
 
-Quick is chosen at entry. Standard vs Long is recommended by `create-research` and confirmed by the user. There is no greenfield path.
+Quick is chosen at entry. Standard vs Long may be chosen at entry too; when it is not, `task-start` writes `path: undecided` and `create-research` recommends one for the user to confirm. There is no greenfield path.
 
 Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference — Linear issue, GitHub issue, Asana task, URL — plus whatever the user says about it. Triage files a well-formed issue in the Linear triage project and stops; promoting it means invoking `task-start` or `quick-task` with that issue.
 
@@ -37,7 +37,7 @@ Created by the entry skill, read first by every skill.
 ```yaml
 ---
 slug: hub-source-toggles
-path: standard          # quick | standard | long
+path: standard          # quick | standard | long | undecided (until create-research)
 phase: plan             # the step currently running or last completed
 repos: [valency-mcp-server, valency-hub]
 source: https://linear.app/.../CUR-123     # entry reference, any tracker

@@ -97,7 +97,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
 
 9. **Gate:** run `plannotator annotate {TASKDIR}/research.md --gate --json`. On approval continue. On annotations, address each one (spawn sub-agents for further investigation where needed, update the existing document in place — likely existing sections rather than net-new ones at the end) and run the gate again.
 
-10. **Recommend the path:** state in one or two sentences whether the research points to Standard (`create-design-discussion`) or Long (`create-prd` → `create-tdd`) and why, and ask the user to confirm. Set `path:` in the `task.md` frontmatter accordingly and append the ruling to its `## Decisions`.
+10. **Settle the path:** if `path` in the `task.md` frontmatter is already `standard` or `long`, use it and skip the ask. Otherwise state in one or two sentences whether the research points to Standard (`create-design-discussion`) or Long (`create-prd` → `create-tdd`) and why, ask the user to confirm, then set `path:` in the frontmatter and append the ruling to `## Decisions`.
 
 11. **Mirror to Linear:** upload `research.md` and `task.md` as documents on the project named by `linear_project`, each titled with its file name; update a document whose title exists, otherwise create it. Keep the URL of the `research.md` document for the final answer.
 
@@ -107,6 +107,12 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
    - Read the final output template:
    `Read({SKILLBASE}/references/research_final_answer.md)`
    - Respond following the template exactly.
+
+14. **Handle follow-up questions:**
+   - If the user has follow-up questions for you to investigate
+   - Spawn new sub-agents as needed for additional investigation
+   - Update the existing document in place with your new findings, likely you will update existing sections rather than adding net-new ones to the end
+   - Re-mirror `research.md` to Linear after each update
 
 ## Document Style and Format
 
