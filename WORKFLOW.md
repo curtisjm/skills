@@ -127,19 +127,16 @@ Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the
 
 User-invoked: entry points and step heads. Model-invoked: building blocks other skills call.
 
-| Skill | Kind | Status |
-|---|---|---|
-| `triage`, `task-start`, `quick-task` | user | to write |
-| `create-research-questions`, `create-research` | user | done |
-| `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
-| `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions`, `iterate-research` done) |
-| `publish` | user | done |
-| `implement` (orchestrator), `implement-item` (item thread head) | user | done; `implement-plan` retired |
-| `revise-plan` (orchestrator, between phases) | model | done |
-| `close-task` | user | done |
-| `describe-pr` | model | HumanLayer copy; replaces local `visual-pr` |
-| `setup-worktree` | model | Quick only |
-| `review-loop`, `ci-commit`, `handoff` | model | done |
+| Skill | Kind |
+|---|---|
+| `triage`, `task-start`, `quick-task` | user |
+| `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user |
+| `publish` | user |
+| `implement` (orchestrator), `implement-item` (item thread head) | user |
+| `revise-plan` (orchestrator, between phases) | model |
+| `close-task`, `handoff` | user |
+| `describe-pr`, `review-loop`, `ci-commit` | model |
+| `setup-worktree` | model, Quick only |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
 
