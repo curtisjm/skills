@@ -18,18 +18,13 @@ You are tasked with conducting comprehensive research across the codebase to ans
 
 ## Initial Setup:
 
-When this command is invoked, check the task directory for documents like `research-questions.md` with `ls -la`. If you find one, read it and proceed with the contents as the research query.
+The launch message names `{TASKDIR}`. Read `{TASKDIR}/research-questions.md` and proceed with its contents as the research query.
 
-If you see several, ask the user which one to proceed with before reading any of them.
+Read only the YAML frontmatter of `{TASKDIR}/task.md` (for `repos` and `linear_project`) and set its `phase: research`.
 
-If you do not know what the task directory is, respond with:
-```
-I'm ready to research the codebase. Please provide your research question or area of interest, and I'll analyze it thoroughly by exploring relevant components and connections.
-```
+**IMPORTANT**: You may NEVER read the body of `task.md` or other files from the task directory which do not match the `research-questions` pattern above unless such a file is explicitly asked for by the user.
 
-**IMPORTANT**: You may NEVER read `ticket.md`/`task.md` files or other files from the task directory which do not match the `research-questions` pattern above unless such a file is explicitly asked for by the user.
-
-Then wait for the user's research query.
+If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, then process the user's feedback (this thread and any `## Decisions` added to `task.md` since) — spawn sub-agents for additional research, make corrections in place, keep the same frontmatter and format — and continue from step 7.
 
 ## Steps to follow after receiving the research query:
 
@@ -100,15 +95,18 @@ Then wait for the user's research query.
    - Get repo info: `gh repo view --json owner,name`
    - Create permalinks: `https://github.com/{owner}/{repo}/blob/{commit}/{file}#L{line}`
 
-9. **Respond to the user according to the template**
+9. **Gate:** run `plannotator annotate {TASKDIR}/research.md --gate --json`. On approval continue. On annotations, address each one (spawn sub-agents for further investigation where needed, update the existing document in place — likely existing sections rather than net-new ones at the end) and run the gate again.
+
+10. **Recommend the path:** state in one or two sentences whether the research points to Standard (`create-design-discussion`) or Long (`create-prd` → `create-tdd`) and why, and ask the user to confirm. Set `path:` in the `task.md` frontmatter accordingly and append the ruling to its `## Decisions`.
+
+11. **Mirror to Linear:** upload `research.md` and `task.md` as documents on the project named by `linear_project`, each titled with its file name; update a document whose title exists, otherwise create it. Keep the URL of the `research.md` document for the final answer.
+
+12. **Launch the next step:** `t3_thread_launch` with title `create-design-discussion {TASKSLUG}` (Standard) or `create-prd {TASKSLUG}` (Long) and message `Run /<skill> for {TASKDIR}`.
+
+13. **Respond to the user according to the template**
    - Read the final output template:
    `Read({SKILLBASE}/references/research_final_answer.md)`
    - Respond following the template exactly.
-
-10. **Handle follow-up questions:**
-   - If the user has follow-up questions for you to investigate
-   - Spawn new sub-agents as needed for additional investigation
-   - Update the existing document in place with your new findings, likely you will update existing sections rather than adding net-new ones to the end
 
 ## Document Style and Format
 
