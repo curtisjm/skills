@@ -7,7 +7,7 @@ T3 Code is the harness that runs the threads. A thread may run Claude or Codex; 
 ## Placeholders
 
 - `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it.
-- `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it.
+- `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it. Each task has a T3 project of the same name whose workspace root is `{TASKDIR}`; every thread of the task lives in it.
 - `{SKILLBASE}` — directory containing the current skill's `SKILL.md`. `{SKILLBASE}/references/...` are that skill's templates.
 - `{REPOBASENAME}` — basename of a repository directory. Repos live at `~/dev/valency/{REPOBASENAME}`.
 
@@ -28,7 +28,7 @@ Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference —
 
 ### Relay
 
-Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes only `title` and `message`, so the new thread inherits this thread's project, model, and modes (`workspaceStrategy` is omitted too: planning steps run in the project's main checkout, not a worktree). The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
+Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes only `title` and `message`, so the new thread inherits this thread's project, model, and modes (`workspaceStrategy` is omitted too: planning steps run in the task project's root, `{TASKDIR}`). The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
 
 ## `task.md`
 
