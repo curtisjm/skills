@@ -16,7 +16,7 @@ The launch message names `{TASKDIR}` and the item `id`.
 2. **Set up the repo.** The worktree is a fresh checkout with no setup run: install dependencies and run whatever the repo's README or package manager calls setup. Secrets come from AWS; nothing is copied from another checkout.
 
 3. **Do the work, by type:**
-   - `pr`: delegate the implementation to `implementer-agent` with a short prompt — `Implement item {id} of {TASKDIR}/plan.md; stop after its automated verification` — then review its output and run the item's automated verification yourself. Commit with `ci-commit`. Then run `review-loop` to take the branch through the inner loop, `describe-pr`, the PR, and the outer loop.
+   - `pr`: implement the item yourself in this worktree. Read every file the item section names FULLY first; follow the plan's intent while adapting to what the code actually looks like. When the code does not match what the plan assumed, decide whether the intent still holds and note the divergence for the report; when it cannot be followed at all, stop and report blocked. Run the item's automated verification until it passes. Commit with `ci-commit`. Then run `review-loop` to take the branch through the inner loop, `describe-pr`, the PR, and the outer loop.
    - `ops`: open the pin or activation PR the item describes (same `ci-commit` + `review-loop`), or, for an action only the user can run, write out the exact steps. The user merges and runs it; this thread does neither.
    - `test`: run the checks the item describes against the real system (logs, flows, dashboards) and record what was observed, pass or fail.
 
