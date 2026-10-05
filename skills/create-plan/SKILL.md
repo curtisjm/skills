@@ -32,7 +32,7 @@ You are in the final Plan Writing phase. Convert the design discussion (Standard
    - Add both automated and manual success criteria
    - State `## Rollout` and `## Phase transitions` explicitly
 
-5. **Gate**: run `plannotator annotate {TASKDIR}/plan.md --tailscale --gate --json`. This is plan approval, the last planning gate. Process annotations as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
+5. **Gate**: tell the user the review URL (`~/dev/skills/bin/gate --url {TASKDIR}/plan.md`), then run `~/dev/skills/bin/gate {TASKDIR}/plan.md`. This is plan approval, the last planning gate. Process annotations as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
 
 6. **Mirror to Linear**: set `repos` in the `task.md` frontmatter to the repositories the Items table names, then upload `plan.md` and `task.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
 

@@ -1,0 +1,15 @@
+#!/bin/sh
+# Plannotator review gate over the tailnet, on a port derived from the task slug
+# so concurrent tasks don't collide. Usage:
+#   gate <file-in-TASKDIR>        run the gate (blocks; emits decision JSON)
+#   gate --url <file-in-TASKDIR>  print the review URL only
+set -eu
+url_only=0
+[ "${1:-}" = "--url" ] && { url_only=1; shift; }
+file=$(realpath "$1")
+task=$(basename "$(dirname "$file")")
+port=$((41000 + $(printf %s "$task" | cksum | cut -d' ' -f1) % 1000))
+url="https://$(hostname -s).$(tailscale status --json | sed -n 's/.*"MagicDNSSuffix": *"\([^"]*\)".*/\1/p' | head -1):$port"
+[ "$url_only" = 1 ] && { echo "$url"; exit 0; }
+echo "Review at $url" >&2
+PLANNOTATOR_PORT=$port exec plannotator annotate "$file" --tailscale --gate --json
