@@ -53,13 +53,13 @@ Body: `## Goal` (the user's words verbatim), `## Source` (issue text pulled in),
 
 One document per type per task, no numeric prefixes: `research-questions.md`, `research.md`, `design-discussion.md`, `prd.md`, `tdd.md`, `plan.md`. If a second of the same type seems needed, ask.
 
-Every planning document is reviewed through Plannotator (`annotate --gate --json`) before the step hands off. Plan approval is the last planning gate.
+Every planning document except `research-questions.md` is reviewed through Plannotator (`annotate --gate --json`) before the step hands off; research questions go straight to `create-research`, as in HumanLayer. Plan approval is the last planning gate.
 
 HTML artifacts (mockups, diagrams, explainers) live in `{TASKDIR}/html/` and are opened from disk. `publish-internal-artifact` is used only when the user explicitly asks to publish one.
 
 ### Syncing to Linear
 
-On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project, titled with the file name, and kept identical to the local files. Each `create-*` skill re-syncs its document after the gate passes; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
+On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project, titled with the file name, and kept identical to the local files. Each `create-*` skill re-syncs its document before handing off; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
 
 ### `plan.md`
 
@@ -115,7 +115,7 @@ Linear is personal work management; the user is the only one on the team using i
 
 ## Gates
 
-Human: every planning document; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
+Human: every planning document after research questions; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
 
 Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the review loop, `revise-plan` within scope.
 
@@ -128,7 +128,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | Skill | Kind | Status |
 |---|---|---|
 | `triage`, `task-start`, `quick-task` | user | to write |
-| `create-research-questions` | user | rewritten |
+| `create-research-questions` | user | done |
 | `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
 | `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions` done) |
 | `publish` | user | to write |
