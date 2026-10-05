@@ -1,6 +1,6 @@
 ---
 name: ci-commit
-description: Only use when the user explicitly invokes this skill by name.
+description: Commit the session's changes as focused, atomic commits with clear messages. Use after implementation is verified and before the review loop.
 ---
 
 # Commit Changes

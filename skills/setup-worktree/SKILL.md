@@ -1,6 +1,6 @@
 ---
 name: setup-worktree
-description: Only use when the user explicitly invokes this skill by name.
+description: Create the task's worktree(s) under {TASKDIR}/repos from fresh origin/main and run repo setup. Quick path only; the orchestrator makes item worktrees itself.
 ---
 
 ## steps to follow
