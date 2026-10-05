@@ -32,9 +32,21 @@ You run the PRD as a guided conversation. You settle the **foundation** - the pr
 <step index="1" name="understand-the-context">
 
 <instructions>
-- Find the task directory: `ls -la {TASKDIR}`.
-- Read every relevant file in the task directory **fully** (Read with no limit/offset), excluding research-questions docs.
+- The launch message names `{TASKDIR}`: `ls -la {TASKDIR}`.
+- Read every relevant file in the task directory **fully** (Read with no limit/offset), excluding research-questions docs. Read `{TASKDIR}/task.md` and set its `phase: prd`.
 - Read the PRD template: `Read({SKILLBASE}/references/prd_template.md)`.
+- If `{TASKDIR}/prd.md` already exists, this run revises it. Skip Step 2 and 3; if the user gave no feedback, ask:
+
+  ```
+  I'm ready to iterate on the PRD. Would you like to:
+  1. Provide specific feedback or changes to incorporate
+  2. Continue grilling the solution - I'll walk the solution details one decision at a time, presenting each with options and my recommendation
+  3. Have me surface additional design questions
+
+  Let me know which direction, or share your feedback directly.
+  ```
+
+  Resolve feedback one item at a time with the same reflexes as the interview (re-paint, don't append), continue grilling from Step 4, and finish with Steps 5 and 6.
 </instructions>
 
 <guidance>
@@ -121,12 +133,12 @@ When an answer reshapes the work, touch every affected section in the same pass:
 
 Mockups are how you communicate visually - use them liberally when discussing UI.
 
-- Write HTML files to `{TASKDIR}/mockup-{description}.html`
+- Write HTML files to `{TASKDIR}/html/mockup-{description}.html`
 - Follow the **user's product** design system (colors, fonts, components) found in Step 1; use realistic labels, not lorem ipsum
 - Keep each mockup focused on the decision at hand
 
 Link from the document:
-[{TASKDIR}/mockup-{description}.html]({TASKDIR}/mockup-{description}.html)
+[{TASKDIR}/html/mockup-{description}.html]({TASKDIR}/html/mockup-{description}.html)
 
 Update mockups as decisions evolve; the final PRD should embed the "winning" versions.
 </guidance>
@@ -140,7 +152,7 @@ When the solution is fully fleshed out, stop and hand it back for review. Becaus
 
 > I think the solution is complete. Since we've built it up decision by decision, can you read the **Solution Details** top to bottom and confirm it hangs together before we wrap up?
 
-Wait for the user's approval and incorporate any fixes they raise.
+Then run the gate: `plannotator annotate {TASKDIR}/prd.md --gate --json`. Annotations are the user's fixes: fold each one in (re-paint the affected section, update mockups), then run the gate again. Continue only on approval.
 </instructions>
 
 </step>
@@ -148,7 +160,11 @@ Wait for the user's approval and incorporate any fixes they raise.
 <step index="6" name="wrap-up">
 
 <instructions>
-When the solution is approved, read the final answer template and follow it exactly (it points to the next step - the TDD): `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`.
+When the solution is approved:
+
+- **Mirror to Linear**: upload `prd.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer. Mockups stay local in `{TASKDIR}/html/`.
+- **Launch the TDD step**: `t3_thread_launch` with title `create-tdd {TASKSLUG}` and message `Run /create-tdd for {TASKDIR}`.
+- Read the final answer template and follow it exactly: `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`.
 </instructions>
 
 </step>
