@@ -33,7 +33,7 @@ Then end the turn. Item threads wake this thread with `t3_thread_send` when they
 
 Read `{TASKDIR}/reports/{id}.md`. Sub-issue → In Review (`pr`, `ops`: a PR is open and waiting on the user) or Done (`test`, when the checks passed). A report that says the item is blocked or failed its checks: tell the user what it needs and stop there; the sub-issue stays In Progress.
 
-When every sub-issue of the phase is In Review or Done, the phase has converged: run `revise-plan` (it reads the phase's reports and updates `plan.md`, `plan-changelog.md`, and the next phase's sub-issue bodies; a change outside the approved scope becomes a question to the user and a pause). Then:
+When every sub-issue of the phase is In Review or Done, the phase has converged: run `revise-plan` (it reads the phase's reports and updates `plan.md`, `plan-changelog.md`, and the next phase's sub-issue bodies; a change beyond the approved outcome becomes a proposal to the user and a pause; their ruling is applied by running `revise-plan` again). Then:
 
 - **stacked** next phase: dispatch it now.
 - **merge-first** next phase: list the PRs the user must merge and end the turn. When the user reports the merges (or says continue): sub-issues → Done, phase issue → Done, dispatch the next phase.
