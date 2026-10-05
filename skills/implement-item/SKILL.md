@@ -16,13 +16,15 @@ The launch message names `{TASKDIR}` and the item `id`.
 2. **Set up the repo.** The worktree is a fresh checkout with no setup run: install dependencies and run whatever the repo's README or package manager calls setup. Secrets come from AWS; nothing is copied from another checkout.
 
 3. **Do the work, by type:**
-   - `pr`: implement the item yourself in this worktree. Read every file the item section names FULLY first; follow the plan's intent while adapting to what the code actually looks like. When the code does not match what the plan assumed, decide whether the intent still holds and note the divergence for the report; when it cannot be followed at all, stop and report blocked. Run the item's automated verification until it passes. Commit with `ci-commit`. Then run `review-loop` to take the branch through the inner loop, `describe-pr`, the PR, and the outer loop.
+   - `pr`: implement the item yourself in this worktree. Read every file the item section names FULLY first; follow the plan's intent while adapting to what the code actually looks like. Plans are carefully designed, but reality can be messy: when the code does not match what the plan assumed, first make sure you have read and understood the relevant code and consider whether the codebase moved since the plan was written; if the intent still holds, follow it and note the divergence for the report; if it cannot be followed, stop and report blocked with what the plan expected, what you found, and why it matters. Use sub-agents sparingly — targeted debugging or unfamiliar territory. Run the item's automated verification until it passes; manual verification is listed in the report for the user, never marked done by you. Commit with `ci-commit`. Then run `review-loop` to take the branch through the inner loop, `describe-pr`, the PR, and the outer loop.
    - `ops`: open the pin or activation PR the item describes (same `ci-commit` + `review-loop`), or, for an action only the user can run, write out the exact steps. The user merges and runs it; this thread does neither.
    - `test`: run the checks the item describes against the real system (logs, flows, dashboards) and record what was observed, pass or fail.
 
 4. **Write `{TASKDIR}/reports/{id}.md`:** PR URL (if any); what diverged from the plan and why; rulings made; review findings rejected and why; manual verification still owed; anything later phases must know. Facts only; the orchestrator folds them into the plan.
 
 5. **Report**: `t3_thread_send` to `orchestrator_thread` with `Item {id} done: {TASKDIR}/reports/{id}.md` (or `Item {id} blocked: …` when stuck). Then end.
+
+If this thread is resumed with work already committed on the branch, trust it: pick up from the plan step after the last commit and verify earlier work only if something seems off.
 
 ## Guardrails
 
