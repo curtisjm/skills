@@ -39,7 +39,7 @@ Created by the entry skill, read first by every skill.
 slug: hub-source-toggles
 path: standard          # quick | standard | long | undecided (until create-research)
 phase: plan             # the step currently running or last completed
-repos: [valency-mcp-server, valency-hub]
+repos: [valency-mcp-server, valency-hub]   # initial guess; create-research and create-plan correct it
 source: https://linear.app/.../CUR-123     # entry reference, any tracker
 linear_project: Hub source toggles         # Standard/Long only
 linear_issue: CUR-123                      # Quick only, when source is a Linear issue; else absent

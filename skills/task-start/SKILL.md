@@ -14,7 +14,7 @@ The user has already created the T3 project for this task, rooted at `{TASKDIR}`
 1. **Pull in the reference.** If the user gave one, fetch it (Linear: `get_issue`; GitHub: `gh issue view`; otherwise fetch the URL) and keep its text verbatim for `## Source`. Read any files the user @-mentioned FULLY.
 
 2. **Settle the frontmatter with the user.** Confirm, in one message, the things only they can decide:
-   - `repos`: which repositories the task touches (basenames under `~/dev/valency/`)
+   - `repos`: which repositories the task touches (basenames under `~/dev/valency/`); a first guess is fine, research and planning correct it
    - `path`: `standard`, `long`, or `undecided` (then `create-research` recommends one)
    - anything in the reference or their description that contradicts itself
    Skip the question for anything they already stated.

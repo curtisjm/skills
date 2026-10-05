@@ -97,7 +97,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
 
 9. **Gate:** run `plannotator annotate {TASKDIR}/research.md --gate --json`. On approval continue. On annotations, address each one (spawn sub-agents for further investigation where needed, update the existing document in place — likely existing sections rather than net-new ones at the end) and run the gate again.
 
-10. **Settle the path:** if `path` in the `task.md` frontmatter is already `standard` or `long`, use it and skip the ask. Otherwise state in one or two sentences whether the research points to Standard (`create-design-discussion`) or Long (`create-prd` → `create-tdd`) and why, ask the user to confirm, then set `path:` in the frontmatter and append the ruling to `## Decisions`.
+10. **Settle the path:** if `path` in the `task.md` frontmatter is already `standard` or `long`, use it and skip the ask. Otherwise state in one or two sentences whether the research points to Standard (`create-design-discussion`) or Long (`create-prd` → `create-tdd`) and why, ask the user to confirm, then set `path:` in the frontmatter and append the ruling to `## Decisions`. Also correct `repos` in the frontmatter when research showed the task touches different repositories than listed.
 
 11. **Mirror to Linear:** upload `research.md` and `task.md` as documents on the project named by `linear_project`, each titled with its file name; update a document whose title exists, otherwise create it. Keep the URL of the `research.md` document for the final answer.
 

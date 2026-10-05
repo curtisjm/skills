@@ -34,7 +34,7 @@ You are in the final Plan Writing phase. Convert the design discussion (Standard
 
 5. **Gate**: run `plannotator annotate {TASKDIR}/plan.md --gate --json`. This is plan approval, the last planning gate. Process annotations as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
 
-6. **Mirror to Linear**: upload `plan.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
+6. **Mirror to Linear**: set `repos` in the `task.md` frontmatter to the repositories the Items table names, then upload `plan.md` and `task.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
 
 7. **Launch publish**: `t3_thread_launch` with title `publish {TASKSLUG}` and message `Run /publish for {TASKDIR}`.
 
