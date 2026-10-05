@@ -19,13 +19,7 @@ You are already inside a worktree. Creating another worktree from here is probab
 **Output this final answer instead of proceeding:**
 
 <output_example>
-You're already in a worktree at `[current directory]`.
-
-To start implementation, create a new session with the following command:
-
-```text
-/implement-outline
-```
+You're already in a worktree at `[current directory]`. Implementation can continue here.
 
 If you really do want to create a new worktree from here, let me know and I can still help with that.
 </output_example>
@@ -41,15 +35,9 @@ If you really do want to create a new worktree from here, let me know and I can 
 
 1. Figure out what task you're working on - you should have the task directory `{TASKDIR}` already. TASKSLUG is the basename of `{TASKDIR}`.
 
-1a. Read the ticket and the outline or plan if present:
+1a. Read `{TASKDIR}/task.md` if not already read this session.
 
-```
-Read({TASKDIR}/ticket.md)   # or task.md
-Read({TASKDIR}/structure-outline.md)
-Read({TASKDIR}/plan.md)
-```
-
-1b. Determine the repository (or repositories) the task touches. The current directory is the primary repository unless the ticket or user says otherwise. REPOBASENAME is the basename of a repository, e.g. `~/dev/example-api` -> `example-api`.
+1b. The repositories the task touches are `repos` in the `task.md` frontmatter. REPOBASENAME is the basename of a repository, e.g. `~/dev/example-api` -> `example-api`.
 
 </step>
 
@@ -62,7 +50,7 @@ Defaults (adjust only if the user asks):
 - Worktree path: `{TASKDIR}/repos/{REPOBASENAME}`
 - Branch name: `{TASKSLUG}`
 - Source ref: the latest `origin/main` (or the repository's default branch)
-- Files to copy from the repository root into the worktree, preserving relative paths, when they exist: `.env*`, `.claude/settings.local.json`, `CLAUDE.local.md`
+- Nothing is copied from the repository root: secrets come from AWS
 - Setup command: infer from the repository (e.g. `bun install`, `npm install`, `uv sync`, `make setup`). Skip if nothing obvious exists.
 
 <loop for="each repository">
@@ -75,17 +63,6 @@ Defaults (adjust only if the user asks):
     ```
   </step>
   <step index=2.2>
-    Copy the local-only files listed above:
-
-    ```bash
-    ls -la [REPO_ROOT]/[pattern]
-    mkdir -p [WORKTREE_FULL_PATH]/[parent-dir]
-    cp [matched-file] [WORKTREE_FULL_PATH]/[same-relative-path]
-    ```
-
-    For example, `.claude/settings.local.json` → `[WORKTREE_FULL_PATH]/.claude/settings.local.json`
-  </step>
-  <step index=2.3>
     Run the setup command in the new worktree directory:
 
     ```
@@ -107,13 +84,7 @@ Don't proceed to step 3 until the worktrees are created and setup is complete.
 If you encountered an error in Step 2, do NOT output this section.
 
 <output_example>
-Worktree for {TASKSLUG} has been created at [WORKTREE_FULL_PATH]. You can start implementation by running
-
-```text
-use the implement-outline skill for task {TASKDIR}
-```
-
-in the [WORKTREE_FULL_PATH] directory.
+Worktree for {TASKSLUG} has been created at [WORKTREE_FULL_PATH] on branch `{TASKSLUG}`; implementation continues there.
 </output_example>
 
 </step>

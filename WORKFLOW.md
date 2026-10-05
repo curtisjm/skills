@@ -73,7 +73,7 @@ The plan is read by the orchestrator, so it carries a table:
 | 2 | 2-1-staging-pin | valency-foundation | staging pin | ops | 20 |
 | 2 | 2-2-staging-smoke | — | staging smoke | test | — |
 
-- A **phase** is a vertical slice: the set of items that can run in parallel. Phases are sequential. Two items that cannot run in parallel belong in different phases.
+- A **phase** is a vertical slice: the set of items that can run in parallel, each cutting across layers where it can rather than one layer at a time. Phases are sequential. Two items that cannot run in parallel belong in different phases, and no phase depends on a later one to be verifiable.
 - Each `pr` item targets under 1000 lines. Files it will touch may be named in prose as indicative, never as a binding list.
 - `type`: `pr` (code), `ops` (promotion pin PRs in `valency-foundation`, activation, database scripts — the prose row says which), `test` (verifying the real system: AWS logs, walking user flows; not writing more tests).
 - `## Rollout` states environments, promotion order and how each step is validated. Rollout items sit in the same table, either inside implementation phases or as phases of their own.
@@ -140,7 +140,6 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `describe-pr` | model | HumanLayer copy; replaces local `visual-pr` |
 | `setup-worktree` | model | Quick only |
 | `review-loop`, `ci-commit`, `handoff` | model | done |
-| `create-structure-outline`, `iterate-structure-outline`, `implement-outline`, `iterate-implementation` | — | retire (no greenfield path) |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
 
