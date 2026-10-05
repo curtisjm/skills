@@ -1,22 +1,16 @@
 ---
 name: handoff
-description: Roll the orchestrator (implement) to a fresh thread when its context has grown long. Use from the orchestrator thread only; item threads finish and end instead.
+description: Compact the current conversation into a handoff document for another agent to pick up.
+argument-hint: "What will the next session be used for?"
+disable-model-invocation: true
 ---
 
-# Handoff
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to `{TASKDIR}/handoffs/<YYYY-MM-DD-HHMM>-<topic>.md`.
 
-The orchestrator keeps no state the fresh thread cannot rebuild: phase progress is in Linear sub-issue statuses, item outcomes in `{TASKDIR}/reports/`, the plan in `plan.md` and `plan-changelog.md`. So a handoff is a launch, not a summary.
+Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
 
-## Steps
+Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
-1. **Finish the turn's bookkeeping** first: any report already received is reflected in Linear, and `plan.md` / `plan-changelog.md` are mirrored.
+Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
-2. **Launch** `t3_thread_launch` with title `implement {TASKSLUG}` and message `Run /implement for {TASKDIR}`. Write the returned thread id to `orchestrator_thread` in the `task.md` frontmatter at once, so item threads reporting from now on reach the new thread.
-
-3. **Reply** with exactly:
-
-   ```markdown
-   Handed off to thread `implement {TASKSLUG}`; it resumes from Linear state. This thread is done.
-   ```
-
-   Then end. The fresh thread's Setup (`implement`) derives the current phase from Linear and continues.
+If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.

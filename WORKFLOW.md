@@ -6,7 +6,7 @@ T3 Code is the harness that runs the threads. A thread may run Claude or Codex; 
 
 ## Placeholders
 
-- `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it. `~/dev/valency/tasks` is a git repo (`repos/` ignored) committed by `close-task`.
+- `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `handoffs/`, `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it. `~/dev/valency/tasks` is a git repo (`repos/` ignored) committed by `close-task`.
 - `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it. Each task has a T3 project of the same name whose workspace root is `{TASKDIR}`; every thread of the task lives in it.
 - `{SKILLBASE}` — directory containing the current skill's `SKILL.md`. `{SKILLBASE}/references/...` are that skill's templates.
 - `{REPOBASENAME}` — basename of a repository directory. Repos live at `~/dev/valency/{REPOBASENAME}`.
@@ -94,7 +94,7 @@ All items of a phase launch together; there is no concurrency cap.
 
 An **item thread** (`implement-item`): read its plan row and sub-issue → implement → inner loop (roborev refine and CodeRabbit CLI locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
 
-The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-plan`: read the phase's reports, apply what they change to `plan.md` and the next phase's sub-issue bodies, then dispatch the next phase — on its own if the plan stacks, otherwise when the user says go after merging. If its context grows long, `handoff` rolls it to a fresh thread.
+The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-plan`: read the phase's reports, apply what they change to `plan.md` and the next phase's sub-issue bodies, then dispatch the next phase — on its own if the plan stacks, otherwise when the user says go after merging. If its context grows long it writes a `handoff` and relaunches itself, pointing the new thread at the handoff file.
 
 `revise-plan` rules:
 
