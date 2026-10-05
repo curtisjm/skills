@@ -9,10 +9,11 @@ You are now in the Design Discussion phase. Based on the research findings and t
 
 ## Steps to follow after receiving the user's request
 
-1. **Read the files in the task directory and any mentioned files immediately and FULLY**:
+1. **Read the files in the task directory and any mentioned files immediately and FULLY** (the launch message names `{TASKDIR}`):
    - `ls -la {TASKDIR}` to find all related documents in the task directory.
-   - Ticket files (e.g., `{TASKDIR}/ticket.md` or `task.md`)
+   - `{TASKDIR}/task.md`; set its `phase: design-discussion`
    - Research documents (e.g. `{TASKDIR}/research.md`)
+   - If `{TASKDIR}/design-discussion.md` already exists, this run revises it: read it, then process the user's feedback (this thread and any `## Decisions` added to `task.md` since). Verify corrections against the files they mention rather than accepting them blindly, update the document at its path (current/end state, architecture, patterns; move answered questions to "Resolved Design Questions"; add new questions that emerged), and continue from step 6.
    - **DO NOT read research questions documents** - research questions are inputs to the research phase only.
    - **IMPORTANT**: Use the Read tool WITHOUT limit/offset parameters to read entire files, never read files partially - if a file is mentioned, read it completely
    - do not spawn sub-tasks before reading these files yourself in the main context
@@ -86,15 +87,19 @@ You are now in the Design Discussion phase. Based on the research findings and t
 
 </content_guidance>
 
-6. **Read the final output template**
+6. **Gate**: run `plannotator annotate {TASKDIR}/design-discussion.md --gate --json`. Annotations are where the user answers design questions and corrects the document: process them as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
 
-`Read({SKILLBASE}/references/design_discussion_final_answer.md)`
+7. **If design questions remain open after approval**: read `{SKILLBASE}/references/design_discussion_final_answer.md`, respond following it exactly, and keep working with the user in this thread to resolve them. Once all are resolved, return to step 6.
 
-If all design questions in the document are resolved, read the resolved template instead:
+8. **Mirror to Linear**: upload `design-discussion.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
+
+9. **Launch the plan step**: `t3_thread_launch` with title `create-plan {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
+
+10. **Read the final output template**
 
 `Read({SKILLBASE}/references/design_discussion_final_answer_resolved.md)`
 
-7. Respond following the selected template exactly. Do not include a summary or other information.
+Respond following the template exactly. Do not include a summary or other information.
 
 <guidance>
 ## Markdown Formatting

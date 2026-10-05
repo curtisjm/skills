@@ -1,9 +1,8 @@
 ### Next Steps
 
-All questions in the design document have been resolved. At this point, we can proceed to the outline phase and create an outline of the implementation work.
+All questions in the design document have been resolved.
 
-To do this, create a new session with the following command:
-```text
-/create-structure-outline
-```
+- Local: `{TASKDIR}/design-discussion.md`
+- Linear: [design-discussion.md]({url of the Linear document})
 
+The plan phase has been launched in thread `create-plan {TASKSLUG}`.
