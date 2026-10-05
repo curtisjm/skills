@@ -13,13 +13,14 @@ These questions will be used by another agent to research the codebase.
 
 ## Steps to follow after receiving the user's request
 
-1. **Read all @-mentioned files immediately and FULLY**:
+1. **Read `{TASKDIR}/task.md` immediately and FULLY** (the launch message names `{TASKDIR}`), and set its `phase: research-questions`:
 
-    - Ticket files (e.g., `{TASKDIR}/ticket.md` or `task.md`)
     - collateral files if explicitly mentioned
     - **DO NOT** read other artifacts unless requested.
     - Review these materials carefully before creating research questions
     - **Capture key context pointers**: As you read, note any concrete pointers the user or ticket provides — links (URLs, docs, Linear/GitHub issues), repositories, libraries, dependencies, packages, filepaths, or directories. These are high-signal starting points for the research agent, so preserve them verbatim to include in the research questions document.
+
+    If `{TASKDIR}/research-questions.md` already exists, this run revises it: read it FULLY, apply the user's feedback (this thread and any `## Decisions` added since), keep the same frontmatter and format, then continue from **Output Format** step 2.
 
 2. **Perform lightweight research to contextualize the ticket and the user's request**
     Use only the specialized research agents listed below. Do not use other agent types, including `general-purpose`, `Explore`, or `Plan`.
@@ -77,11 +78,15 @@ Populate the **Key Context Pointers** section with the links, repositories, libr
 
 2. **Write the research questions** to `{TASKDIR}/research-questions.md`
 
-3. **Read the final output template**
+3. **Mirror to Linear**: upload the file as a document on the project named by `linear_project` in `task.md`, titled `research-questions.md`; update the document if one with that title exists, otherwise create it. Keep the document's URL for the final answer.
+
+4. **Launch the research step**: `t3_thread_launch` with title `create-research {TASKSLUG}` and message `Run /create-research for {TASKDIR}`.
+
+5. **Read the final output template**
 
 `Read({SKILLBASE}/references/research_questions_final_answer.md)`
 
-4. Respond following the template EXACTLY. Do not include a summary or other information.
+6. Respond following the template EXACTLY. Do not include a summary or other information.
 
 <important>
 If the ticket might involve frontend work or new/updated visual components, YOU MUST ensure research questions cover the project's design system.

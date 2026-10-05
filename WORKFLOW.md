@@ -7,7 +7,7 @@ T3 Code is the harness that runs the threads. A thread may run Claude or Codex; 
 ## Placeholders
 
 - `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it.
-- `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it.
+- `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it. Each task has a T3 project of the same name whose workspace root is `{TASKDIR}`; every thread of the task lives in it.
 - `{SKILLBASE}` — directory containing the current skill's `SKILL.md`. `{SKILLBASE}/references/...` are that skill's templates.
 - `{REPOBASENAME}` — basename of a repository directory. Repos live at `~/dev/valency/{REPOBASENAME}`.
 
@@ -28,7 +28,7 @@ Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference —
 
 ### Relay
 
-Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
+Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes only `title` and `message`, so the new thread inherits this thread's project, model, and modes (`workspaceStrategy` is omitted too: planning steps run in the task project's root, `{TASKDIR}`). The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
 
 ## `task.md`
 
@@ -53,13 +53,13 @@ Body: `## Goal` (the user's words verbatim), `## Source` (issue text pulled in),
 
 One document per type per task, no numeric prefixes: `research-questions.md`, `research.md`, `design-discussion.md`, `prd.md`, `tdd.md`, `plan.md`. If a second of the same type seems needed, ask.
 
-Every planning document is reviewed through Plannotator (`annotate --gate --json`) before the step hands off. Plan approval is the last planning gate.
+Every planning document except `research-questions.md` is reviewed through Plannotator (`annotate --gate --json`) before the step hands off; research questions go straight to `create-research`, as in HumanLayer. Plan approval is the last planning gate.
 
 HTML artifacts (mockups, diagrams, explainers) live in `{TASKDIR}/html/` and are opened from disk. `publish-internal-artifact` is used only when the user explicitly asks to publish one.
 
 ### Syncing to Linear
 
-On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project and kept identical to the local files. Each `create-*` skill re-syncs its document after the gate passes; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
+On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project, titled with the file name, and kept identical to the local files. Each `create-*` skill re-syncs its document before handing off; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
 
 ### `plan.md`
 
@@ -85,8 +85,9 @@ The plan is read by the orchestrator, so it carries a table:
 The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch`, each with its own worktree:
 
 - thread title `PR 1.2 hub settings UI` (`PROMO 2.1 …` / `TEST 2.2 …` for ops and test items)
-- `workspaceStrategy: {type: worktree, baseRef, branch}`; worktree `{TASKDIR}/repos/{REPOBASENAME}-1-2`, branch `{TASKSLUG}/1-2-hub-settings-ui`, base `origin/main` or the named parent PR branch when stacking
-- the launch creates the checkout and runs the repo setup script; the item thread never runs a worktree step and nothing is copied between worktrees (secrets come from AWS)
+- the orchestrator first runs `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-1-2 -b {TASKSLUG}/1-2-hub-settings-ui <base>`, base `origin/main` or the named parent PR branch when stacking (the task project is not the code repo, so T3's `worktree` strategy cannot create it)
+- `workspaceStrategy: {type: existing_worktree, worktreePath, branch}` binds the thread to that checkout (verified: a task project accepts a worktree of another repo)
+- T3 runs no setup script for it; the item thread runs the repo's own setup first. Nothing is copied between worktrees (secrets come from AWS)
 
 All items of a phase launch together; there is no concurrency cap.
 
@@ -115,7 +116,7 @@ Linear is personal work management; the user is the only one on the team using i
 
 ## Gates
 
-Human: every planning document; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
+Human: every planning document after research questions; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
 
 Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the review loop, `revise-plan` within scope.
 
@@ -128,8 +129,9 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | Skill | Kind | Status |
 |---|---|---|
 | `triage`, `task-start`, `quick-task` | user | to write |
-| `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
-| `iterate-*` | — | retire; folded into `create-*` |
+| `create-research-questions` | user | done |
+| `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
+| `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions` done) |
 | `publish` | user | to write |
 | `implement` (orchestrator), item thread head | user | to write; replaces `implement-plan` |
 | `revise-plan` (orchestrator, between phases) | model | to write |
