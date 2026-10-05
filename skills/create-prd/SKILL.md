@@ -152,7 +152,7 @@ When the solution is fully fleshed out, stop and hand it back for review. Becaus
 
 > I think the solution is complete. Since we've built it up decision by decision, can you read the **Solution Details** top to bottom and confirm it hangs together before we wrap up?
 
-Then run the gate: `plannotator annotate {TASKDIR}/prd.md --gate --json`. Annotations are the user's fixes: fold each one in (re-paint the affected section, update mockups), then run the gate again. Continue only on approval.
+Then run the gate: tell the user the review URL (`~/dev/skills/bin/gate --url {TASKDIR}/prd.md`), then run `~/dev/skills/bin/gate {TASKDIR}/prd.md`. Annotations are the user's fixes: fold each one in (re-paint the affected section, update mockups), then run the gate again. Continue only on approval.
 </instructions>
 
 </step>
