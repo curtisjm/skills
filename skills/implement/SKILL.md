@@ -44,4 +44,3 @@ When every sub-issue of the phase is In Review or Done, the phase has converged:
 - **Agents never merge.** The user merges every PR and runs every promotion action; an `ops` thread opens the pin PR, nothing more.
 - `plan.md` has one writer: this thread, through `revise-plan`. Completed phases are not rewritten; their reports are the record.
 - Linear identifiers and links never go into code, commits, PR titles or bodies, or branch names.
-- When this thread's context grows long, run `handoff` to roll to a fresh thread; it rewrites `orchestrator_thread`, and the fresh thread resumes from Setup.
