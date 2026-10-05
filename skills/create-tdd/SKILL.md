@@ -37,9 +37,21 @@ You fully settle and get the user's sign-off on the System Design before you ope
 <step index="1" name="understand-the-context">
 
 <instructions>
-- Find the task directory: `ls -la {TASKDIR}`.
-- Read every relevant file in the task directory **fully** (Read with no limit/offset), excluding research-questions docs.
+- The launch message names `{TASKDIR}`: `ls -la {TASKDIR}`.
+- Read every relevant file in the task directory **fully** (Read with no limit/offset), excluding research-questions docs. Read `{TASKDIR}/task.md` and set its `phase: tdd`.
 - Read the TDD template: `Read({SKILLBASE}/references/tdd_template.md)`.
+- If `{TASKDIR}/tdd.md` already exists, this run revises it. Skip Step 2; if the user gave no feedback, ask:
+
+  ```
+  I'm ready to iterate on the TDD. Would you like to:
+  1. Provide specific feedback or changes to incorporate
+  2. Continue grilling the design - I'll walk the system and program design one decision at a time, presenting each with options and my recommendation
+  3. Have me surface additional technical design questions
+
+  Let me know which direction, or share your feedback directly.
+  ```
+
+  Resolve feedback one item at a time with the same reflexes as the interview (re-paint, don't append), continue grilling from Step 3 or 5 as the feedback dictates, and finish with Steps 6 and 7.
 </instructions>
 
 <guidance>
@@ -146,9 +158,9 @@ If the codebase uses an ORM or a schema-definition library, the equivalent ORM-s
 ## HTML artifacts for complex concepts
 
 When a concept is too complex for Mermaid or plain text - combining data flow, structure, annotations, or side-by-side comparisons - write a focused HTML artifact and link to it:
-- Write to `{TASKDIR}/diagram-{description}.html`
+- Write to `{TASKDIR}/html/diagram-{description}.html`
 - Keep each artifact focused on the decision at hand; use realistic labels, not lorem ipsum
-[{TASKDIR}/diagram-{description}.html]({TASKDIR}/diagram-{description}.html)
+[{TASKDIR}/html/diagram-{description}.html]({TASKDIR}/html/diagram-{description}.html)
 
 **If you are writing an HTML artifact, read `{SKILLBASE}/references/artifact_template.html` and follow it.** Copy its `<style>` block and build your content in the body using its prose elements and utility classes (`.card`, `.badge*`, `.stat*`, `.ba`). The artifact must follow the template so it matches this application, not the codebase the TDD is about.
 </guidance>
@@ -270,7 +282,7 @@ When the program design is settled, hand it back for review the same way:
 
 > I think the program design is complete too. Can you review the **Program Design** section and confirm the code shape looks right?
 
-Wait for the user's approval and incorporate any fixes.
+Then run the gate on the whole document: `plannotator annotate {TASKDIR}/tdd.md --gate --json`. Annotations are the user's fixes: fold each one in (re-paint the affected section, update diagrams), then run the gate again. Continue only on approval.
 </instructions>
 
 </step>
@@ -278,7 +290,11 @@ Wait for the user's approval and incorporate any fixes.
 <step index="7" name="wrap-up">
 
 <instructions>
-When both phases are approved, read the final answer template and follow it exactly (it points to the next step - the structure outline): `Read({SKILLBASE}/references/tdd_final_answer_resolved.md)`.
+When both phases are approved:
+
+- **Mirror to Linear**: upload `tdd.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer. Diagrams stay local in `{TASKDIR}/html/`.
+- **Launch the plan step**: `t3_thread_launch` with title `create-plan {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
+- Read the final answer template and follow it exactly: `Read({SKILLBASE}/references/tdd_final_answer_resolved.md)`.
 </instructions>
 
 </step>
