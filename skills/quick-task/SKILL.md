@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Quick Task
 
-The Quick path (`WORKFLOW.md`): small, understood, one thread, one or a few PRs. Mini research and a plan go into `task.md`; then per PR: worktree, implement, review loop. No Linear project, no planning documents, no close step: the last merge is the close.
+The Quick path (`~/dev/skills/WORKFLOW.md`): small, understood, one thread, one or a few PRs. Mini research and a plan go into `task.md`; then per PR: worktree, implement, review loop. No Linear project, no planning documents, no close step: the last merge is the close.
 
 This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` is its basename.
 

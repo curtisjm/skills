@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Implement (orchestrator)
 
-The one thread for everything after Publish (`WORKFLOW.md`): dispatches each phase of `{TASKDIR}/plan.md` as parallel item threads, collects their reports, revises the plan between phases, and writes every Linear status. It writes no code and never merges.
+The one thread for everything after Publish (`~/dev/skills/WORKFLOW.md`): dispatches each phase of `{TASKDIR}/plan.md` as parallel item threads, collects their reports, revises the plan between phases, and writes every Linear status. It writes no code and never merges.
 
 The launch message names `{TASKDIR}`.
 

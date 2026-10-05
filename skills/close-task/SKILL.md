@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Close task
 
-Last step of the Standard and Long paths (`WORKFLOW.md`). The user invokes it after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro, closes the Linear project, removes the task's worktrees, and commits the task directory to the tasks repo. Quick has no close; the merge is the close.
+Last step of the Standard and Long paths (`~/dev/skills/WORKFLOW.md`). The user invokes it after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro, closes the Linear project, removes the task's worktrees, and commits the task directory to the tasks repo. Quick has no close; the merge is the close.
 
 Runs in the task project; `{TASKDIR}` is the working directory.
 

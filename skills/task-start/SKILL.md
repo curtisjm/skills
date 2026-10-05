@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Task Start
 
-Entry point of the Standard and Long paths (`WORKFLOW.md`). Turns a reference (Linear issue, GitHub issue, Asana task, URL) plus whatever the user says about it into `{TASKDIR}/task.md` and a Linear project, then launches `create-research-questions`.
+Entry point of the Standard and Long paths (`~/dev/skills/WORKFLOW.md`). Turns a reference (Linear issue, GitHub issue, Asana task, URL) plus whatever the user says about it into `{TASKDIR}/task.md` and a Linear project, then launches `create-research-questions`.
 
 The user has already created the T3 project for this task, rooted at `{TASKDIR}`; this thread runs in it, so `{TASKDIR}` is the working directory and `{TASKSLUG}` its basename.
 

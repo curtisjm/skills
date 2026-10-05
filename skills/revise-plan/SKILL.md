@@ -5,7 +5,7 @@ description: Fold a converged phase's item reports into {TASKDIR}/plan.md and pl
 
 # Revise plan
 
-Runs in the orchestrator thread only; it is the one writer of `plan.md` (`WORKFLOW.md`).
+Runs in the orchestrator thread only; it is the one writer of `plan.md` (`~/dev/skills/WORKFLOW.md`).
 
 ## Steps
 
