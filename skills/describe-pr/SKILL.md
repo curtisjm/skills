@@ -38,10 +38,11 @@ Create or update the pull request for the current task with a concise descriptio
    - Prefer `diff` blocks when showing changes to an existing shape. Show the complete target shape when most of it is new or diff notation would obscure ownership or order.
    - Keep each view focused on the calls, files, fields, components, and boundaries a reviewer needs. Omit categories that did not change.
    - Do not add walkthrough artifacts, exhaustive implementation narratives, verification checklists, changelog text, or plan-deviation sections.
+   - When the PR changes UI, add a **Screenshots** section: run the app and capture each changed screen or state (before/after when the shape already existed) to `{TASKDIR}/html/pr-{number}/`, and reference each as `![alt](./file.png)` in the body.
 
 5. Save and publish the description:
    - Write the description to `{TASKDIR}/pr-description.md`.
-   - Update the PR with `gh pr edit {number} --body-file {output-path}`.
+   - Update the PR with `gh pr edit {number} --body-file {output-path}`, adding `--attach '{path}#{alt}'` for each screenshot; `gh` uploads the files and rewrites the body references to the hosted assets.
    - Confirm the update succeeded.
 
 6. Report completion:
