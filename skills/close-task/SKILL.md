@@ -17,13 +17,11 @@ Runs in the task project; `{TASKDIR}` is the working directory.
 
 3. **Write `{TASKDIR}/retro.md`** from `{SKILLBASE}/references/retro_template.md`: what shipped (PRs, promotions), how the plan changed and why (from the changelog), what the reports flagged for the future, and what to change in the workflow or skills next time.
 
-4. **Gate**: `plannotator annotate {TASKDIR}/retro.md --gate --json`. Apply annotations and re-run until approved.
+4. **Linear**: mirror `retro.md` to the project (titled `retro.md`); set every remaining issue and sub-issue to Done; project → Done.
 
-5. **Linear**: mirror `retro.md` to the project (titled `retro.md`); set every remaining issue and sub-issue to Done; project → Done.
+5. **Clean up worktrees**: for each checkout under `{TASKDIR}/repos/`, `git -C ~/dev/valency/{REPOBASENAME} worktree remove <path>`. Branches are left alone; they are merged.
 
-6. **Clean up worktrees**: for each checkout under `{TASKDIR}/repos/`, `git -C ~/dev/valency/{REPOBASENAME} worktree remove <path>`. Branches are left alone; they are merged.
-
-7. **Respond** with exactly:
+6. **Respond** with exactly:
 
 ```markdown
 ### Done
