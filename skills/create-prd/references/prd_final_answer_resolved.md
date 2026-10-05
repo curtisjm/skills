@@ -1,11 +1,10 @@
 ### Next Steps
 
-The PRD is fleshed out. At this point, we can proceed to the technical design phase and create a Technical Design Document (TDD) that bridges the product requirements to implementation.
+The PRD is fleshed out.
 
-To do this, create a new session with the following command:
-```text
-/create-tdd
-```
+- Local: `{TASKDIR}/prd.md`
+- Linear: [prd.md]({url of the Linear document})
+
+The technical design phase has been launched in thread `create-tdd {TASKSLUG}`.
 
 Or, if you'd like to go deeper, ask me to keep digging into any part of the solution and we can keep working on it.
-
