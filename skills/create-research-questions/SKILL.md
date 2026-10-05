@@ -78,7 +78,7 @@ Populate the **Key Context Pointers** section with the links, repositories, libr
 
 2. **Write the research questions** to `{TASKDIR}/research-questions.md`
 
-3. **Mirror to Linear**: upload the file as a document on the project named by `linear_project` in `task.md`, titled `research-questions.md`; update the document if one with that title exists, otherwise create it.
+3. **Mirror to Linear**: upload the file as a document on the project named by `linear_project` in `task.md`, titled `research-questions.md`; update the document if one with that title exists, otherwise create it. Keep the document's URL for the final answer.
 
 4. **Launch the research step**: `t3_thread_launch` with title `create-research {TASKSLUG}` and message `Run /create-research for {TASKDIR}`.
 
