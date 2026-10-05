@@ -28,7 +28,7 @@ Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference —
 
 ### Relay
 
-Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
+Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes only `title` and `message`, so the new thread inherits this thread's project, model, and modes (`workspaceStrategy` is omitted too: planning steps run in the project's main checkout, not a worktree). The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
 
 ## `task.md`
 
