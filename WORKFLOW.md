@@ -100,7 +100,7 @@ The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-
 
 - `plan.md` is always the current plan and nothing else. No strikethroughs, no "changed from", no dated notes, no commentary about earlier versions.
 - Every change is recorded in `{TASKDIR}/plan-changelog.md`, newest first: when (after which phase, date), what changed (rows added, removed, re-estimated, moved between phases; prose sections rewritten), why (which report or ruling drove it), and anything the user must decide. One entry per revision.
-- Changes stay within the approved scope. A report that implies new scope or a different approach becomes a question to the user in the changelog entry and a pause, not a silent plan edit.
+- Changes within the approved outcome are applied unattended. New outcomes, a different approach, or excluded work are proposed in the changelog entry with a recommendation and applied only after the user rules; the orchestrator pauses until then.
 - Completed phases are not rewritten; their reports are the record.
 - After the edit, `plan.md` and `plan-changelog.md` are re-synced to the Linear project.
 
@@ -119,7 +119,7 @@ Linear is personal work management; the user is the only one on the team using i
 
 Human: every planning document after research questions; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
 
-Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the review loop, `revise-plan` within scope.
+Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the review loop, `revise-plan` for changes within the approved outcome.
 
 `close-task` is user-invoked after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro to the Linear project. Quick has no close; the merge is the close.
 
