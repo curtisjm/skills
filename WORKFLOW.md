@@ -135,7 +135,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions`, `iterate-research` done) |
 | `publish` | user | done |
 | `implement` (orchestrator), `implement-item` (item thread head) | user | done; `implement-plan` retired |
-| `revise-plan` (orchestrator, between phases) | model | to write |
+| `revise-plan` (orchestrator, between phases) | model | done |
 | `close-task` | user | to write |
 | `describe-pr` | model | HumanLayer copy; replaces local `visual-pr` |
 | `setup-worktree` | model | Quick only |
