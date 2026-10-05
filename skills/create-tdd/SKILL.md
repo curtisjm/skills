@@ -282,7 +282,7 @@ When the program design is settled, hand it back for review the same way:
 
 > I think the program design is complete too. Can you review the **Program Design** section and confirm the code shape looks right?
 
-Then run the gate on the whole document: `plannotator annotate {TASKDIR}/tdd.md --gate --json`. Annotations are the user's fixes: fold each one in (re-paint the affected section, update diagrams), then run the gate again. Continue only on approval.
+Then run the gate on the whole document: `plannotator annotate {TASKDIR}/tdd.md --tailscale --gate --json`. Annotations are the user's fixes: fold each one in (re-paint the affected section, update diagrams), then run the gate again. Continue only on approval.
 </instructions>
 
 </step>

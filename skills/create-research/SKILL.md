@@ -95,7 +95,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
    - Get repo info: `gh repo view --json owner,name`
    - Create permalinks: `https://github.com/{owner}/{repo}/blob/{commit}/{file}#L{line}`
 
-9. **Gate:** run `plannotator annotate {TASKDIR}/research.md --gate --json`. On approval continue. On annotations, address each one (spawn sub-agents for further investigation where needed, update the existing document in place — likely existing sections rather than net-new ones at the end) and run the gate again.
+9. **Gate:** run `plannotator annotate {TASKDIR}/research.md --tailscale --gate --json`. On approval continue. On annotations, address each one (spawn sub-agents for further investigation where needed, update the existing document in place — likely existing sections rather than net-new ones at the end) and run the gate again.
 
 10. **Settle the path:** if `path` in the `task.md` frontmatter is already `standard` or `long`, use it and skip the ask. Otherwise state in one or two sentences whether the research points to Standard (`create-design-discussion`) or Long (`create-prd` → `create-tdd`) and why, ask the user to confirm, then set `path:` in the frontmatter and append the ruling to `## Decisions`. Also correct `repos` in the frontmatter when research showed the task touches different repositories than listed.
 

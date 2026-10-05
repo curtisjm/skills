@@ -87,7 +87,7 @@ You are now in the Design Discussion phase. Based on the research findings and t
 
 </content_guidance>
 
-6. **Gate**: run `plannotator annotate {TASKDIR}/design-discussion.md --gate --json`. Annotations are where the user answers design questions and corrects the document: process them as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
+6. **Gate**: run `plannotator annotate {TASKDIR}/design-discussion.md --tailscale --gate --json`. Annotations are where the user answers design questions and corrects the document: process them as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
 
 7. **If design questions remain open after approval**: read `{SKILLBASE}/references/design_discussion_final_answer.md`, respond following it exactly, and keep working with the user in this thread to resolve them. Once all are resolved, return to step 6.
 

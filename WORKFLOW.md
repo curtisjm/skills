@@ -54,7 +54,7 @@ Body: `## Goal` (the user's words verbatim), `## Source` (issue text pulled in),
 
 One document per type per task, no numeric prefixes: `research-questions.md`, `research.md`, `design-discussion.md`, `prd.md`, `tdd.md`, `plan.md`. If a second of the same type seems needed, ask.
 
-Every planning document except `research-questions.md` is reviewed through Plannotator (`annotate --gate --json`) before the step hands off; research questions go straight to `create-research`, as in HumanLayer. Plan approval is the last planning gate.
+Every planning document except `research-questions.md` is reviewed through Plannotator (`annotate --tailscale --gate --json`) before the step hands off; research questions go straight to `create-research`, as in HumanLayer. Plan approval is the last planning gate. Threads run on the server, so the gate publishes the review page over the tailnet via `tailscale serve`; `PLANNOTATOR_PORT` is pinned there, so the page is always at `https://cm-server.tail1a4138.ts.net:41223` (one gate at a time). The gate blocks until the user approves or annotates.
 
 HTML artifacts (mockups, diagrams, explainers) live in `{TASKDIR}/html/` and are opened from disk. `publish-internal-artifact` is used only when the user explicitly asks to publish one.
 
