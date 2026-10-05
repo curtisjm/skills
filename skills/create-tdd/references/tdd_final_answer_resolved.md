@@ -1,11 +1,10 @@
 ### Next Steps
 
-The TDD is fleshed out. At this point, we can proceed to create a structure outline that breaks down the implementation into phases with specific file changes and validation steps.
+The TDD is fleshed out.
 
-To do this, create a new session with the following command:
-```text
-/create-structure-outline
-```
+- Local: `{TASKDIR}/tdd.md`
+- Linear: [tdd.md]({url of the Linear document})
+
+The plan phase has been launched in thread `create-plan {TASKSLUG}`.
 
 Or, if you'd like to go deeper, ask me to keep digging into any part of the system or program design and we can keep working on it.
-
