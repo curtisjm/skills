@@ -136,10 +136,10 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `publish` | user | done |
 | `implement` (orchestrator), `implement-item` (item thread head) | user | done; `implement-plan` retired |
 | `revise-plan` (orchestrator, between phases) | model | done |
-| `close-task` | user | to write |
+| `close-task` | user | done |
 | `describe-pr` | model | HumanLayer copy; replaces local `visual-pr` |
 | `setup-worktree` | model | Quick only |
-| `review-loop`, `ci-commit`, `handoff` | model | `review-loop` to write |
+| `review-loop`, `ci-commit`, `handoff` | model | done |
 | `create-structure-outline`, `iterate-structure-outline`, `implement-outline`, `iterate-implementation` | — | retire (no greenfield path) |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
