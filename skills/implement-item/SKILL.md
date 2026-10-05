@@ -24,8 +24,6 @@ The launch message names `{TASKDIR}` and the item `id`.
 
 5. **Report**: `t3_thread_send` to `orchestrator_thread` with `Item {id} done: {TASKDIR}/reports/{id}.md` (or `Item {id} blocked: …` when stuck). Then end.
 
-If this thread is resumed with work already committed on the branch, trust it: pick up from the plan step after the last commit and verify earlier work only if something seems off.
-
 ## Guardrails
 
 - Never merge, never push to a branch that is not this item's.
