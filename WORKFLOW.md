@@ -43,6 +43,7 @@ repos: [valency-mcp-server, valency-hub]   # initial guess; create-research and 
 source: https://linear.app/.../CUR-123     # entry reference, any tracker
 linear_project: Hub source toggles         # Standard/Long only
 linear_issue: CUR-123                      # Quick only, when source is a Linear issue; else absent
+orchestrator_thread: 4016b326-…             # written by `implement`; where item threads report
 created: 2026-10-04
 ---
 ```
@@ -91,7 +92,7 @@ The **orchestrator** is one thread for everything after Publish, implementation 
 
 All items of a phase launch together; there is no concurrency cap.
 
-An **item thread**: read its plan row and sub-issue → implement → inner loop (roborev refine and CodeRabbit CLI locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
+An **item thread** (`implement-item`): read its plan row and sub-issue → implement → inner loop (roborev refine and CodeRabbit CLI locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
 
 The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-plan`: read the phase's reports, apply what they change to `plan.md` and the next phase's sub-issue bodies, then dispatch the next phase — on its own if the plan stacks, otherwise when the user says go after merging. If its context grows long, `handoff` rolls it to a fresh thread.
 
@@ -133,7 +134,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
 | `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions`, `iterate-research` done) |
 | `publish` | user | done |
-| `implement` (orchestrator), item thread head | user | to write; replaces `implement-plan` |
+| `implement` (orchestrator), `implement-item` (item thread head) | user | done; `implement-plan` retired |
 | `revise-plan` (orchestrator, between phases) | model | to write |
 | `close-task` | user | to write |
 | `describe-pr` | model | HumanLayer copy; replaces local `visual-pr` |
@@ -141,7 +142,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `review-loop`, `ci-commit`, `handoff` | model | `review-loop` to write |
 | `create-structure-outline`, `iterate-structure-outline`, `implement-outline`, `iterate-implementation` | — | retire (no greenfield path) |
 
-Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`, `implementer-agent`, `implementation-reviewer`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
+Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
 
 ## Invoking skills
 
