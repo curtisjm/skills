@@ -59,7 +59,7 @@ HTML artifacts (mockups, diagrams, explainers) live in `{TASKDIR}/html/` and are
 
 ### Syncing to Linear
 
-On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project and kept identical to the local files. Each `create-*` skill re-syncs its document after the gate passes; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
+On Standard and Long, `task.md` and every planning document are uploaded as documents on the task's Linear project, titled with the file name, and kept identical to the local files. Each `create-*` skill re-syncs its document after the gate passes; the orchestrator re-syncs `plan.md` and `plan-changelog.md` after every revision. Local is the source of truth; Linear is a mirror and is never edited there.
 
 ### `plan.md`
 
@@ -128,8 +128,9 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | Skill | Kind | Status |
 |---|---|---|
 | `triage`, `task-start`, `quick-task` | user | to write |
-| `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
-| `iterate-*` | — | retire; folded into `create-*` |
+| `create-research-questions` | user | rewritten |
+| `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user | HumanLayer copies, rewriting one at a time; each absorbs its `iterate-*` |
+| `iterate-*` | — | retire; folded into `create-*` (`iterate-research-questions` done) |
 | `publish` | user | to write |
 | `implement` (orchestrator), item thread head | user | to write; replaces `implement-plan` |
 | `revise-plan` (orchestrator, between phases) | model | to write |
