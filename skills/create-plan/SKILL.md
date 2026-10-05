@@ -46,13 +46,16 @@ Respond following the template exactly. Do not include a summary or other inform
 
 ## Plan Writing Guidelines
 
-- A phase is a vertical slice: the items in it run in parallel, each in its own thread and worktree. Two items that cannot run in parallel belong in different phases.
+- A phase is a vertical slice: the items in it run in parallel, each in its own thread and worktree. Two items that cannot run in parallel belong in different phases. Each phase cuts across layers, services, or module boundaries where it can, so surprises surface early; never structure phase N so that phase N+1 must be done before N can be verified.
 - Each `pr` item targets under 1000 lines and is independently testable. Files named in an item are indicative, never a binding list.
 - Include specific code examples, not just descriptions
 - Automated verification should be runnable commands
 - Manual verification should be specific, actionable steps
+- Not every item needs manual verification; don't add manual steps just to have them. If an item cannot be checked at all, it may be too small or not vertical enough.
 - Between phases the orchestrator pauses for the user when the plan merges phase by phase; stacked phases run on
 - If the research documented testing patterns for the components being changed, include test code in the plan (new test files or additions to existing test files). Follow the existing test patterns found in the research.
+
+A horizontal breakdown — schema, then API, then UI, then tests — creates handoff problems and partially finished work. A vertical slice cuts through the stack: the user can create the simplest version of the thing end to end; then edit one field end to end; then see the first validation error end to end. Each item carries the schema, API, UI, and tests its slice needs. This is illustrative; not all work fits it, but cross boundaries where you can.
 
 ## Document Precedence
 
