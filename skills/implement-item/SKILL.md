@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Implement item
 
-Head of one item thread (`WORKFLOW.md`): a single row of `{TASKDIR}/plan.md`, run to a review-clean PR (or a completed promotion or check), then reported to the orchestrator. The orchestrator launched this thread inside the item's worktree when the item has a repo.
+Head of one item thread (`~/dev/skills/WORKFLOW.md`): a single row of `{TASKDIR}/plan.md`, run to a review-clean PR (or a completed promotion or check), then reported to the orchestrator. The orchestrator launched this thread inside the item's worktree when the item has a repo.
 
 The launch message names `{TASKDIR}` and the item `id`.
 

@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Publish
 
-Runs unattended after plan approval (`WORKFLOW.md`). Turns the Items table of `{TASKDIR}/plan.md` into the Linear issue tree, moves the project to Implementing, and launches the orchestrator.
+Runs unattended after plan approval (`~/dev/skills/WORKFLOW.md`). Turns the Items table of `{TASKDIR}/plan.md` into the Linear issue tree, moves the project to Implementing, and launches the orchestrator.
 
 The launch message names `{TASKDIR}`.
 
