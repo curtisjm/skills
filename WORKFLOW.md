@@ -6,7 +6,7 @@ T3 Code is the harness that runs the threads. A thread may run Claude or Codex; 
 
 ## Placeholders
 
-- `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it.
+- `{TASKDIR}` — `~/dev/valency/tasks/{TASKSLUG}`. Holds `task.md`, every planning document, `plan-changelog.md`, `html/` (mockups, diagrams, explainers), `reports/`, and `repos/` (worktrees). Plain directory; ordinary file tools work on it. `~/dev/valency/tasks` is a git repo (`repos/` and `html/` ignored) committed by `close-task`.
 - `{TASKSLUG}` — basename of `{TASKDIR}`. Branch names start with it. Each task has a T3 project of the same name whose workspace root is `{TASKDIR}`; every thread of the task lives in it.
 - `{SKILLBASE}` — directory containing the current skill's `SKILL.md`. `{SKILLBASE}/references/...` are that skill's templates.
 - `{REPOBASENAME}` — basename of a repository directory. Repos live at `~/dev/valency/{REPOBASENAME}`.

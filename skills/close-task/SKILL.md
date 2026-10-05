@@ -5,7 +5,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 # Close task
 
-Last step of the Standard and Long paths (`WORKFLOW.md`). The user invokes it after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro, closes the Linear project, and removes the task's worktrees. Quick has no close; the merge is the close.
+Last step of the Standard and Long paths (`WORKFLOW.md`). The user invokes it after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro, closes the Linear project, removes the task's worktrees, and commits the task directory to the tasks repo. Quick has no close; the merge is the close.
 
 Runs in the task project; `{TASKDIR}` is the working directory.
 
@@ -21,7 +21,9 @@ Runs in the task project; `{TASKDIR}` is the working directory.
 
 5. **Clean up worktrees**: for each checkout under `{TASKDIR}/repos/`, `git -C ~/dev/valency/{REPOBASENAME} worktree remove <path>`. Branches are left alone; they are merged.
 
-6. **Respond** with exactly:
+6. **Commit the task record**: `~/dev/valency/tasks` is a git repo (`repos/` and `html/` are ignored). `git -C ~/dev/valency/tasks add {TASKSLUG} && git -C ~/dev/valency/tasks commit -m "Close {TASKSLUG}" && git -C ~/dev/valency/tasks push`.
+
+7. **Respond** with exactly:
 
 ```markdown
 ### Done
