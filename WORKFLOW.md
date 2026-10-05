@@ -85,8 +85,9 @@ The plan is read by the orchestrator, so it carries a table:
 The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch`, each with its own worktree:
 
 - thread title `PR 1.2 hub settings UI` (`PROMO 2.1 …` / `TEST 2.2 …` for ops and test items)
-- `workspaceStrategy: {type: worktree, baseRef, branch}`; worktree `{TASKDIR}/repos/{REPOBASENAME}-1-2`, branch `{TASKSLUG}/1-2-hub-settings-ui`, base `origin/main` or the named parent PR branch when stacking
-- the launch creates the checkout and runs the repo setup script; the item thread never runs a worktree step and nothing is copied between worktrees (secrets come from AWS)
+- the orchestrator first runs `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-1-2 -b {TASKSLUG}/1-2-hub-settings-ui <base>`, base `origin/main` or the named parent PR branch when stacking (the task project is not the code repo, so T3's `worktree` strategy cannot create it)
+- `workspaceStrategy: {type: existing_worktree, worktreePath, branch}` binds the thread to that checkout (verified: a task project accepts a worktree of another repo)
+- T3 runs no setup script for it; the item thread runs the repo's own setup first. Nothing is copied between worktrees (secrets come from AWS)
 
 All items of a phase launch together; there is no concurrency cap.
 
