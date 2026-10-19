@@ -49,3 +49,9 @@
 ```
 
 {Tell the story in the order that makes it easiest to understand. It may make sense to show files first, or it may make sense to establish a data structure, SQL table, or API contract first. All views and subheadings are optional. Use only the views that help explain the pr, and name or order them based on the change rather than a fixed template. It should be written as one human would write to another. Use `diff` for a focused change to an existing shape. Show the complete target shape in a language-specific or `text` block when it is new, high-level, or clearer without diff notation.}
+
+## Merge risk
+
+**Door:** {one-way | two-way} — {one clause: what makes it so, e.g. "revert restores it" or "migration drops a column"}
+
+**Blast radius:** {one or two words, e.g. "this page", "all API consumers", "none"} — {one clause: who or what notices if it is wrong}
