@@ -92,7 +92,7 @@ The **orchestrator** is one thread for everything after Publish, implementation 
 
 All items of a phase launch together; there is no concurrency cap.
 
-An **item thread** (`implement-item`): read its plan row and sub-issue → implement → inner loop (roborev refine and CodeRabbit CLI locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
+An **item thread** (`implement-item`): read its plan row and sub-issue → implement → inner loop (roborev refine locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
 
 The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-plan`: read the phase's reports, apply what they change to `plan.md` and the next phase's sub-issue bodies, then dispatch the next phase — on its own if the plan stacks, otherwise when the user says go after merging.
 
