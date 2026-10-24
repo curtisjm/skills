@@ -117,7 +117,7 @@ Linear is personal work management; the user is the only one on the team using i
 
 ## Gates
 
-Human: every planning document after research questions; plan approval; every merge; the go-ahead between phases when waiting on merges; `close-task`.
+Human: every planning document after research questions; plan approval, including the Quick plan in `task.md`; every merge; the go-ahead between phases when waiting on merges; `close-task`.
 
 Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the review loop, `revise-plan` for changes within the approved outcome.
 
