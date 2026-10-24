@@ -16,7 +16,7 @@ The user has already created the T3 project for this task, rooted at `{TASKDIR}`
 2. **Settle the frontmatter with the user.** Confirm, in one message, the things only they can decide:
    - `repos`: which repositories the task touches (basenames under `~/dev/valency/`); a first guess is fine, research and planning correct it
    - `path`: `standard`, `long`, or `undecided` (then `create-research` recommends one)
-   - `linear_project`: a short Title Case name for the Linear project, derived from the goal (slug `hub-source-toggles` -> "Hub source toggles"); never the slug itself
+   - `linear_project`: a short Title Case name for the Linear project, derived from the goal (slug `hub-source-toggles` -> "Hub Source Toggles"); never the slug itself
    - anything in the reference or their description that contradicts itself
    Skip the question for anything they already stated.
 
