@@ -56,7 +56,7 @@ You are now in the Design Discussion phase. Based on the research findings and t
 - Use the smallest set of visual views needed to make the current state, proposed end state, and key design choices clear.
 - Place each visual next to the short text it supports. Do not add visuals that do not help the user make a design decision.
 
-5. **Write the design discussion** to `{TASKDIR}/design-discussion.md`
+5. **Write the design discussion** to `{TASKDIR}/design-discussion.md`. The document is written through the `unslop` skill.
 
 <content_guidance>
 **Outline High-level product spec** - Current state, desired end state, what we're not doing in terms of user experience or functionality

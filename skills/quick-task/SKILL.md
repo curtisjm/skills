@@ -33,6 +33,7 @@ This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` i
 10. **If `linear_issue` is set**, move the issue to In Review. The user marks it Done at merge.
 
 11. **Report**: write `{TASKDIR}/reports/quick.md` (divergences from the plan, each principle applied and the decision it changed, rejected review findings and why, manual checks for the user), then respond with exactly:
+11. **Report**: write `{TASKDIR}/reports/quick.md` (divergences from the plan, rejected review findings and why, manual checks for the user) through the `unslop` skill, then respond with exactly:
 
 ```markdown
 ### Next Steps

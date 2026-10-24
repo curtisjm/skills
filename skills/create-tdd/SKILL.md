@@ -72,7 +72,7 @@ There is no required upstream artifact. The product context might be a full PRD,
 <step index="2" name="write-the-skeleton">
 
 <instructions>
-Write the doc to `{TASKDIR}/tdd.md`.
+Write the doc to `{TASKDIR}/tdd.md`. The document is written through the `unslop` skill.
 
 **Keep the skeleton as minimal as possible. No preamble, no setup, no summaries.** The faster you reach the first question, the more the user stays engaged in building the TDD. Write only:
 - Frontmatter with `type: design-tdd`, plus the top-level title

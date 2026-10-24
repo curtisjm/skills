@@ -76,7 +76,7 @@ Follow this format, using an appropriate number of questions for the task (less 
 
 Populate the **Key Context Pointers** section with the links, repositories, libraries, dependencies, and filepaths you captured from the ticket in step 1. Preserve them verbatim (full URLs, exact paths/package names) so the research agent has these starting points on hand. Omit the section only if the ticket truly provides none.
 
-2. **Write the research questions** to `{TASKDIR}/research-questions.md`
+2. **Write the research questions** to `{TASKDIR}/research-questions.md`. The document is written through the `unslop` skill.
 
 3. **Mirror to Linear**: upload the file as a document on the project named by `linear_project` in `task.md`, titled `research-questions.md`; update the document if one with that title exists, otherwise create it. Keep the document's URL for the final answer.
 

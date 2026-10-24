@@ -83,7 +83,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
 
    `Read({SKILLBASE}/references/research_template.md)`
 
-   - Write the document to `{TASKDIR}/research.md`
+   - Write the document to `{TASKDIR}/research.md`. The document is written through the `unslop` skill.
 
 7. **Attempt to answer open questions**
    - if there are open questions in the doc you write, dispatch subagents to additional targeted research AFTER you write the doc

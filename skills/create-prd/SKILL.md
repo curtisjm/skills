@@ -73,7 +73,7 @@ If the work touches UI/UX, your mockups should match the **user's product** - it
 <step index="2" name="write-the-skeleton">
 
 <instructions>
-Write the doc to `{TASKDIR}/prd.md`.
+Write the doc to `{TASKDIR}/prd.md`. The document is written through the `unslop` skill.
 
 **Keep the skeleton as minimal as possible. No preamble, no setup, no summaries.** The faster you reach the first question, the more the user stays engaged in building the PRD. Write only:
 - Frontmatter with `type: design-prd`, plus the top-level title

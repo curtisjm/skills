@@ -26,7 +26,7 @@ You are in the final Plan Writing phase. Convert the design discussion (Standard
 `Read({SKILLBASE}/references/plan_template.md)`
 
 4. **Write the implementation plan**:
-   - Write to `{TASKDIR}/plan.md`
+   - Write to `{TASKDIR}/plan.md`. The document is written through the `unslop` skill.
    - Fill the `## Items` table first; every item in the table has a matching `### Item` section under its phase
    - Include specific code examples for each change
    - Add both automated and manual success criteria
