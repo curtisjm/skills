@@ -11,11 +11,11 @@ Runs in the task project; `{TASKDIR}` is the working directory.
 
 ## Steps
 
-1. **Read** `{TASKDIR}/task.md` (set `phase: close`), `plan.md`, `plan-changelog.md`, and every `reports/*.md` FULLY.
+1. **Read** `{TASKDIR}/task.md` (set `phase: close`), `plan.md`, `plan-changelog.md`, every `reports/*.md`, and `decisions.tsv` when present FULLY.
 
 2. **Confirm with the user** in one message anything the records leave open: PRs not reported merged, rollout items without a validation note, manual verification still owed. Continue only when they say it is all done.
 
-3. **Write `{TASKDIR}/retro.md`** from `{SKILLBASE}/references/retro_template.md`: what shipped (PRs as links, `[repo#n](url)`; promotions), how the plan changed and why (from the changelog), what the reports flagged for the future, and what to change in the workflow or skills next time. The retro is written through the `unslop` skill.
+3. **Write `{TASKDIR}/retro.md`** from `{SKILLBASE}/references/retro_template.md`: what shipped (PRs as links, `[repo#n](url)`; promotions), how the plan changed and why (from the changelog), what the reports and `decisions.tsv` flagged for the future, and what to change in the workflow or skills next time. The retro is written through the `unslop` skill.
 
 4. **Linear**: mirror `retro.md` to the project (titled `retro.md`); set every remaining issue and sub-issue to Done; project → Done.
 
