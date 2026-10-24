@@ -36,9 +36,11 @@ You are in the final Plan Writing phase. Convert the design discussion (Standard
 
 6. **Mirror to Linear**: set `repos` in the `task.md` frontmatter to the repositories the Items table names, then upload `plan.md` and `task.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
 
-7. **Launch publish**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Publish: {TASKSLUG}` and message `Run /publish for {TASKDIR}`.
+7. **Publish**: run the `publish` skill for `{TASKDIR}`. It creates the Linear issue tree from the Items table and moves the project to Implementing; keep the project URL and the phase and item counts it returns for the final answer.
 
-8. **Read the final output template**
+8. **Launch the orchestrator**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Implement: {TASKSLUG}` and message `Run /implement for {TASKDIR}`.
+
+9. **Read the final output template**
 
 `Read({SKILLBASE}/references/plan_final_answer.md)`
 
