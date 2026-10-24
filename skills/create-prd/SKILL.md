@@ -163,7 +163,7 @@ Then run the gate: tell the user the review URL (`~/dev/skills/bin/gate --url {T
 When the solution is approved:
 
 - **Mirror to Linear**: upload `prd.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer. Mockups stay local in `{TASKDIR}/html/`.
-- **Launch the TDD step**: `t3_thread_launch` with title `create-tdd {TASKSLUG}` and message `Run /create-tdd for {TASKDIR}`.
+- **Launch the TDD step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `TDD: {TASKSLUG}` and message `Run /create-tdd for {TASKDIR}`.
 - Read the final answer template and follow it exactly: `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`.
 </instructions>
 

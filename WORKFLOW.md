@@ -28,7 +28,7 @@ Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference —
 
 ### Relay
 
-Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes only `title` and `message`, so the new thread inherits this thread's project, model, and modes (`workspaceStrategy` is omitted too: planning steps run in the task project's root, `{TASKDIR}`). The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
+Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes `title`, `message`, and `runtimeMode: full-access`; project and model are still inherited (`workspaceStrategy` is omitted too: planning steps run in the task project's root, `{TASKDIR}`). The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. Thread titles follow one convention: `Label: {TASKSLUG}` for steps (`PRD: {TASKSLUG}`, `Plan: {TASKSLUG}`), `PR X.Y: title` for items. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again.
 
 ## `task.md`
 
@@ -83,9 +83,9 @@ The plan is read by the orchestrator, so it carries a table:
 
 `publish` runs unattended after plan approval: it creates the issue tree below from the plan table, moves the project to Implementing, and launches the orchestrator. Documents are already mirrored on the project by then (see Syncing to Linear).
 
-The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch`, each with its own worktree:
+The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch` (`runtimeMode: full-access`), each with its own worktree:
 
-- thread title `PR 1.2 hub settings UI` (`PROMO 2.1 …` / `TEST 2.2 …` for ops and test items)
+- thread title `PR 1.2: hub settings UI` (`PROMO 2.1: …` / `TEST 2.2: …` for ops and test items)
 - the orchestrator first runs `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-1-2 -b {TASKSLUG}/1-2-hub-settings-ui <base>`, base `origin/main` or the named parent PR branch when stacking (the task project is not the code repo, so T3's `worktree` strategy cannot create it)
 - `workspaceStrategy: {type: existing_worktree, worktreePath, branch}` binds the thread to that checkout (verified: a task project accepts a worktree of another repo)
 - T3 runs no setup script for it; the item thread runs the repo's own setup first. Nothing is copied between worktrees (secrets come from AWS)
@@ -138,7 +138,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `setup-worktree` | model, Quick only |
 
-Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads.
+Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 
 ## Invoking skills
 

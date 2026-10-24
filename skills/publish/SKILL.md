@@ -21,7 +21,7 @@ The launch message names `{TASKDIR}`.
 
 4. **Move the project to Implementing**: `save_project` with `state: Implementing`.
 
-5. **Launch the orchestrator**: `t3_thread_launch` with title `implement {TASKSLUG}` and message `Run /implement for {TASKDIR}`.
+5. **Launch the orchestrator**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Implement: {TASKSLUG}` and message `Run /implement for {TASKDIR}`.
 
 6. **Respond** with exactly:
 
@@ -32,7 +32,7 @@ Published `{TASKSLUG}`: [N] phases, [M] items.
 
 - Linear: [{linear_project}]({project URL})
 
-The orchestrator has been launched in thread `implement {TASKSLUG}`.
+The orchestrator has been launched in thread `Implement: {TASKSLUG}`.
 ```
 
 Linear issue identifiers and links stay in Linear: they never go into code, commits, PR titles or bodies, or branch names.

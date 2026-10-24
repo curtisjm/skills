@@ -25,7 +25,7 @@ The user has already created the T3 project for this task, rooted at `{TASKDIR}`
 
 5. **Mirror to Linear**: upload `task.md` as a document on the project, titled `task.md`.
 
-6. **Launch the next step**: `t3_thread_launch` with title `create-research-questions {TASKSLUG}` and message `Run /create-research-questions for {TASKDIR}`.
+6. **Launch the next step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Research questions: {TASKSLUG}` and message `Run /create-research-questions for {TASKDIR}`.
 
 7. **Respond** with exactly:
 
@@ -37,5 +37,5 @@ Task `{TASKSLUG}` is set up.
 - Local: `{TASKDIR}/task.md`
 - Linear: [{linear_project}]({project URL})
 
-Research questions have been launched in thread `create-research-questions {TASKSLUG}`.
+Research questions have been launched in thread `Research questions: {TASKSLUG}`.
 ```

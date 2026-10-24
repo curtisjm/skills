@@ -93,7 +93,7 @@ You are now in the Design Discussion phase. Based on the research findings and t
 
 8. **Mirror to Linear**: upload `design-discussion.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
 
-9. **Launch the plan step**: `t3_thread_launch` with title `create-plan {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
+9. **Launch the plan step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Plan: {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
 
 10. **Read the final output template**
 
