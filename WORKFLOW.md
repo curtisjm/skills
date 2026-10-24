@@ -134,7 +134,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `publish` | user |
 | `implement` (orchestrator), `implement-item` (item thread head) | user |
 | `revise-plan` (orchestrator, between phases) | model |
-| `close-task`, `handoff` | user |
+| `close-task`, `handoff`, `task-status` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `setup-worktree` | model, Quick only |
 
