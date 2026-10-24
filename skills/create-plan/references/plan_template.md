@@ -58,7 +58,7 @@ repos: [repo basenames this plan touches]
 [What this phase accomplishes]
 
 ### If promoted after this phase
-[What becomes user-visible or operationally active if this phase alone reaches staging and production. What stays dark or inert (behind a flag, unused column, dead endpoint) and is therefore safe. Anything that must not be promoted without a later phase. Environments and validation live in `## Rollout`; reference it, do not repeat it.]
+[What becomes user-visible or operationally active if this phase alone reaches staging and production. What stays dark or inert (behind a flag, unused column, dead endpoint) and is therefore safe. Anything that must not be promoted without a later phase. This must be safe to promote alone; if it is not, the plan is wrong, not the note. Environments and validation live in `## Rollout`; reference it, do not repeat it.]
 
 ### Item 1-1-[slug] — [title] (`[repo]`, pr)
 
@@ -108,7 +108,7 @@ export interface [name]{
 [What this phase accomplishes]
 
 ### If promoted after this phase
-[What becomes user-visible or operationally active if this phase alone reaches staging and production. What stays dark or inert (behind a flag, unused column, dead endpoint) and is therefore safe. Anything that must not be promoted without a later phase. Environments and validation live in `## Rollout`; reference it, do not repeat it.]
+[What becomes user-visible or operationally active if this phase alone reaches staging and production. What stays dark or inert (behind a flag, unused column, dead endpoint) and is therefore safe. Anything that must not be promoted without a later phase. This must be safe to promote alone; if it is not, the plan is wrong, not the note. Environments and validation live in `## Rollout`; reference it, do not repeat it.]
 
 ### Item 2-1-[slug] — [title] (`valency-foundation`, ops)
 
