@@ -50,6 +50,10 @@
 
 {Tell the story in the order that makes it easiest to understand. It may make sense to show files first, or it may make sense to establish a data structure, SQL table, or API contract first. All views and subheadings are optional. Use only the views that help explain the pr, and name or order them based on the change rather than a fixed template. It should be written as one human would write to another. Use `diff` for a focused change to an existing shape. Show the complete target shape in a language-specific or `text` block when it is new, high-level, or clearer without diff notation.}
 
+## Evidence
+
+{Concrete before/after proof that the change does what the body says. For UI changes, a screenshot of each changed screen or state, before/after when the shape already existed. For behaviour changes, the specific observation: a named test that failed before and passes now with the relevant assertion or output excerpt, a command and its before/after output, a log line that no longer appears, a measured number. Omit this section when there is nothing specific to show. Never write "all tests pass" or "x/x passing"; that is not evidence.}
+
 ## Merge risk
 
 **Door:** {one-way | two-way} — {one clause: what makes it so, e.g. "revert restores it" or "migration drops a column"}
