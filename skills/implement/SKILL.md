@@ -25,6 +25,7 @@ For every item of the phase, together, with no concurrency cap:
    - title `PR X.Y: [title]` for `pr`, `PROMO X.Y: [title]` for `ops`, `TEST X.Y: [title]` for `test`
    - `workspaceStrategy: {type: existing_worktree, worktreePath, branch}` when a worktree was made; omitted for items with no repo
    - message `Run /implement-item for {TASKDIR} item {id}`
+   - `modelSelection`: the newest Opus model when this thread runs on Claude, the newest Sol model when it runs on Codex, at high reasoning (`orchestrator_capabilities` lists the models; see Relay in `~/dev/skills/WORKFLOW.md`)
 4. **Linear**: sub-issue → In Progress; phase issue → In Progress at its first item.
 
 Then end the turn. Item threads wake this thread with `t3_thread_send` when they finish.

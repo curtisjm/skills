@@ -38,7 +38,7 @@ You are in the final Plan Writing phase. Convert the design discussion (Standard
 
 7. **Publish**: run the `publish` skill for `{TASKDIR}`. It creates the Linear issue tree from the Items table and moves the project to Implementing; keep the project URL and the phase and item counts it returns for the final answer.
 
-8. **Launch the orchestrator**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Implement: {TASKSLUG}` and message `Run /implement for {TASKDIR}`.
+8. **Launch the orchestrator**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Implement: {TASKSLUG}` and message `Run /implement for {TASKDIR}`, and `modelSelection` set to the newest Fable model when this thread runs on Claude or the newest Astra model when it runs on Codex, at medium reasoning (`orchestrator_capabilities` lists the models; see Relay in `~/dev/skills/WORKFLOW.md`).
 
 9. **Read the final output template**
 
