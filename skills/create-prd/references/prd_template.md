@@ -23,8 +23,9 @@ sha: [result of git rev-parse HEAD]
 
 - [What will be true when this work is done]
 - [User story, problems that will be solved, new things a user can do]
-- [How will we know this is successful?]
-- [Measurable outcomes or user behaviors we expect to see]
+- [What the system does after the change that it did not do before: a flow that completes, an error that no longer occurs, a target met, a capability that exists]
+- [How each outcome is checked after shipping]
+- [Adoption or usage signal, only if the user wants one]
 - [references to experiments or feature flag system if relevant]
 
 ### Proposed Solution

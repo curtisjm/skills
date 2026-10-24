@@ -66,6 +66,7 @@ You are now in the Design Discussion phase. Based on the research findings and t
 **Discuss design decisions**
    - For each major design choice, present options with pros/cons
    - Make recommendations based on codebase conventions
+   - Give each question the context needed to answer it: what the code does today in the relevant spot (with file references), the constraint or finding that makes it a decision, and what each option implies
    - If the research surfaced testing patterns for the components being changed, include a brief testing approach (e.g. "follow the existing unit test pattern in `__tests__/foo.test.ts`")
 
 **IMPORTANT: All design questions must be written in the OPEN state**
