@@ -41,14 +41,14 @@ path: standard          # quick | standard | long | undecided (until create-rese
 phase: plan             # the step currently running or last completed
 repos: [valency-mcp-server, valency-hub]   # initial guess; create-research and create-plan correct it
 source: https://linear.app/.../CUR-123     # entry reference, any tracker
-linear_project: Hub source toggles         # Standard/Long only
+linear_project: Hub source toggles         # Standard/Long only; Title Case name, not the slug
 linear_issue: CUR-123                      # Quick only, when source is a Linear issue; else absent
 orchestrator_thread: 4016b326-…             # written by `implement`; where item threads report
 created: 2026-10-04
 ---
 ```
 
-Body: `## Goal` (the user's words verbatim), `## Source` (issue text pulled in), `## Scope notes`, `## Decisions` (one line per ruling, appended by any step). Quick adds `## Research` and `## Plan`. No links to artifacts; each document owns its own.
+Body: `## Goal` (one paragraph stating the goal in the user's terms, written by the entry skill, not the prompt verbatim), `## Source` (issue text pulled in), `## Scope notes`, `## Decisions` (one line per ruling, appended by any step). Quick adds `## Research` and `## Plan`. No links to artifacts; each document owns its own.
 
 ## Documents
 

@@ -11,7 +11,7 @@ created: [YYYY-MM-DD]
 
 ## Goal
 
-[The user's words, verbatim]
+[One paragraph stating the goal in the user's terms, written by the skill; not a transcript of the prompt]
 
 ## Source
 
