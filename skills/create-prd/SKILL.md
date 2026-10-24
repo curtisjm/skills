@@ -48,7 +48,7 @@ You run the PRD as a guided conversation. You settle the **foundation** - the pr
   Let me know which direction, or share your feedback directly.
   ```
 
-  Resolve feedback one item at a time with the same reflexes as the interview (re-paint, don't append), continue grilling from Step 4, and finish with Steps 5 and 6.
+  Resolve feedback one item at a time with the same reflexes as the interview (re-paint, don't append), continue grilling from Step 5, and finish with Steps 6 and 7.
 </instructions>
 
 <guidance>
@@ -113,12 +113,30 @@ Settle the foundation one piece at a time, re-working the document as each is lo
 
 **b. What success looks like.** Once the problem is settled, move to success. The point of this section is to align on **what the system does after the change that it did not do before** - observable behaviour someone can check after shipping to decide whether the work landed. Treat that check as part of the definition of done. Define it in terms of functionality, not product analytics: a flow that completes, an error that no longer occurs, a latency or correctness target met, a capability that now exists. Fit it to the work: this skill serves backend internal tooling, full-stack product, DevOps, and everything between. Anything worth doing is worth measuring, and the measure is the behaviour. Propose the success criteria (or a few options) with your recommendation and iterate until the user is happy. Add an adoption or usage signal only when the user wants one - reference experiments or feature flags if relevant. For very small changes the change itself may be the only sensible check; if so, say that plainly and, with the user's agreement, record that rather than inventing a metric. Then re-work the "What does business success look like, and how can we measure it?" section.
 
-Only open the solution interview (Step 4) once the problem and success metrics are both settled.
+Only open the solution interview (Step 5) once the problem and success metrics are both settled.
 </instructions>
 
 </step>
 
-<step index="4" name="solution-interview">
+<step index="4" name="choose-the-prototype-form">
+
+<instructions>
+Skip this step when the work touches no UI. Otherwise, once the foundation is settled and before the first UI question, ask the user one question: prototype as HTML mockups, or as an in-repo prototype?
+
+- **HTML mockups.** Static files in `{TASKDIR}/html/` that follow the product's design system (the Step 5 guidance).
+- **In-repo prototype.** A throwaway branch in the real codebase. Create a worktree: `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-prototype -b {TASKSLUG}-prototype origin/main`, run the repo's own setup, then build the feature directly and roughly so it is clickable. Replace the feature outright; add no switches or flags. The branch is never committed to main and never gets a PR. Delete it after the PRD is approved unless the user says to keep it.
+
+Record the choice as one line in `## Decisions` of `{TASKDIR}/task.md`.
+
+With an in-repo prototype:
+- The PRD links to the branch name (`{TASKSLUG}-prototype`) instead of mockup files.
+- Answer the interview's UI questions by looking at or screenshotting the running prototype. Save screenshots to `{TASKDIR}/html/` and link them where a mockup would go.
+- Grill only what the prototype needs to show. Leave production concerns (error handling, tests, performance) to the TDD.
+</instructions>
+
+</step>
+
+<step index="5" name="solution-interview">
 
 <instructions>
 Now grill the solution. **Ask exactly one question per message, walking down each branch of the solution tree.** Resolve one decision, let it inform the next, and only then ask the next. Presenting 2-3 options to choose between is still one question - don't stack multiple decisions into one message, and don't append a second question or an "any feedback?". Each question is a brush stroke that adds detail to the document - you're progressively painting the Solution Details, not logging Q&A.
@@ -147,7 +165,7 @@ Update mockups as decisions evolve; the final PRD should embed the "winning" ver
 
 </step>
 
-<step index="5" name="solution-review-gate">
+<step index="6" name="solution-review-gate">
 
 <instructions>
 When the solution is fully fleshed out, stop and hand it back for review. Because you've been building it decision by decision, the user hasn't read it as a whole yet. Say something like:
@@ -159,13 +177,14 @@ Then run the gate: tell the user the review URL (`~/dev/skills/bin/gate --url {T
 
 </step>
 
-<step index="6" name="wrap-up">
+<step index="7" name="wrap-up">
 
 <instructions>
 When the solution is approved:
 
 - **Mirror to Linear**: upload `prd.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer. Mockups stay local in `{TASKDIR}/html/`.
 - **Launch the TDD step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `TDD: {TASKSLUG}` and message `Run /create-tdd for {TASKDIR}`.
+- **Remove the prototype**: if an in-repo prototype exists, remove its worktree and branch unless the user said to keep it.
 - Read the final answer template and follow it exactly: `Read({SKILLBASE}/references/prd_final_answer_resolved.md)`.
 </instructions>
 

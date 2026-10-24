@@ -54,6 +54,7 @@ sha: [result of git rev-parse HEAD]
 
 [if appropriate, link to an html mockup]
 [{TASKDIR}/mockup-{description}.html]({TASKDIR}/mockup-{description}.html)
+[or, with an in-repo prototype, the branch name `{TASKSLUG}-prototype` and a screenshot in {TASKDIR}/html/]
 
 [Explanation of mockup and any behavioral notes]
 
