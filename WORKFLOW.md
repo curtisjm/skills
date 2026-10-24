@@ -140,7 +140,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `implement` (orchestrator), `implement-item` (item thread head) | user |
 | `publish` | model, from `create-plan` |
 | `revise-plan` (orchestrator, between phases) | model |
-| `close-task`, `handoff` | user |
+| `close-task`, `handoff`, `bro` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `setup-worktree` | model, Quick only |
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
