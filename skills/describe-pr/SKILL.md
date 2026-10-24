@@ -47,7 +47,7 @@ Create or update the pull request for the current task with a concise descriptio
 
 6. Report completion:
    - Read `{SKILLBASE}/references/describe_pr_final_answer.md`.
-   - Respond using that final answer template with the PR URL, saved description path, and concise list of changed files.
+   - Respond using that final answer template with the PR as a link, saved description path, and concise list of changed files.
 
 Always read and follow `{SKILLBASE}/references/pr_description_template.md`. Do not expand the PR body beyond that template.
 

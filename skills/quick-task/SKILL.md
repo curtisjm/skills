@@ -36,7 +36,7 @@ This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` i
 ```markdown
 ### Next Steps
 
-PRs open: {one line per PR: URL · stacked on … if so · review loop clean | stopped at limit — what is left}.
+PRs open: {one line per PR: [repo#n](url) · stacked on … if so · review loop clean | stopped at limit — what is left}.
 
 - Report: `{TASKDIR}/reports/quick.md`
 - Manual checks before merge: {list or "none"}
