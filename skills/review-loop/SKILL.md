@@ -1,6 +1,6 @@
 ---
 name: review-loop
-description: Drive the current branch's PR to review-clean. Use after the implementation of a plan item or Quick task is committed, inside its worktree; runs the inner loop (roborev refine + CodeRabbit CLI) before the PR opens and the outer loop (CodeRabbit/Copilot bots + CI) after.
+description: Drive the current branch's PR to review-clean. Use after the implementation of a plan item or Quick task is committed, inside its worktree; runs the inner loop (roborev refine) before the PR opens and the outer loop (CodeRabbit/Copilot bots + CI) after.
 ---
 
 # Review loop
@@ -12,8 +12,11 @@ Runs inside a worktree on a task branch. Ends only when the branch is clean thro
 Repeat until a full pass makes no changes, at most 5 passes:
 
 1. `/roborev-refine` — fix → commit → re-review until roborev passes.
-2. `coderabbit review --agent --base <base branch>` — address every finding you agree with, commit; record the ones you reject with a one-line reason for the report.
-3. A pass that fixed anything is followed by another pass; a pass with nothing to fix ends the loop.
+2. A pass that fixed anything is followed by another pass; a pass with nothing to fix ends the loop.
+
+## Proportionality
+
+Match review depth to the PR. Lockfile-only and pin PRs (ops items that bump a service pin in `valency-foundation`, lockfile-only changes) skip the inner loop entirely; CI green and zero unresolved bot threads is the gate. For every other PR, judge how many inner-loop passes the size and risk of the change warrant. A one-line fix does not need five passes.
 
 ## Open the PR
 
