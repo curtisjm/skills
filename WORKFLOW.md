@@ -19,7 +19,7 @@ A **path** is the chain of steps a task follows. A **step** is one T3 thread run
 |---|---|---|
 | Triage | Something came up; not scoping it now | `triage` → stop |
 | Quick | Small, understood, one thread, one or a few PRs | `quick-task` (one thread: mini research + plan in `task.md`, worktree, implement, review loop, `describe-pr`) |
-| Standard | Needs research and a plan | `task-start` → `create-research-questions` → `create-research` → `create-design-discussion` → `create-plan` → `publish` → `implement` → `close-task` |
+| Standard | Needs research and a plan | `task-start` → `create-research-questions` → `create-research` → `create-design-discussion` → `create-plan` → `implement` → `close-task` |
 | Long | Standard, plus product and technical design docs | as Standard, with `create-prd` → `create-tdd` replacing `create-design-discussion` |
 
 Quick is chosen at entry. Standard vs Long may be chosen at entry too; when it is not, `task-start` writes `path: undecided` and `create-research` recommends one for the user to confirm. There is no greenfield path.
@@ -81,7 +81,7 @@ The plan is read by the orchestrator, so it carries a table:
 
 ## Implementation
 
-`publish` runs unattended after plan approval: it creates the issue tree below from the plan table, moves the project to Implementing, and launches the orchestrator. Documents are already mirrored on the project by then (see Syncing to Linear).
+After plan approval `create-plan` runs `publish` unattended: it creates the issue tree below from the plan table and moves the project to Implementing, then `create-plan` launches the orchestrator. Documents are already mirrored on the project by then (see Syncing to Linear).
 
 The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch` (`runtimeMode: full-access`), each with its own worktree:
 
@@ -131,8 +131,8 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 |---|---|
 | `triage`, `task-start`, `quick-task` | user |
 | `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user |
-| `publish` | user |
 | `implement` (orchestrator), `implement-item` (item thread head) | user |
+| `publish` | model, from `create-plan` |
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |

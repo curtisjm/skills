@@ -1,8 +1,8 @@
 ## Next Steps
 
-The plan is approved.
+The plan is approved and published: [N] phases, [M] items.
 
 - Local: `{TASKDIR}/plan.md`
-- Linear: [plan.md]({url of the Linear document})
+- Linear: [plan.md]({url of the Linear document}), project [{linear_project}]({project URL})
 
-Publish has been launched in thread `Publish: {TASKSLUG}`; it will create the issue tree and start the orchestrator.
+The orchestrator has been launched in thread `Implement: {TASKSLUG}`.
