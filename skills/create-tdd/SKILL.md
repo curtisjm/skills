@@ -53,7 +53,7 @@ You fully settle and get the user's sign-off on the System Design before you ope
   Let me know which direction, or share your feedback directly.
   ```
 
-  Resolve feedback one item at a time with the same reflexes as the interview (re-paint, don't append), continue grilling from Step 3 or 5 as the feedback dictates, and finish with Steps 6 and 7.
+  Resolve feedback one item at a time with the same reflexes as the interview (re-paint, don't append), continue grilling from Step 3 or 5 as the feedback dictates, and finish with Steps 6 to 8.
 </instructions>
 
 <guidance>
@@ -289,7 +289,15 @@ Then run the gate on the whole document: tell the user the review URL (`~/dev/sk
 
 </step>
 
-<step index="7" name="wrap-up">
+<step index="7" name="independent-review">
+
+<instructions>
+**Independent review.** Ask the user, in one question, which model should review the design for blockers; list the models available (`orchestrator_capabilities` returns providers and model ids, for example Claude Opus 5.5, Claude Fable 5.1, GPT-6-Sol, GPT-6-Astra). Then `delegate_task` (mode `wait`, `runtimeMode: full-access`, `target` set to the chosen provider and model) with a brief that names `{TASKDIR}/tdd.md`, the research document, and the repos, and asks for blockers only: contradictions with the code as it exists, missing pieces that would stop a plan being written, risks the design does not address. Not style, not preferences. Put each blocker to the user with your recommendation; apply the rulings to the document (re-paint, as with annotations) and run the gate again if the document changed materially. Record the review in `## Decisions` of task.md in one line (model, blockers found, how resolved).
+</instructions>
+
+</step>
+
+<step index="8" name="wrap-up">
 
 <instructions>
 When both phases are approved:

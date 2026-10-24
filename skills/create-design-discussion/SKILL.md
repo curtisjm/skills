@@ -92,11 +92,13 @@ You are now in the Design Discussion phase. Based on the research findings and t
 
 7. **If design questions remain open after approval**: read `{SKILLBASE}/references/design_discussion_final_answer.md`, respond following it exactly, and keep working with the user in this thread to resolve them. Once all are resolved, return to step 6.
 
-8. **Mirror to Linear**: upload `design-discussion.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
+8. **Independent review.** Ask the user, in one question, which model should review the design for blockers; list the models available (`orchestrator_capabilities` returns providers and model ids, for example Claude Opus 5.5, Claude Fable 5.1, GPT-6-Sol, GPT-6-Astra). Then `delegate_task` (mode `wait`, `runtimeMode: full-access`, `target` set to the chosen provider and model) with a brief that names `{TASKDIR}/design-discussion.md`, the research document, and the repos, and asks for blockers only: contradictions with the code as it exists, missing pieces that would stop a plan being written, risks the design does not address. Not style, not preferences. Put each blocker to the user with your recommendation; apply the rulings to the document (re-paint, as with annotations) and run the gate (step 6) again if the document changed materially. Record the review in `## Decisions` of task.md in one line (model, blockers found, how resolved).
 
-9. **Launch the plan step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Plan: {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
+9. **Mirror to Linear**: upload `design-discussion.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer.
 
-10. **Read the final output template**
+10. **Launch the plan step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Plan: {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
+
+11. **Read the final output template**
 
 `Read({SKILLBASE}/references/design_discussion_final_answer_resolved.md)`
 
