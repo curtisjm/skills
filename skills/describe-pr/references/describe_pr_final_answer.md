@@ -19,4 +19,4 @@
 
 ### Next Steps
 
-The PR description has been updated at [pr_url].
+The PR description has been updated on [#{number}]({pr_url}).

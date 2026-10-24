@@ -10,7 +10,7 @@ closed: [YYYY-MM-DD]
 
 | item | PR | merged | promoted | validated |
 |---|---|---|---|---|
-| 1-1-[slug] | [url] | [date] | staging [date] · prod [date] | [how] |
+| 1-1-[slug] | [repo#n](url) | [date] | staging [date] · prod [date] | [how] |
 
 ## How the plan changed
 

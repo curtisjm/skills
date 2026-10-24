@@ -106,6 +106,10 @@ The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-
 
 **Agents never merge.** The user merges every PR, including promotion pins, and runs every promotion action. An ops thread may open a production pin PR; opening is harmless.
 
+### Mentioning PRs
+
+Every PR mentioned to the user is a markdown link to it: `[repo#n](url)`. Reports under `reports/` and the retro follow the same rule.
+
 ## Linear
 
 Linear is personal work management; the user is the only one on the team using it. Issue identifiers and links never appear in code, commits, PR titles or bodies, or branch names. There is no Linear↔GitHub integration.

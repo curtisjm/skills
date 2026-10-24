@@ -31,4 +31,4 @@ Repeat until every condition in the stop check holds, at most 5 rounds:
 
 ## Report
 
-End with: PR URL, rounds run, what was rejected and why, and anything still open if a limit was hit. The caller (the item thread or Quick thread) writes the task report; this skill only returns facts.
+End with: the PR as a link (`[repo#n](url)`), rounds run, what was rejected and why, and anything still open if a limit was hit. The caller (the item thread or Quick thread) writes the task report; this skill only returns facts.

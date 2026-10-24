@@ -36,7 +36,7 @@ Read `{TASKDIR}/reports/{id}.md`. Sub-issue → In Review (`pr`, `ops`: a PR is 
 When every sub-issue of the phase is In Review or Done, the phase has converged: run `revise-plan` (it reads the phase's reports and updates `plan.md`, `plan-changelog.md`, and the next phase's sub-issue bodies; a change beyond the approved outcome becomes a proposal to the user and a pause; their ruling is applied by running `revise-plan` again). Then:
 
 - **stacked** next phase: dispatch it now.
-- **merge-first** next phase: list the PRs the user must merge and end the turn. When the user reports the merges (or says continue): sub-issues → Done, phase issue → Done, dispatch the next phase.
+- **merge-first** next phase: list the PRs the user must merge, each as a link (`[repo#n](url)`), and end the turn. When the user reports the merges (or says continue): sub-issues → Done, phase issue → Done, dispatch the next phase.
 - no next phase: project → In Review. The user runs `close-task` when the work is merged, promoted, and validated.
 
 ## Guardrails
