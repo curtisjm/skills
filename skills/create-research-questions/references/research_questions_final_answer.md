@@ -7,4 +7,4 @@ The research questions we wrote are a query plan for our research phase.
 - Local: `{TASKDIR}/research-questions.md`
 - Linear: [research-questions.md]({url of the Linear document})
 
-The research phase has been launched in thread `create-research {TASKSLUG}`.
+The research phase has been launched in thread `Research: {TASKSLUG}`.

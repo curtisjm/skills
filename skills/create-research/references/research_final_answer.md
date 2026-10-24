@@ -7,4 +7,4 @@ The research has been completed!
 
 If you'd like, you can review the research document for completeness. You can ask for additional research to answer any important open questions.
 
-Path: {Standard | Long}, as confirmed. The next phase has been launched in thread `{create-design-discussion | create-prd} {TASKSLUG}`.
+Path: {Standard | Long}, as confirmed. The next phase has been launched in thread `{Design | PRD}: {TASKSLUG}`.

@@ -101,7 +101,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
 
 11. **Mirror to Linear:** upload `research.md` and `task.md` as documents on the project named by `linear_project`, each titled with its file name; update a document whose title exists, otherwise create it. Keep the URL of the `research.md` document for the final answer.
 
-12. **Launch the next step:** `t3_thread_launch` with title `create-design-discussion {TASKSLUG}` (Standard) or `create-prd {TASKSLUG}` (Long) and message `Run /<skill> for {TASKDIR}`.
+12. **Launch the next step:** `t3_thread_launch` (`runtimeMode: full-access`) with title `Design: {TASKSLUG}` (Standard) or `PRD: {TASKSLUG}` (Long) and message `Run /<skill> for {TASKDIR}`.
 
 13. **Respond to the user according to the template**
    - Read the final output template:

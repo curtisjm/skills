@@ -293,7 +293,7 @@ Then run the gate on the whole document: tell the user the review URL (`~/dev/sk
 When both phases are approved:
 
 - **Mirror to Linear**: upload `tdd.md` as a document on the project named by `linear_project` in `task.md`, titled with its file name; update the document if one with that title exists, otherwise create it. Keep its URL for the final answer. Diagrams stay local in `{TASKDIR}/html/`.
-- **Launch the plan step**: `t3_thread_launch` with title `create-plan {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
+- **Launch the plan step**: `t3_thread_launch` (`runtimeMode: full-access`) with title `Plan: {TASKSLUG}` and message `Run /create-plan for {TASKDIR}`.
 - Read the final answer template and follow it exactly: `Read({SKILLBASE}/references/tdd_final_answer_resolved.md)`.
 </instructions>
 

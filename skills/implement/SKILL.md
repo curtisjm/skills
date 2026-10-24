@@ -21,8 +21,8 @@ For every item of the phase, together, with no concurrency cap:
 
 1. **Base branch.** `origin/main`, or the parent PR's branch when `## Phase transitions` stacks this item on it. `git -C ~/dev/valency/{REPOBASENAME} fetch origin` first.
 2. **Worktree** (items with a repo): `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-X-Y -b {TASKSLUG}/{id} <base>`. The task project is not the code repo, so T3 cannot create this itself.
-3. **Launch** with `t3_thread_launch`:
-   - title `PR X.Y [title]` for `pr`, `PROMO X.Y [title]` for `ops`, `TEST X.Y [title]` for `test`
+3. **Launch** with `t3_thread_launch` (`runtimeMode: full-access`):
+   - title `PR X.Y: [title]` for `pr`, `PROMO X.Y: [title]` for `ops`, `TEST X.Y: [title]` for `test`
    - `workspaceStrategy: {type: existing_worktree, worktreePath, branch}` when a worktree was made; omitted for items with no repo
    - message `Run /implement-item for {TASKDIR} item {id}`
 4. **Linear**: sub-issue → In Progress; phase issue → In Progress at its first item.
