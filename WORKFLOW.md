@@ -112,7 +112,9 @@ Every PR mentioned to the user is a markdown link to it: `[repo#n](url)`. Report
 
 ## Linear
 
-Linear is personal work management; the user is the only one on the team using it. Issue identifiers and links never appear in code, commits, PR titles or bodies, or branch names. There is no Linear↔GitHub integration.
+Linear is personal work management; the user is the only one on the team using it. There is no Linear↔GitHub integration.
+
+Teammates have GitHub access only: they see neither Linear nor `{TASKDIR}`. So nothing on GitHub refers to either. Issue identifiers and links never appear in code, code comments, commit messages, PR titles or bodies, review replies, or branch names. Neither do the task's documents (`task.md`, `research.md`, `design-discussion.md`, `prd.md`, `tdd.md`, `plan.md`, `reports/`), paths under `{TASKDIR}`, or phrases like "per the TDD" or "as the plan says". A PR explains its change on its own terms. In Linear and in `{TASKDIR}` all of these may be mentioned freely.
 
 - Triage project collects unscoped issues.
 - Standard/Long: one project per task, created by `task-start`; documents mirrored onto it as they pass their gates; one issue per phase and one sub-issue per plan item, created by `publish`. Project statuses: Researching / Planning / Implementing / In Review / Blocked / Done.

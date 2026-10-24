@@ -20,7 +20,7 @@ Match review depth to the PR. Lockfile-only and pin PRs (ops items that bump a s
 
 ## Open the PR
 
-Push with an upstream and run `describe-pr`. Base is `origin/main`, or the parent PR branch when the plan stacks this item. No Linear identifiers in the title, body, commits, or branch.
+Push with an upstream and run `describe-pr`. Base is `origin/main`, or the parent PR branch when the plan stacks this item. No Linear identifiers in the title, body, commits, or branch, and no task documents (`tdd.md`, `plan.md`, …), paths under `{TASKDIR}`, or phrases like "per the TDD" either.
 
 ## Outer loop (bots + CI)
 

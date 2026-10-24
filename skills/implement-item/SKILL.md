@@ -27,5 +27,5 @@ The launch message names `{TASKDIR}` and the item `id`.
 ## Guardrails
 
 - Never merge, never push to a branch that is not this item's.
-- Linear identifiers and links never go into code, commits, PR titles or bodies, or branch names.
+- Linear identifiers and links never go into code, commits, PR titles or bodies, or branch names. Neither do the task's documents (`tdd.md`, `plan.md`, …), paths under `{TASKDIR}`, or phrases like "per the TDD".
 - Scope is the item. Work the plan did not ask for goes in the report as a note, not into the PR.

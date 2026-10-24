@@ -44,4 +44,4 @@ When every sub-issue of the phase is In Review or Done, the phase has converged:
 
 - **Agents never merge.** The user merges every PR and runs every promotion action; an `ops` thread opens the pin PR, nothing more.
 - `plan.md` has one writer: this thread, through `revise-plan`. Completed phases are not rewritten; their reports are the record.
-- Linear identifiers and links never go into code, commits, PR titles or bodies, or branch names.
+- Linear identifiers and links never go into code, commits, PR titles or bodies, or branch names. Neither do the task's documents (`tdd.md`, `plan.md`, …), paths under `{TASKDIR}`, or phrases like "per the TDD".
