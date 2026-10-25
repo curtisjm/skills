@@ -7,7 +7,7 @@ description: "Use for 'why does X work this way', 'why we picked Y', design rati
 
 Investigate the motivation and intent behind code. The companion `how` skill answers what the code does and how it works. `why` answers what forces led to its shape.
 
-Investigators run as `delegate_task` children told not to edit files, on the item-thread model and effort per the Relay rule in `~/dev/skills/WORKFLOW.md`. The synthesizer runs on the highest tier model of its family (the Fable tier on Claude, the Astra tier on Codex; newest version from `orchestrator_capabilities`) at `xhigh` reasoning.
+Investigators run as `delegate_task` children told not to edit files, on the light model of its family (the Sonnet tier on Claude, the Luna tier on Codex) at `medium`. The synthesizer runs on the highest tier model of its family (the Fable tier on Claude, the Astra tier on Codex; newest version from `orchestrator_capabilities`) at `xhigh` reasoning.
 
 Every spawn is a `delegate_task` child, which keeps the session's MCP servers for the MCP-backed investigators and the synthesizer's citation spot-checks. Investigators still shouldn't write anything.
 
