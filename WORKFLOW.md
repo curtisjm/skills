@@ -188,6 +188,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `orchestrate` | user |
 | `autopilot-full`, `autopilot-stack` | user |
 | `figure-it-out` | user |
+| `reflect` | user |
 | `no-comments` | model |
 | `correct` | user |
 
