@@ -161,41 +161,55 @@ Remaining triggers:
 
 User-invoked: entry points and step heads. Model-invoked: building blocks other skills call.
 
+**Entry points are what you invoke when a task starts.**
+
 | Skill | Kind |
 |---|---|
-| `triage`, `task-start`, `quick-task` | user |
-| `auto-task` | user |
+| `triage`, `task-start`, `quick-task`, `auto-task` | user |
+
+**Steps of the gated paths run one per thread on Standard and Long.**
+
+| Skill | Kind |
+|---|---|
 | `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user |
-| `implement` (orchestrator), `implement-item` (item thread head) | user |
 | `publish` | model, from `create-plan` |
+| `implement` (orchestrator), `implement-item` (item thread head) | user |
 | `revise-plan` (orchestrator, between phases) | model |
-| `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
-| `pause-safely`, `session-pickup` | user |
-| `teach`, `interrogate` | user |
-| `prototype`, `visual-parity` | user |
-| `investigation`, `runtime-forensics`, `trace-forensics` | user |
-| `perf-issue`, `hillclimb` | user |
+| `close-task`, `handoff` | user |
+
+**Playbooks are for work with a known shape, routed by `auto-task` or invoked by name.**
+
+| Skill | Kind |
+|---|---|
 | `bug-fix`, `feature`, `refactoring` | user |
-| `describe-pr`, `review-loop`, `ci-commit` | model |
-| `typescript-best-practices`, `show-me-your-work` | model |
-| `how` | model |
-| `why` | model |
-| `setup-worktree` | model, Quick only |
-| `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
-| `autonomous-run` | user |
-| `architect` | user |
-| `arena` | model |
-| `recall` | user |
-| `swarm` | model |
-| `orchestrate` | user |
+| `perf-issue`, `hillclimb` | user |
+| `investigation`, `runtime-forensics`, `trace-forensics` | user |
+| `prototype`, `visual-parity` | user |
+| `autonomous-run`, `figure-it-out`, `orchestrate` | user |
 | `autopilot-full`, `autopilot-stack` | user |
-| `figure-it-out` | user |
-| `eval` | user |
-| `worktree-cleanup` | user |
-| `create-verification-skill`, `maintain-verification-skill` | user |
-| `reflect` | user |
-| `no-comments` | model |
-| `correct` | user |
+| `session-pickup`, `pause-safely` | user |
+
+**Building blocks are what the model reaches for mid-step.**
+
+| Skill | Kind |
+|---|---|
+| `how`, `why` | model |
+| `arena`, `swarm` | model |
+| `architect`, `interrogate` | user |
+| `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
+| `typescript-best-practices`, `show-me-your-work`, `no-comments` | model |
+| `describe-pr`, `review-loop`, `ci-commit` | model |
+| `setup-worktree` | model, Quick only |
+
+**User tools are what you invoke by name outside a path's steps.**
+
+| Skill | Kind |
+|---|---|
+| `catch-up`, `recall`, `reflect`, `correct`, `eval` | user |
+| `sharpen`, `bro`, `teach`, `in-your-own-words` | user |
+| `worktree-cleanup`, `create-verification-skill`, `maintain-verification-skill` | user |
+
+`docs/skills.md` describes each one.
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 
