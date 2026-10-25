@@ -13,6 +13,6 @@ disable-model-invocation: true
 3. **Absorb drift at the root.** Until landing starts, apply `autopilot-full` step 5's test to each link and rebase the chain bottom-up where it calls for one. Then, link by link, a rebase that leaves the patch-id unchanged carries the verdict, since a link's base is its parent.
 4. **Deliver the chain, then keep your hands off it.** Each link carries its verdict in its PR. Once landing starts, nobody writes to the chain except the post-merge retarget after Curtis lands a link, because a second writer breaks a landing in flight. A mid-landing problem goes through you to the operator, and any fix waits for the operator's go.
 
-**Choosing between the autopilots.** `autopilot-full` when the PRs are independent. `autopilot-stack` when the operator wants review before landing, the work is sequenced or coupled, or merge authority is withheld.
+**Choosing between the autopilots.** `autopilot-full` when the PRs are independent. `autopilot-stack` when the operator wants review before landing, the work is sequenced or coupled.
 
 **Reply:** catch the operator up per the **catch-up** skill, with links to the stack root and tip, a one-line verdict per link, and anything parked or excluded with the reason.
