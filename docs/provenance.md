@@ -18,12 +18,17 @@ The repository is https://github.com/cursor/plugins/tree/main/pstack. The pinned
 
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
+### Matt Pocock
+
+The repository is https://github.com/mattpocock/skills. The pinned commit is `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, from 2026-10-19.
+
+`handoff` was copied from here on 2026-10-05 before the source was recorded. Paths in the mapping table are relative to the repo root.
+
+To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
+
 ### Other
 
-- `handoff` is Matt Pocock's handoff skill, copied verbatim except the save path. Its repo and commit were not recorded.
 - `review-loop` grew from a local `pr-loop` skill that is not in any upstream.
-
-With no pinned commit, check `handoff` for drift by finding Matt Pocock's current handoff skill and diffing it against ours, then read our skill.
 
 ## Mapping
 
@@ -55,7 +60,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/implement-item` | HumanLayer | none (nearest `plugins/rpi/skills/rpi/references/implement-outline/process.md`) | borrowed | Replaces riptide `implement-plan` and `implementer-agent` with no text carried over. |
 | `skills/revise-plan` | none | none | own | Written here. |
 | `skills/close-task` | none | none | own | Written here. |
-| `skills/handoff` | Other | not recorded | verbatim | Matt Pocock's skill with the save path changed. |
+| `skills/handoff` | Matt Pocock | `skills/productivity/handoff/SKILL.md` | modified | Save path moved to `{TASKDIR}/handoffs/`, `pause-safely` steps and `unslop` added. |
 | *Playbooks* | | | | |
 | `skills/bug-fix` | pstack | `skills/poteto-mode/playbooks/bug-fix.md` | verbatim | Playbook promoted to a skill. |
 | `skills/feature` | pstack | `skills/poteto-mode/playbooks/feature.md` | verbatim | Playbook promoted to a skill. |
