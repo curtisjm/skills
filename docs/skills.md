@@ -91,6 +91,7 @@ Reach for these by name when you want something for yourself rather than the tas
 - [`worktree-cleanup`](../skills/worktree-cleanup/SKILL.md) audits worktrees with `bin/worktree-audit`, cross-checks the active T3 threads, and prunes merged or abandoned worktrees and stale simulators. Invoke it when disk runs low, since `close-task` already removes a finished task's worktrees.
 - [`create-verification-skill`](../skills/create-verification-skill/SKILL.md) generates a project-local `verify-<app>` skill that drives the app the way a user does and captures evidence. Invoke it in a repo with no scripted way to prove UI, CLI, or service behavior, and the Non-negotiables then verify through it.
 - [`maintain-verification-skill`](../skills/maintain-verification-skill/SKILL.md) reads source per feature and drives every feature live to correct a drifted `verify-<app>` skill in at most one PR. Invoke it periodically or when the feature map has gone stale.
+- [`wizard`](../skills/wizard/SKILL.md) generates an interactive bash script from `template.sh` that walks you through manual steps only you can do, such as dashboard clicks, credentials, and CI secrets. Invoke it when a setup or cutover needs your hands in a browser.
 
 ## Agents
 

@@ -113,6 +113,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/worktree-cleanup` | pstack | `skills/poteto-mode/playbooks/worktree-cleanup.md` | verbatim | Playbook promoted to a skill without the macOS and Cursor items. |
 | `skills/create-verification-skill` | pstack | `skills/create-verification-skill/SKILL.md`, `references/feature-map-example/` | modified | Skills go to `.claude/skills` and a cadence runs as a T3 scheduled task. |
 | `skills/maintain-verification-skill` | pstack | `skills/maintain-verification-skill/SKILL.md` | verbatim | `.cursor/skills` maps to `.claude/skills`. |
+| `skills/wizard` | Matt Pocock | `skills/engineering/wizard/` | verbatim | Frontmatter only, with `template.sh` and `agents/openai.yaml` byte-identical. |
 | *Agents* | | | | |
 | `agents/codebase-locator.md` | HumanLayer | `plugins/rpi/agents/codebase-locator.md` | verbatim | Unchanged since the import, and upstream only reformatted the frontmatter. |
 | `agents/codebase-analyzer.md` | HumanLayer | `plugins/rpi/agents/codebase-analyzer.md` | verbatim | Unchanged since the import, and upstream swapped `LS` for `Bash` in tools. |
