@@ -15,6 +15,8 @@ Read `{TASKDIR}/task.md` and `{TASKDIR}/plan.md` FULLY. In the `task.md` frontma
 
 Derive the current state from Linear, not memory: the current phase is the first whose sub-issues are not all Done. Sub-issues already In Progress have a live thread; In Review ones are waiting on the user's merge. This is also how a thread started by `handoff` resumes.
 
+The orchestrator keeps the decision trail at `{TASKDIR}/decisions.tsv` per the `show-me-your-work` skill (`~/dev/skills/skills/show-me-your-work/SKILL.md`); that skill says what earns a row.
+
 ## Dispatch a phase
 
 For every item of the phase, together, with no concurrency cap:

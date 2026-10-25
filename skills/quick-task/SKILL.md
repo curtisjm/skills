@@ -7,7 +7,7 @@ description: Only use when the user explicitly invokes this skill by name.
 
 The Quick path (`~/dev/skills/WORKFLOW.md`): small, understood, one thread, one or a few PRs. Mini research and a plan go into `task.md`; then per PR: worktree, implement, review loop. No Linear project, no planning documents, no close step: the last merge is the close.
 
-This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` is its basename.
+This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` is its basename. On a Quick run spanning more than one PR, or one the user steps away from, keep the decision trail at `{TASKDIR}/decisions.tsv` per the `show-me-your-work` skill (`~/dev/skills/skills/show-me-your-work/SKILL.md`).
 
 ## Steps
 
