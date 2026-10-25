@@ -142,6 +142,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
 | `teach`, `interrogate` | user |
+| `perf-issue`, `hillclimb` | user |
 | `bug-fix`, `feature`, `refactoring` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `typescript-best-practices`, `show-me-your-work` | model |
