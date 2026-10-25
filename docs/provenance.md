@@ -108,6 +108,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/sharpen` | pstack | `skills/sharpen/SKILL.md` | verbatim | Byte-identical. |
 | `skills/bro` | pstack | `skills/bro/SKILL.md` | verbatim | Byte-identical. |
 | `skills/teach` | pstack | `skills/teach/SKILL.md` | verbatim | Byte-identical. |
+| `skills/show-me` | HumanLayer | `plugins/show-me/skills/show-me/SKILL.md` | verbatim | `open` maps to a `{TASKDIR}/html/` link or `html_render` in T3. |
 | `skills/in-your-own-words` | pstack | `skills/in-your-own-words/SKILL.md` | verbatim | Byte-identical. |
 | `skills/worktree-cleanup` | pstack | `skills/poteto-mode/playbooks/worktree-cleanup.md` | verbatim | Playbook promoted to a skill without the macOS and Cursor items. |
 | `skills/create-verification-skill` | pstack | `skills/create-verification-skill/SKILL.md`, `references/feature-map-example/` | modified | Skills go to `.claude/skills` and a cadence runs as a T3 scheduled task. |
