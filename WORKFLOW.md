@@ -143,6 +143,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `close-task`, `handoff` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `tdd` | model |
+| `unslop` | model |
 | `setup-worktree` | model, Quick only |
 | `principles` | model |
 
