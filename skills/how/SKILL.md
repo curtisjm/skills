@@ -7,7 +7,7 @@ description: "Use for \"how does X work\", code walkthroughs before changing som
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn is a `delegate_task` child told not to edit files. Explorers run as the `codebase-analyzer` role (see "Sub-agents are named by role" in `~/dev/skills/WORKFLOW.md`), and every explainer runs on the item-thread model and effort from the Relay rule in `~/dev/skills/WORKFLOW.md`.
+Every spawn is a `delegate_task` child told not to edit files. Explorers run as the `codebase-analyzer` role (point the child at `~/dev/skills/agents/codebase-analyzer.md`) (see "Sub-agents are named by role" in `~/dev/skills/WORKFLOW.md`), and every explainer runs on the item-thread model and effort from the Relay rule in `~/dev/skills/WORKFLOW.md`.
 
 ## 1. Assess complexity
 
@@ -24,7 +24,7 @@ Decompose the question into 2 to 4 angles, each a distinct slice of the subsyste
 
 ## 3. Synthesize (complex only)
 
-Once all explorers have returned, spawn one explainer with `references/explainer-prompt.md` and every explorer's findings filled in.
+Once all explorers have returned, spawn one explainer with `references/explainer-prompt.md` and every explorer's findings filled in. The explainer states confidence per `references/epistemics.md`.
 
 ## 4. Present
 
