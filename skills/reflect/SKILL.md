@@ -45,7 +45,7 @@ Move any Accepted item that a lint rule, script, metadata flag, or runtime check
 
 Present the synthesizer's full Accepted / Rejected / Backlog output and wait for explicit approval before applying any Accepted edit. The user picks the subset and may redirect routings. Skill changes affect every future agent in the org. Do not auto-apply.
 
-File each Backlog item to your team's devex or backlog tracker without waiting. Only the Accepted list waits for approval.
+File each Backlog item as an issue in the Linear Triage project (the `triage` skill's target) without waiting. Only the Accepted list waits for approval.
 
 Never edit a skill under `plugins/cache/`. Before approval, show its destination, `skills/<skill>/` in `~/dev/skills` (`curtisjm/skills`), or `.claude/skills/<skill>/` and `.agents/skills/<skill>/` in a code repo for a project-local skill. After approval, make every edit by PR, never in place. For `~/dev/skills`, create a worktree with `git -C ~/dev/skills worktree add {TASKDIR}/repos/skills-<skill> -b reflect-<skill> origin/main`, edit there, and open a PR against `curtisjm/skills`. For a project-local skill, do the same in that code repo, with the worktree at `{TASKDIR}/repos/{REPOBASENAME}-reflect-<skill>`. Then run `describe-pr` (`~/dev/skills/skills/describe-pr/SKILL.md`) and `review-loop` (`~/dev/skills/skills/review-loop/SKILL.md`). Never edit `~/dev/skills` or `~/dev/skills/WORKFLOW.md` in place. Never merge.
 
@@ -54,7 +54,7 @@ Follow each approved row's Routing exactly:
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): the parent does it directly.
 - Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): draft it in the worktree, then test and iterate on it with the `eval` skill.
 - `tune description: <skill path>` (the skill exists but didn't trigger when it should have): tune the description in the worktree and test with the `eval` skill that it now triggers.
-- `new skill via create-skill: <kebab-name>`: create it in the worktree in the shape of the existing skills under `~/dev/skills/skills/`, then test it with the `eval` skill. Do not invent the shape ad hoc.
+- `new skill: <kebab-name>`: create it in the worktree in the shape of the existing skills under `~/dev/skills/skills/`, then test it with the `eval` skill. Do not invent the shape ad hoc.
 
 If your environment ships a SKILL.md validator, run it on every touched skill before declaring done.
 
@@ -64,5 +64,5 @@ Short list, no preamble:
 
 - Edits applied: `<skill path>`. What changed, one line each.
 - New skills created: `<skill path>`. One line each (rare).
-- Backlog filed to the devex tracker: `<issue title>` (`<tags>`). One line each.
+- Backlog filed to Triage: `<issue title>` (`<tags>`). One line each.
 - Dropped: one line per rejected finding + reason from the synthesizer.
