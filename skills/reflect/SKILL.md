@@ -28,7 +28,7 @@ One message, three `delegate_task` children, `mode: async`. Reviewers need MCP a
 | Lens | Model | Prompt template |
 |---|---|---|
 | Judgment | the highest tier model of its family (the Fable tier on Claude, the Astra tier on Codex; newest version from `orchestrator_capabilities`) at `xhigh` reasoning | `references/judgment-reviewer.md` |
-| Tooling | the item-thread model and effort per the Relay rule in `~/dev/skills/WORKFLOW.md` | `references/tooling-reviewer.md` |
+| Tooling | the light model of its family (the Sonnet tier on Claude, the Luna tier on Codex) at `medium` | `references/tooling-reviewer.md` |
 | Divergent | the highest tier model of its family (the Fable tier on Claude, the Astra tier on Codex; newest version from `orchestrator_capabilities`) at `xhigh` reasoning | `references/divergent-reviewer.md` |
 
 Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in the `delegate_task` result.

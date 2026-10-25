@@ -7,7 +7,7 @@ description: "Use for \"how does X work\", code walkthroughs before changing som
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn is a `delegate_task` child told not to edit files. Explorers run as the `codebase-analyzer` role (point the child at `~/dev/skills/agents/codebase-analyzer.md`) (see "Sub-agents are named by role" in `~/dev/skills/WORKFLOW.md`), and every explainer runs on the highest tier model of its family (the Fable tier on Claude, the Astra tier on Codex; newest version from `orchestrator_capabilities`) at `xhigh` reasoning, as a judgment role.
+Every spawn is a `delegate_task` child told not to edit files. Explorers run as the `codebase-analyzer` role (point the child at `~/dev/skills/agents/codebase-analyzer.md`) (see "Sub-agents are named by role" in `~/dev/skills/WORKFLOW.md`) on the light model of its family (the Sonnet tier on Claude, the Luna tier on Codex) at `medium`, and every explainer runs on the item-thread model and effort from the Relay rule in `~/dev/skills/WORKFLOW.md`.
 
 ## 1. Assess complexity
 
