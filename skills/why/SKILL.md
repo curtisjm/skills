@@ -1,6 +1,6 @@
 ---
 name: why
-description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, long-form docs, real-time chat, infrastructure observability, error tracking, product analytics warehouse) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior."
+description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, product planning, meeting notes, real-time chat, infrastructure, product analytics) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior."
 ---
 
 # Why
@@ -31,25 +31,24 @@ Before spawning investigators, build the seed context inline: file paths and lin
 
 ### Discovery
 
-Before spawning investigators, list the MCP servers and CLIs available in this session (today: GitHub via `gh`, Linear, PostHog, Attio, and whatever else the tool list shows).
+Before spawning investigators, list the MCP servers and CLIs available in this session (expected: GitHub via `gh`, Linear, Asana, Granola, Slack, the `aws` CLI, and PostHog).
 
 Map each available MCP to one evidence category:
 
 1. Source control history
 2. Issue / ticket tracker
-3. Long-form documents
-4. Real-time team chat
-5. Infrastructure observability
-6. Error / exception tracking
-7. Product analytics warehouse
+3. Product planning
+4. Meeting notes
+5. Real-time team chat
+6. Infrastructure
+7. Product analytics
 
 Source control is always available through git and `gh`. For the other six, classify using the MCP name, server instructions, tool names, and resource descriptors. If an MCP could fit more than one category, choose the one matching its primary evidence. Record ambiguous cases in the coverage map.
 
 Spawn one investigator per category that has a matching MCP, all in a single message so they run concurrently, each owning exactly one tool or MCP. Don't ask one agent to cover multiple MCPs.
 
 Each investigator's prompt is `references/investigator-prompt.md` filled in, plus:
-- the category playbook `references/sources/<source>.md` for the selected MCP, adapted from the examples in `references/source-playbook.md`
-- `references/sources/incident-postmortem.md` **if the target code looks defensive** (null checks, retry logic, timeout handling, rate limiting, feature flags, egress guards, OOM handlers)
+- the category playbook `references/sources/<source>.md` for the selected MCP, listed in `references/source-playbook.md`
 - the code anchor and the user's original question
 
 ### Investigator roster, one per available evidence category
@@ -57,12 +56,12 @@ Each investigator's prompt is `references/investigator-prompt.md` filled in, plu
 Each category below is uniquely positioned to surface one shape of "why", shown after "Best at". Use it to know what to expect back, to name a gap when a category returns empty, and, only in the rare provably-irrelevant case, to justify a skip.
 
 1. **Source control** (git history, `gh` for PRs, code comments, tests). Always spawn, the only guaranteed source. Best at *implementation-time rationale captured during review*.
-2. **Issue / ticket tracker** (e.g. Linear, Jira, GitHub Issues, Plane, Shortcut MCP). Best at *the product or business forcing function*. Strongest when the why is external to engineering.
-3. **Long-form documents** (e.g. Notion, Confluence, Google Docs, Coda MCP). Best at *long-form design rationale*, written out before it becomes code.
-4. **Real-time team chat** (e.g. Slack, Discord, Microsoft Teams, Mattermost MCP). Best at *real-time deliberation that never reached a doc*. Especially important when the source control, ticket, and doc paper trail is thin.
-5. **Infrastructure observability** (e.g. Datadog, New Relic, Honeycomb, Grafana, Splunk MCP). Best at *infrastructure and runtime reality that motivated the code*. Strongest when the target reacts to an infra signal (timeouts, retries, rate limits, circuit breakers).
-6. **Error / exception tracking** (e.g. Sentry, Rollbar, Bugsnag, Airbrake MCP). Best at *the specific exceptions and error trajectories that motivated defensive or corrective code*. Strongest for catch blocks, null guards, type checks, retries, and other defenses.
-7. **Product analytics warehouse** (e.g. Databricks, Snowflake, BigQuery, ClickHouse, dbt, Redshift MCP). Best at *product and data reality that shaped the code*. Strongest for flag-gated code, experiment-driven ships, data migrations, and "where did this number come from" questions.
+2. **Issue / ticket tracker** (Linear MCP). Best at *the engineering forcing function*: the bug, the request, the scope recorded when the work was planned.
+3. **Product planning** (Asana MCP). Best at *the product or business decision above the ticket*: the initiative, the customer, the launch, and what was cut. Strongest when the why is external to engineering.
+4. **Meeting notes** (Granola MCP). Best at *decisions made out loud and the alternatives rejected*, including customer calls in the customer's own words.
+5. **Real-time team chat** (Slack MCP). Best at *real-time deliberation that never reached a doc*. Especially important when the source control, ticket, and planning paper trail is thin.
+6. **Infrastructure** (`aws` CLI: CloudWatch logs, metrics and alarms, CloudTrail, deploy history). Best at *infrastructure and runtime reality that motivated the code*. Strongest when the target reacts to an infra signal (timeouts, retries, rate limits, circuit breakers) or handles a specific error.
+7. **Product analytics** (PostHog MCP: events, flags, experiments, error tracking, insights). Best at *product and data reality that shaped the code*. Strongest for flag-gated code, experiment-driven ships, and "where did this number come from" questions.
 
 ### When to skip an investigator
 

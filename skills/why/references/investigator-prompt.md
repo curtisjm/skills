@@ -1,6 +1,6 @@
 # Investigator Prompt Template
 
-Fill in the placeholders. Append the one category playbook `sources/<source>.md` for this investigator's evidence category (index: `source-playbook.md`). If the target code looks defensive (null checks, retry logic, timeout handling, rate limiting, feature flags, egress guards, OOM handlers), also append `sources/incident-postmortem.md` so the investigator runs incident-flavored queries inside its own source.
+Fill in the placeholders. Append the one category playbook `sources/<source>.md` for this investigator's evidence category (index: `source-playbook.md`). md` so the investigator runs incident-flavored queries inside its own source.
 
 ---
 
@@ -55,7 +55,7 @@ Before reporting a finding as strong, ask whether you would expect to find it if
 Return your findings in this structure. The synthesizer reads it directly.
 
 ### Source
-Which source you investigated (source control, issue / ticket tracker, long-form documents, real-time team chat, infrastructure observability, error / exception tracking, product analytics warehouse, code comments, etc.).
+Which source you investigated (source control, issue / ticket tracker, product planning, meeting notes, real-time team chat, infrastructure, product analytics, code comments, etc.).
 
 ### What I Searched
 The queries you ran, items you opened, and places you looked. Be specific. This shows how thorough the search was and what is still unsearched.

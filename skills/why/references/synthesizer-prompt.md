@@ -100,11 +100,11 @@ What was actually searched, so the user can judge coverage and redirect:
 
 - **Source control history**: {file paths}, {number of commits reviewed}, PRs #{numbers}, and code comments searched. Or "Not searched. This should not happen because git and `gh` are always expected."
 - **Issue / ticket tracker**: {ticket IDs and keyword searches}. Or "Not searched. No matching MCP available in this environment."
-- **Long-form documents**: {page titles and search queries}. Or "Not searched. No matching MCP available in this environment."
+- **Product planning**: {Asana tasks, projects, and searches}. Or "Not searched. No matching MCP available in this environment."
+- **Meeting notes**: {meetings read, date range, transcript searches}. Or "Not searched. No matching MCP available in this environment."
 - **Real-time team chat**: {channels searched, date ranges, queries}. Or "Not searched. No matching MCP available in this environment."
-- **Infrastructure observability**: {dashboards, monitors, metrics, logs, traces, or incidents searched}. Or "Not searched. No matching MCP available in this environment."
-- **Error / exception tracking**: {issues, events, or releases searched}. Or "Not searched. No matching MCP available in this environment."
-- **Product analytics warehouse**: {fully-qualified tables queried, the time windows, and the numeric summaries (counts, percentiles, first/last-seen timestamps) that bore on the question}. Or "Not searched. No matching MCP available in this environment."
+- **Infrastructure**: {log groups, metrics, alarms, deploy or CloudTrail events searched, with account and region}. Or "Not searched. The `aws` CLI was not available in this environment."
+- **Product analytics**: {PostHog project, events, flags, error issues, or insights queried, the time windows, and the numeric summaries that bore on the question}. Or "Not searched. No matching MCP available in this environment."
 
 ### Confidence Summary
 
