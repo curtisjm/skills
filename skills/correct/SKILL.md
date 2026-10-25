@@ -12,7 +12,7 @@ Assume every contributor is an agent that sees only the files it opened, copies 
 
 ## Find the mistake classes
 
-First, read recent commits, reverts, review comments including CodeRabbit and Copilot review threads, the repo's `AGENTS.md`, and comments that explain workarounds. Group the mistakes into classes. A class counts once it has happened twice.
+First, read recent commits, reverts, review comments including CodeRabbit and Copilot review threads, the repo's `AGENTS.md` (or `CLAUDE.md` where that is the only agent instruction file), and comments that explain workarounds. Group the mistakes into classes. A class counts once it has happened twice.
 
 ## Fix each class at the highest level that works
 
