@@ -143,6 +143,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `typescript-best-practices`, `show-me-your-work` | model |
+| `how` | model |
 | `setup-worktree` | model, Quick only |
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 
