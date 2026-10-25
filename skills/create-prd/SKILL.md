@@ -124,7 +124,7 @@ Only open the solution interview (Step 5) once the problem and success metrics a
 Skip this step when the work touches no UI. Otherwise, once the foundation is settled and before the first UI question, ask the user one question: prototype as HTML mockups, or as an in-repo prototype?
 
 - **HTML mockups.** Static files in `{TASKDIR}/html/` that follow the product's design system (the Step 5 guidance).
-- **In-repo prototype.** A throwaway branch in the real codebase. Create a worktree: `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-prototype -b {TASKSLUG}-prototype origin/main`, run the repo's own setup, then build the feature directly and roughly so it is clickable. Replace the feature outright; add no switches or flags. The branch is never committed to main and never gets a PR. Delete it after the PRD is approved unless the user says to keep it.
+- **In-repo prototype.** A throwaway branch in the real codebase. Create a worktree: `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-prototype -b {TASKSLUG}-prototype origin/main`, run the repo's own setup, then build the feature directly and roughly so it is clickable. Replace the feature outright; add no switches or flags. For comparing alternatives, the `prototype` skill's scratch-dir and switcher rules apply (`~/dev/skills/skills/prototype/SKILL.md`). The branch is never committed to main and never gets a PR. Delete it after the PRD is approved unless the user says to keep it.
 
 Record the choice as one line in `## Decisions` of `{TASKDIR}/task.md`.
 
