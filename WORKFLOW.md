@@ -211,7 +211,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 
 `docs/skills.md` describes each one.
 
-Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
+Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. When the harness exposes no agent for a role, read the role's instructions from `~/dev/skills/agents/<role>.md` and pass them into a `delegate_task` child with your main prompt, with the file inside `<instructions>` and your message on what to look for or build inside `<message>`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 
 ## Invoking skills
 

@@ -1,9 +1,9 @@
 ---
 task: [task slug]
 type: design-discussion
-repo: [current repository]
-branch: [current branch name]
-sha: [result of git rev-parse HEAD]
+repos:
+  - identifier: [Repository identifier]
+    sha: [Commit SHA]
 ---
 
 ### Summary of change request

@@ -1,9 +1,9 @@
 ---
 task: [task slug]
 type: design-prd
-repo: [current repository]
-branch: [current branch name]
-sha: [result of git rev-parse HEAD]
+repos:
+  - identifier: [Repository identifier]
+    sha: [Commit SHA]
 ---
 
 # [PRD Title]
@@ -69,3 +69,7 @@ sha: [result of git rev-parse HEAD]
 - [Things that are explicitly out of scope]
 - [Features or behaviors we're intentionally not building]
 - ..
+
+### Deferred to TDD
+
+[Technical decisions to address during technical design, when present.]
