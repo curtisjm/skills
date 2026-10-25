@@ -143,11 +143,15 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
 | `teach`, `interrogate` | user |
 | `prototype`, `visual-parity` | user |
+| `investigation`, `runtime-forensics`, `trace-forensics` | user |
+| `perf-issue`, `hillclimb` | user |
+| `bug-fix`, `feature`, `refactoring` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `typescript-best-practices`, `show-me-your-work` | model |
 | `how` | model |
 | `setup-worktree` | model, Quick only |
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
+| `autonomous-run` | user |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 
