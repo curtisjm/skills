@@ -174,6 +174,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `typescript-best-practices`, `show-me-your-work` | model |
 | `how` | model |
+| `why` | model |
 | `setup-worktree` | model, Quick only |
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 | `autonomous-run` | user |
