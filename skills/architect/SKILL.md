@@ -42,7 +42,7 @@ Arena returns one synthesized design package. Its synthesis decision fills the r
 
 Default: proceed directly to implementation with the synthesized design. No human checkpoint.
 
-Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off. Write the design to `{TASKDIR}/architecture.md` and run `~/dev/skills/bin/gate {TASKDIR}/architecture.md`.
+Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off. Write the design to `{TASKDIR}/architecture.md`, tell the user the review URL (`~/dev/skills/bin/gate --url {TASKDIR}/architecture.md`), then run `~/dev/skills/bin/gate {TASKDIR}/architecture.md`.
 
 The synthesis can ship as its own commit either way, as the "scaffold first" mode of the **foundational-thinking** principle skill. Planned and scoped breakage during fill-in is fine, per the **outcome-oriented-execution** principle skill. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch.
 
