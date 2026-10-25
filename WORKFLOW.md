@@ -185,6 +185,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `arena` | model |
 | `recall` | user |
 | `swarm` | model |
+| `orchestrate` | user |
 | `autopilot-full`, `autopilot-stack` | user |
 | `figure-it-out` | user |
 
