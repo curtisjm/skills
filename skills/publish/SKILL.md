@@ -21,4 +21,4 @@ Runs unattended from `create-plan` after plan approval (`~/dev/skills/WORKFLOW.m
 
 5. **Return to the caller** the project URL and the counts of phases and items created.
 
-Linear issue identifiers and links stay in Linear: they never go into code, commits, PR titles or bodies, or branch names.
+Linear issue identifiers and links stay in Linear: they never go into code, commits, PR titles or bodies, or branch names. Neither do the task's documents (`tdd.md`, `plan.md`, …), paths under `{TASKDIR}`, or phrases like "per the TDD".
