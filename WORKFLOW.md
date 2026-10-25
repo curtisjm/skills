@@ -142,13 +142,8 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
-| `tdd` | model |
-| `unslop` | model |
 | `setup-worktree` | model, Quick only |
-| `principles` | model |
-| `technical-writing` | model |
-| `benchmark-checklist` | model |
-| `blast-radius` | model |
+| `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 

@@ -26,8 +26,8 @@ Create or update the pull request for the current task with a concise descriptio
    - Use `gh pr view` to collect PR metadata and changed files.
    - Read `{SKILLBASE}/references/show-me.md` for the visual-outline conventions used in the PR body.
 
-4. Write the PR description using the template. The body is written through the `unslop` skill (`~/dev/skills/skills/unslop/SKILL.md`).
 4. Write the PR description using the template:
+   - The body is written through the `unslop` skill (`~/dev/skills/skills/unslop/SKILL.md`).
    - The title, body, and commit messages follow the `technical-writing` skill (`~/dev/skills/skills/technical-writing/SKILL.md`), every layer except Diátaxis.
    - Keep **Why the change** to exactly one sentence.
    - Keep **Special things to note** to 1-3 bullets. Prioritize reviewer warnings, migrations, compatibility constraints, deliberate omissions, or surprising decisions. Write `- None.` when there are no special considerations.
