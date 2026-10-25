@@ -16,6 +16,8 @@ Repeat until a full pass makes no changes, at most 5 passes:
 
 For a contested item, or when the user asks, run `interrogate` (`~/dev/skills/skills/interrogate/SKILL.md`) before the PR opens; its verdict is advice, not a gate.
 
+Before the PR opens, run `no-comments` (`~/dev/skills/skills/no-comments/SKILL.md`) over the diff.
+
 ## Proportionality
 
 Match review depth to the PR. Lockfile-only and pin PRs (ops items that bump a service pin in `valency-foundation`, lockfile-only changes) skip the inner loop entirely; CI green and zero unresolved bot threads is the gate. For every other PR, judge how many inner-loop passes the size and risk of the change warrant. A one-line fix does not need five passes.
