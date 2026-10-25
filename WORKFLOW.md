@@ -183,6 +183,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `autonomous-run` | user |
 | `architect` | user |
 | `arena` | model |
+| `recall` | user |
 | `swarm` | model |
 | `figure-it-out` | user |
 
