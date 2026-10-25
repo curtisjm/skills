@@ -55,6 +55,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
    **For web research and researching libraries & dependencies (if applicable):**
    - Use the **web-search-researcher** agent for external documentation and resources
    - IF you use web-research agents, instruct them to return LINKS with their findings, and please INCLUDE those links in your final report
+   - When web access is unavailable, note that limit and continue with code and local documentation.
 
    The key is to use these agents intelligently:
    - **Combine related questions**: Don't necessarily launch one subagent per research question. Group related questions that touch the same area of the codebase into a single subagent prompt. For example, if 3 questions are about how the daemon handles sessions, combine them into one codebase-analyzer call.
@@ -232,6 +233,7 @@ Pick the views that make each part of the story clearest:
 - Include **test file locations**, testing approach (unit/integration/e2e), mocking patterns,
   test fixtures and utilities used
 - If there are no tests, say so explicitly — that's a finding
+- Distinguish tests read from checks run. Support claims that a check passed with its command and observed result.
 
 <guidance>
 ## Important notes:

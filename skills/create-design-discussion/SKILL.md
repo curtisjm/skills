@@ -39,6 +39,8 @@ You are now in the Design Discussion phase. Based on the research findings and t
    - Return specific file:line references
    - Find tests and examples
 
+   Fold new facts into the research document (`{TASKDIR}/research.md`).
+
 <important if="the user asks you to find how things work or add detail about existing functionality">
   prefer to use an initial pass with one or more Agent() calls before reading files yourself
   <else if="the user gives straightforward feedback that doesn't require loading more codebase context">

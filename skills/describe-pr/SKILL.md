@@ -34,6 +34,7 @@ Create or update the pull request for the current task with a concise descriptio
    - Make **Change outline** a compact, `/show-me`-inspired structural view rather than prose or a file-by-file changelog.
    - Include only the views that help explain this PR:
      - SQL table and endpoint contract changes, plus pseudocode for business logic.
+     - key data structure / type changes
      - A shallow file tree showing changed responsibilities.
      - React component tree changes, including important hooks, state, and package boundaries.
      - Call-tree, call-stack, control-flow, or data-flow changes.

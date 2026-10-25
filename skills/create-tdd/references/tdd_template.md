@@ -1,9 +1,9 @@
 ---
 task: [task slug]
 type: design-tdd
-repo: [current repository]
-branch: [current branch name]
-sha: [result of git rev-parse HEAD]
+repos:
+  - identifier: [Repository identifier]
+    sha: [Commit SHA]
 ---
 
 # [TDD Title]
@@ -56,4 +56,4 @@ something out. Omit the header if there's nothing meaningful to exclude.]
 ### Patterns to Follow
 
 [Existing codebase patterns the implementation should follow, with file locations and
-short snippets showing each pattern.]
+short snippets showing each pattern, including test seams.]

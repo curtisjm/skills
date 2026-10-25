@@ -1,8 +1,8 @@
 ---
 date: [Current date and time with timezone in ISO format]
-git_commit: [Current commit hash]
-branch: [Current branch name]
-repository: [Repository name]
+repos:
+  - identifier: "[Repository identifier]"
+    sha: [Current commit hash]
 topic: "[User's Question/Topic]"
 type: research
 tags: [research, codebase, relevant-component-names]
@@ -10,11 +10,6 @@ status: complete
 ---
 
 # Research: [User's Question/Topic]
-
-**Date**: [Current date and time with timezone from step 4]
-**Git Commit**: [Current commit hash from step 4]
-**Branch**: [Current branch name from step 4]
-**Repository**: [Repository name]
 
 ## Research Question
 

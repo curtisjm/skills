@@ -41,6 +41,7 @@ These questions will be used by another agent to research the codebase.
     - **web-search-researcher**: Research external documentation (only if needed)
       - For SDK docs, library usage, best practices
       - Skip if the task is purely internal
+      - When web access is unavailable, note that limit and continue with code and local documentation.
 
 3. **Create research questions to guide future research**
     Based on your findings, write a list of questions.
