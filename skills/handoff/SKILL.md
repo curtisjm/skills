@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to `{TASKDIR}/handoffs/<YYYY-MM-DD-HHMM>-<topic>.md`. Before writing it, apply `pause-safely` steps 1 to 3 (`~/dev/skills/skills/pause-safely/SKILL.md`): stop at a safe boundary, take no irreversible action, commit uncommitted edits as one `wip:` commit. The document is written through the `unslop` skill.
 
-Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
+Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
 Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 

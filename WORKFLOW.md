@@ -207,9 +207,10 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | Skill | Kind |
 |---|---|
 | `catch-up`, `recall`, `reflect`, `correct`, `eval` | user |
-| `sharpen`, `bro`, `teach`, `in-your-own-words` | user |
+| `sharpen`, `bro`, `teach`, `show-me`, `in-your-own-words` | user |
 | `worktree-cleanup`, `create-verification-skill`, `maintain-verification-skill` | user |
 | `improve-codebase-architecture`, `grilling` | user |
+| `wizard` | user |
 
 `docs/skills.md` describes each one.
 

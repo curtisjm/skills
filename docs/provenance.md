@@ -23,15 +23,13 @@ To check for drift, diff the upstream path at the pinned SHA against upstream HE
 The repository is https://github.com/mattpocock/skills. The pinned commit is `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, from 2026-10-19.
 
 The architecture skills were imported on 2026-10-25. Paths in the mapping table are relative to the repo root.
+`handoff` was copied from here on 2026-10-05 before the source was recorded. On 2026-10-25 our copy was diffed against the pinned commit; the only upstream change since the copy was the "suggested skills" sentence, which was carried over the same day, so the pin is a clean baseline. Paths in the mapping table are relative to the repo root.
 
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
 ### Other
 
-- `handoff` is Matt Pocock's handoff skill, copied verbatim except the save path. Its repo and commit were not recorded.
 - `review-loop` grew from a local `pr-loop` skill that is not in any upstream.
-
-With no pinned commit, check `handoff` for drift by finding Matt Pocock's current handoff skill and diffing it against ours, then read our skill.
 
 ## Mapping
 
@@ -63,7 +61,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/implement-item` | HumanLayer | none (nearest `plugins/rpi/skills/rpi/references/implement-outline/process.md`) | borrowed | Replaces riptide `implement-plan` and `implementer-agent` with no text carried over. |
 | `skills/revise-plan` | none | none | own | Written here. |
 | `skills/close-task` | none | none | own | Written here. |
-| `skills/handoff` | Other | not recorded | verbatim | Matt Pocock's skill with the save path changed. |
+| `skills/handoff` | Matt Pocock | `skills/productivity/handoff/SKILL.md` | modified | Save path moved to `{TASKDIR}/handoffs/`, `pause-safely` steps and `unslop` added. |
 | *Playbooks* | | | | |
 | `skills/bug-fix` | pstack | `skills/poteto-mode/playbooks/bug-fix.md` | verbatim | Playbook promoted to a skill. |
 | `skills/feature` | pstack | `skills/poteto-mode/playbooks/feature.md` | verbatim | Playbook promoted to a skill. |
@@ -113,12 +111,14 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/sharpen` | pstack | `skills/sharpen/SKILL.md` | verbatim | Byte-identical. |
 | `skills/bro` | pstack | `skills/bro/SKILL.md` | verbatim | Byte-identical. |
 | `skills/teach` | pstack | `skills/teach/SKILL.md` | verbatim | Byte-identical. |
+| `skills/show-me` | HumanLayer | `plugins/show-me/skills/show-me/SKILL.md` | verbatim | `open` maps to a `{TASKDIR}/html/` link or `html_render` in T3. |
 | `skills/in-your-own-words` | pstack | `skills/in-your-own-words/SKILL.md` | verbatim | Byte-identical. |
 | `skills/worktree-cleanup` | pstack | `skills/poteto-mode/playbooks/worktree-cleanup.md` | verbatim | Playbook promoted to a skill without the macOS and Cursor items. |
 | `skills/create-verification-skill` | pstack | `skills/create-verification-skill/SKILL.md`, `references/feature-map-example/` | modified | Skills go to `.claude/skills` and a cadence runs as a T3 scheduled task. |
 | `skills/maintain-verification-skill` | pstack | `skills/maintain-verification-skill/SKILL.md` | verbatim | `.cursor/skills` maps to `.claude/skills`. |
 | `skills/improve-codebase-architecture` | Matt Pocock | `skills/engineering/improve-codebase-architecture/` | verbatim | The report goes to `{TASKDIR}/html/` when a task exists and can render with `html_render`. |
 | `skills/grilling` | Matt Pocock | `skills/productivity/grilling/` | verbatim | Byte-identical. |
+| `skills/wizard` | Matt Pocock | `skills/engineering/wizard/` | verbatim | Frontmatter only, with `template.sh` and `agents/openai.yaml` byte-identical. |
 | *Agents* | | | | |
 | `agents/codebase-locator.md` | HumanLayer | `plugins/rpi/agents/codebase-locator.md` | verbatim | Unchanged since the import, and upstream only reformatted the frontmatter. |
 | `agents/codebase-analyzer.md` | HumanLayer | `plugins/rpi/agents/codebase-analyzer.md` | verbatim | Unchanged since the import, and upstream swapped `LS` for `Bash` in tools. |

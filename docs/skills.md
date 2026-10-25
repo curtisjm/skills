@@ -88,12 +88,14 @@ Reach for these by name when you want something for yourself rather than the tas
 - [`sharpen`](../skills/sharpen/SKILL.md) makes a task deeper rather than bigger, then rewrites the prompt. Invoke it on a prompt before you send it.
 - [`bro`](../skills/bro/SKILL.md) restates the last message in plain language with no jargon. Invoke it when a reply is too dense.
 - [`teach`](../skills/teach/SKILL.md) runs `how` and `why` and weaves what they find into one plain explanation at your pace. Invoke it when you want to understand a change or subsystem rather than change it.
+- [`show-me`](../skills/show-me/SKILL.md) explains the current topic with the smallest visual that makes the point, from pseudocode and call trees to Mermaid, diffs, or one HTML page. Invoke it when prose is not landing and you want to see the shape.
 - [`in-your-own-words`](../skills/in-your-own-words/SKILL.md) plays back what the agent thinks your goal and problem are. Invoke it before work starts to check the agent understood.
 - [`worktree-cleanup`](../skills/worktree-cleanup/SKILL.md) audits worktrees with `bin/worktree-audit`, cross-checks the active T3 threads, and prunes merged or abandoned worktrees and stale simulators. Invoke it when disk runs low, since `close-task` already removes a finished task's worktrees.
 - [`create-verification-skill`](../skills/create-verification-skill/SKILL.md) generates a project-local `verify-<app>` skill that drives the app the way a user does and captures evidence. Invoke it in a repo with no scripted way to prove UI, CLI, or service behavior, and the Non-negotiables then verify through it.
 - [`maintain-verification-skill`](../skills/maintain-verification-skill/SKILL.md) reads source per feature and drives every feature live to correct a drifted `verify-<app>` skill in at most one PR. Invoke it periodically or when the feature map has gone stale.
 - [`improve-codebase-architecture`](../skills/improve-codebase-architecture/SKILL.md) scans a codebase for deepening opportunities, presents them as an HTML report, and grills through the one you pick. Invoke it when a codebase has grown friction you want to refactor away.
 - [`grilling`](../skills/grilling/SKILL.md) interviews you in rounds of numbered questions, each with a recommended answer, until every branch of a plan's decision tree is settled. Invoke it to stress-test a plan or idea. Called by `improve-codebase-architecture`.
+- [`wizard`](../skills/wizard/SKILL.md) generates an interactive bash script from `template.sh` that walks you through manual steps only you can do, such as dashboard clicks, credentials, and CI secrets. Invoke it when a setup or cutover needs your hands in a browser.
 
 ## Agents
 
