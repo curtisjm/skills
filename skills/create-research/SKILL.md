@@ -65,7 +65,7 @@ If `{TASKDIR}/research.md` already exists, this run revises it: read it FULLY, t
    - Each agent knows its job - just tell it what you're looking for
    - Don't write detailed prompts about HOW to search - the agents already know
 
-   When a sub-question is 'how does X work', run the `how` skill (`~/dev/skills/skills/how/SKILL.md`) for it instead of a bare locator or analyzer.
+   When a sub-question is 'how does X work', run the `how` skill (`~/dev/skills/skills/how/SKILL.md`) for it instead of a bare locator or analyzer. When a sub-question is 'why was this built this way', run the `why` skill (`~/dev/skills/skills/why/SKILL.md`) for it.
 
 4. **Wait for all sub-agents to complete and synthesize findings:**
    - IMPORTANT: Wait for ALL sub-agent tasks to complete before proceeding
