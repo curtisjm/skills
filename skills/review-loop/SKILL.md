@@ -14,6 +14,8 @@ Repeat until a full pass makes no changes, at most 5 passes:
 1. `/roborev-refine` — fix → commit → re-review until roborev passes.
 2. A pass that fixed anything is followed by another pass; a pass with nothing to fix ends the loop.
 
+For a contested item, or when the user asks, run `interrogate` (`~/dev/skills/skills/interrogate/SKILL.md`) before the PR opens; its verdict is advice, not a gate.
+
 ## Proportionality
 
 Match review depth to the PR. Lockfile-only and pin PRs (ops items that bump a service pin in `valency-foundation`, lockfile-only changes) skip the inner loop entirely; CI green and zero unresolved bot threads is the gate. For every other PR, judge how many inner-loop passes the size and risk of the change warrant. A one-line fix does not need five passes.

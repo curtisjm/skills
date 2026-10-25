@@ -141,7 +141,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `publish` | model, from `create-plan` |
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
-| `teach` | user |
+| `teach`, `interrogate` | user |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `typescript-best-practices`, `show-me-your-work` | model |
 | `how` | model |
