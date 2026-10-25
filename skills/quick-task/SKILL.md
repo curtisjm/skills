@@ -25,15 +25,13 @@ This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` i
 
 7. **Worktree**, per PR: run `setup-worktree` (worktree `{TASKDIR}/repos/{REPOBASENAME}`, branch `{TASKSLUG}`; a second PR in the same repo uses `{REPOBASENAME}-2` and branch `{TASKSLUG}-2`, from the first branch when stacked). Work inside it with absolute paths; this thread stays bound to `{TASKDIR}`.
 
-8. **Implement** that PR's steps, run their automated verification, and commit with `ci-commit`. When the PR fixes a bug with a cheap local test path, follow the `tdd` skill (`~/dev/skills/skills/tdd/SKILL.md`) so the failing test lands before the fix.
-8. **Implement** that PR's steps, run their automated verification, and commit with `ci-commit`. Before writing code, read the index in `~/dev/skills/skills/principles/SKILL.md` and open the leaf for any principle you apply.
+8. **Implement** that PR's steps, run their automated verification, and commit with `ci-commit`. Before writing code, read the index in `~/dev/skills/skills/principles/SKILL.md` and open the leaf for any principle you apply. When the PR fixes a bug with a cheap local test path, follow the `tdd` skill (`~/dev/skills/skills/tdd/SKILL.md`) so the failing test lands before the fix.
 
 9. **Review loop**: run `review-loop` (base is `origin/main`, or the prior branch when stacked). It opens the PR via `describe-pr` and returns when the branch is review-clean or a limit is hit. Repeat 7–9 for the next PR.
 
 10. **If `linear_issue` is set**, move the issue to In Review. The user marks it Done at merge.
 
-11. **Report**: write `{TASKDIR}/reports/quick.md` (divergences from the plan, each principle applied and the decision it changed, rejected review findings and why, manual checks for the user), then respond with exactly:
-11. **Report**: write `{TASKDIR}/reports/quick.md` (divergences from the plan, rejected review findings and why, manual checks for the user) through the `unslop` skill, then respond with exactly:
+11. **Report**: write `{TASKDIR}/reports/quick.md` (divergences from the plan, each principle applied and the decision it changed, rejected review findings and why, manual checks for the user) through the `unslop` skill, then respond with exactly:
 
 ```markdown
 ### Next Steps

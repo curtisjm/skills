@@ -21,8 +21,7 @@ The launch message names `{TASKDIR}` and the item `id`.
    - `ops`: open the pin or activation PR the item describes (same `ci-commit` + `review-loop`; review-loop's proportionality rule skips the inner loop for pin PRs), or, for an action only the user can run, write out the exact steps. The user merges and runs it; this thread does neither.
    - `test`: run the checks the item describes against the real system (logs, flows, dashboards) and record what was observed, pass or fail.
 
-4. **Write `{TASKDIR}/reports/{id}.md`:** the PR as a link, `[repo#n](url)` (if any); what diverged from the plan and why; rulings made; review findings rejected and why; each principle applied and the decision it changed; manual verification still owed; anything later phases must know. Facts only; the orchestrator folds them into the plan.
-4. **Write `{TASKDIR}/reports/{id}.md`:** the PR as a link, `[repo#n](url)` (if any); what diverged from the plan and why; rulings made; review findings rejected and why; manual verification still owed; anything later phases must know. Facts only; the orchestrator folds them into the plan. The report is written through the `unslop` skill.
+4. **Write `{TASKDIR}/reports/{id}.md`:** the PR as a link, `[repo#n](url)` (if any); what diverged from the plan and why; rulings made; review findings rejected and why; each principle applied and the decision it changed; manual verification still owed; anything later phases must know. Facts only; the orchestrator folds them into the plan. The report is written through the `unslop` skill.
 
 5. **Report**: `t3_thread_send` to `orchestrator_thread` with `Item {id} done: {TASKDIR}/reports/{id}.md` (or `Item {id} blocked: …` when stuck). Then end.
 
