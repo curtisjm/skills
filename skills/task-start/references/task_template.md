@@ -1,6 +1,6 @@
 ---
 slug: [task slug]
-path: [quick | standard | long | undecided]
+path: [quick | auto | standard | long | undecided]
 phase: start
 repos: [repo basenames]
 source: [entry reference URL, or none]

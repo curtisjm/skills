@@ -19,12 +19,13 @@ A **path** is the chain of steps a task follows. A **step** is one T3 thread run
 |---|---|---|
 | Triage | Something came up; not scoping it now | `triage` → stop |
 | Quick | Small, understood, one thread, one or a few PRs | `quick-task` (one thread: mini research + plan in `task.md`, worktree, implement, review loop, `describe-pr`) |
+| Auto | Agent-led: the run plans, prototypes and implements inside a playbook skill with no gates; Curtis reviews the PRs | `auto-task` (one thread; routes to a playbook skill such as `feature` or `figure-it-out`) |
 | Standard | Needs research and a plan | `task-start` → `create-research-questions` → `create-research` → `create-design-discussion` → `create-plan` → `implement` → `close-task` |
 | Long | Standard, plus product and technical design docs | as Standard, with `create-prd` → `create-tdd` replacing `create-design-discussion` |
 
-Quick is chosen at entry. Standard vs Long may be chosen at entry too; when it is not, `task-start` writes `path: undecided` and `create-research` recommends one for the user to confirm. There is no greenfield path.
+Quick and Auto are chosen at entry. Standard vs Long may be chosen at entry too; when it is not, `task-start` writes `path: undecided` and `create-research` recommends one for the user to confirm. There is no greenfield path.
 
-Every entry skill (`triage`, `task-start`, `quick-task`) accepts a reference — Linear issue, GitHub issue, Asana task, URL — plus whatever the user says about it. Triage files a well-formed issue in the Linear triage project and stops; promoting it means invoking `task-start` or `quick-task` with that issue.
+Every entry skill (`triage`, `task-start`, `quick-task`, `auto-task`) accepts a reference — Linear issue, GitHub issue, Asana task, URL — plus whatever the user says about it. Triage files a well-formed issue in the Linear triage project and stops; promoting it means invoking `task-start` or `quick-task` with that issue.
 
 ### Relay
 
@@ -161,11 +162,13 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | Skill | Kind |
 |---|---|
 | `triage`, `task-start`, `quick-task` | user |
+| `auto-task` | user |
 | `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user |
 | `implement` (orchestrator), `implement-item` (item thread head) | user |
 | `publish` | model, from `create-plan` |
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
+| `pause-safely`, `session-pickup` | user |
 | `teach`, `interrogate` | user |
 | `prototype`, `visual-parity` | user |
 | `investigation`, `runtime-forensics`, `trace-forensics` | user |
@@ -180,8 +183,10 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `autonomous-run` | user |
 | `architect` | user |
 | `arena` | model |
+| `recall` | user |
 | `swarm` | model |
 | `autopilot-full`, `autopilot-stack` | user |
+| `figure-it-out` | user |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 
