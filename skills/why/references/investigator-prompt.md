@@ -1,6 +1,6 @@
 # Investigator Prompt Template
 
-Fill in the placeholders. Append the one category playbook `sources/<source>.md` for this investigator's evidence category (index: `source-playbook.md`). md` so the investigator runs incident-flavored queries inside its own source.
+Fill in the placeholders. Append the one category playbook `sources/<source>.md` for this investigator's evidence category (index: `source-playbook.md`).
 
 ---
 
