@@ -16,4 +16,4 @@ link_dir "$HOME/.agents/skills"   # Codex and other AGENTS.md-aware tools
 mkdir -p "$HOME/.claude/agents"
 for f in "$repo"/agents/*.md; do ln -sfn "$f" "$HOME/.claude/agents/$(basename "$f")"; done
 
-for c in gh plannotator roborev coderabbit bun; do command -v "$c" >/dev/null || echo "missing: $c" >&2; done
+for c in gh plannotator roborev coderabbit bun jq rg; do command -v "$c" >/dev/null || echo "missing: $c" >&2; done
