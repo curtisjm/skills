@@ -30,5 +30,6 @@ You are tasked with creating git commits for the changes made during this sessio
 - You have the full context of what was done in this session
 - Group related changes together
 - Keep commits focused and atomic when possible
+- Commit liberally. Rebase into small, ordered commits before opening PRs. Each commit is a future PR: landable, ordered to tell the story. Amend when the fix belongs in a just-made commit. New commit when separable. Commit bodies don't restate the subject.
 - The user trusts your judgment - they asked you to commit
 - **IMPORTANT**: - never stop and ask for feedback from the user.

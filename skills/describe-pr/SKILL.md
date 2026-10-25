@@ -18,6 +18,7 @@ Create or update the pull request for the current task with a concise descriptio
    - Check the current branch for a PR with `gh pr view --json url,number,title,state,baseRefName,headRefName 2>/dev/null`.
    - If no PR exists, inspect `git status --short --branch` and the commits on the current branch.
    - Commit task-related changes when needed, push the branch with an upstream, and create a PR for it. Follow the repository's git safety protocol.
+   - Open every PR ready, never as a draft. With `gh`, omit `--draft`. If a PR still opens as a draft, run `gh pr ready <number>`. Run `gh pr view <number>` before you refer to PR status.
    - Ask the user to select a PR only when the current branch has no relevant work and there is no safe current-branch PR to create.
 
 3. Gather only the context needed to explain the change:
@@ -40,6 +41,7 @@ Create or update the pull request for the current task with a concise descriptio
    - Prefer `diff` blocks when showing changes to an existing shape. Show the complete target shape when most of it is new or diff notation would obscure ownership or order.
    - Keep each view focused on the calls, files, fields, components, and boundaries a reviewer needs. Omit categories that did not change.
    - Do not add walkthrough artifacts, exhaustive implementation narratives, verification checklists, changelog text, or plan-deviation sections.
+   - The body becomes the squash commit body, so keep that commit under about 40 lines. Full SHAs, swarm or arena lane recitals, lever-correction essays, file-by-file checklists, and "CLEAN" verdicts go in a linked artifact, not the body.
    - Fill **Merge risk** honestly: a change is a one-way door when rolling it back does not restore the prior state (destructive migrations, data rewrites, published contracts, sent messages); otherwise two-way. Blast radius is who notices if the change is wrong, judged from the diff and its callers, not from the PR's size. For a change whose safety rests on one fact, the `blast-radius` skill (`~/dev/skills/skills/blast-radius/SKILL.md`) finds and proves that fact, and its "one fact" line goes in Merge risk.
    - Add an **Evidence** section when there is something specific to show: concrete before/after proof that the change does what the body says, such as a named test that failed before and passes now with the relevant assertion, a command and its before/after output, a log line that no longer appears, or a measured number. Never write "all tests pass" or "x/x passing"; that is not evidence. Gather evidence from what this session actually ran; do not run the whole suite just to quote it. When the PR changes UI, run the app and capture each changed screen or state (before/after when the shape already existed) to `{TASKDIR}/html/pr-{number}/`, and reference each as `![alt](./file.png)` in the body. When the `tdd` skill ran, its final-response evidence (the failing-before test and its failure, the passing-after run) is the Evidence section.
    - Never cite the ticket, Linear, or task documents in the body; explain the change on its own terms.
