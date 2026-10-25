@@ -65,6 +65,8 @@ On Standard and Long, `task.md` and every planning document are uploaded as docu
 
 ### `plan.md`
 
+`~/dev/skills/bin/check-plan {TASKDIR}/plan.md` verifies the file before the gate.
+
 The plan is read by the orchestrator, so it carries a table:
 
 | phase | id | repo | title | type | est. LOC |

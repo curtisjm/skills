@@ -1,0 +1,169 @@
+#!/usr/bin/env node
+import fs from "node:fs";
+import process from "node:process";
+
+const ITEMS_HEADER = ["phase", "id", "repo", "title", "type", "est. LOC"];
+const TYPES = ["pr", "ops", "test"];
+const SECTIONS = ["Items", "Rollout", "Phase transitions"];
+const PR_BLOCKS = ["Automated Verification", "Live Verification"];
+const OPTIONAL_BLOCKS = ["Manual Verification"];
+const PROMOTED = "If promoted after this phase";
+const BOX = /^\s*- \[[ x]\] (.*)$/;
+// The template's own heading separators. The text after them is checked.
+const PHASE_HEAD = /^## Phase (\d+): /;
+const ITEM_HEAD = /^### Item ([0-9A-Za-z][\w-]*)( — )?/;
+
+const file = process.argv[2];
+if (!file) {
+	console.error("Usage: check-plan <plan.md>");
+	process.exit(2);
+}
+
+const raw = fs.readFileSync(file, "utf8").split(/\r?\n/);
+const problems = [];
+const fail = (line, message) => problems.push(`${file}:${line}: ${message}`);
+
+let start = 0;
+if (raw[0] === "---") {
+	start = raw.indexOf("---", 1) + 1;
+}
+
+const lines = [];
+let fence = null;
+const openingFence = (text) => {
+	const match = text.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+	if (!match || (match[1][0] === "`" && match[2].includes("`"))) return null;
+	return { char: match[1][0], length: match[1].length };
+};
+const closingFence = (text, opening) => {
+	const match = text.match(/^ {0,3}(`+|~+)[ \t]*$/);
+	return Boolean(
+		match &&
+		match[1][0] === opening.char &&
+		match[1].length >= opening.length,
+	);
+};
+for (let i = start; i < raw.length; i++) {
+	const text = raw[i];
+	const n = i + 1;
+	let code = Boolean(fence);
+	if (fence && closingFence(text, fence)) {
+		code = false;
+		fence = null;
+	} else if (!fence) {
+		fence = openingFence(text);
+		code = Boolean(fence);
+	}
+	lines.push({ n, text, code });
+	if (code || !/^#{1,6} /.test(text)) continue;
+	const prose = text
+		.replace(PHASE_HEAD, "")
+		.replace(ITEM_HEAD, "")
+		.replace(/(?<!`)(`+)(?!`)(.*?)(?<!`)\1(?!`)/g, "`")
+		.replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+		.replace(/\]\([^)]*\)/g, "]");
+	if (/[–—]/.test(prose)) fail(n, "long dash in heading");
+	if (/: \S/.test(prose)) fail(n, "mid-sentence colon in heading");
+}
+
+const heading = (l, level) => (!l.code && l.text.startsWith(`${"#".repeat(level)} `) ? l.text.slice(level + 1).trim() : null);
+const sections = [];
+for (const l of lines) {
+	const title = heading(l, 2);
+	if (title !== null) sections.push({ title, n: l.n, body: [] });
+	else if (sections.length) sections.at(-1).body.push(l);
+}
+const find = (title) => sections.find((s) => s.title === title);
+const boxes = (ls) => ls.filter((l) => !l.code && BOX.test(l.text)).map((l) => ({ n: l.n, text: l.text.match(BOX)[1] }));
+const cells = (text) => text.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+
+for (const title of SECTIONS) {
+	if (!find(title)) fail(1, `no "## ${title}" section`);
+}
+
+const rows = [];
+const items = find("Items");
+if (items) {
+	const table = items.body.filter((l) => !l.code && l.text.trim().startsWith("|"));
+	if (table.length === 0) fail(items.n, "Items has no table");
+	else if (cells(table[0].text).join("|") !== ITEMS_HEADER.join("|")) {
+		fail(table[0].n, `Items columns are [${cells(table[0].text).join(", ")}], expected [${ITEMS_HEADER.join(", ")}]`);
+	} else {
+		for (const l of table.slice(1)) {
+			const c = cells(l.text);
+			if (c.every((x) => /^:?-+:?$/.test(x))) continue;
+			const [phase, id, , , type] = c;
+			if (rows.some((r) => r.id === id)) fail(l.n, `Items row ${id} is duplicated`);
+			if (!TYPES.includes(type)) fail(l.n, `Items row ${id} has type "${type}", expected one of ${TYPES.join(", ")}`);
+			rows.push({ phase, id, type, n: l.n });
+		}
+		if (rows.length === 0) fail(items.n, "Items table has no rows");
+	}
+}
+
+const phases = sections.filter((s) => PHASE_HEAD.test(`## ${s.title}`));
+if (phases.length === 0) fail(1, 'no "## Phase <n>: <name>" section');
+
+const report = [];
+const seen = new Set();
+for (const phase of phases) {
+	const number = phase.title.match(/^Phase (\d+)/)[1];
+	const h3s = [];
+	for (const l of phase.body) {
+		const title = heading(l, 3);
+		if (title !== null) h3s.push({ title, n: l.n, text: l.text, body: [] });
+		else if (h3s.length) h3s.at(-1).body.push(l);
+	}
+	if (!h3s.some((h) => h.title === PROMOTED)) fail(phase.n, `Phase ${number} lacks "### ${PROMOTED}"`);
+
+	for (const item of h3s.filter((h) => ITEM_HEAD.test(h.text))) {
+		const id = item.text.match(ITEM_HEAD)[1];
+		const row = rows.find((r) => r.id === id);
+		if (seen.has(id)) fail(item.n, `Item ${id} has more than one section`);
+		seen.add(id);
+		if (!row) {
+			fail(item.n, `Item ${id} has no Items table row`);
+			continue;
+		}
+		if (row.phase !== number) fail(item.n, `Item ${id} is under Phase ${number}, its Items row says phase ${row.phase}`);
+
+		const prose = item.body.filter((l) => !l.code);
+		const see = prose.find((l) => /^\*\*You see\b/.test(l.text));
+		if (!see) fail(item.n, `Item ${id} has no "You see" line`);
+		else if (see.text.replace(/^\*\*You see[^*]*\*\*[.:]?/, "").trim() === "") fail(see.n, `Item ${id}: "You see" names nothing`);
+
+		const blocks = [];
+		for (const l of item.body) {
+			const title = heading(l, 5);
+			if (title !== null) blocks.push({ name: title.replace(/:$/, ""), n: l.n, lines: [] });
+			else if (blocks.length) blocks.at(-1).lines.push(l);
+		}
+		const counts = {};
+		for (const b of blocks) counts[b.name] = boxes(b.lines).length;
+		if (row.type === "pr") {
+			if (!prose.some((l) => /^#### Success Criteria/.test(l.text))) fail(item.n, `Item ${id} has no "#### Success Criteria"`);
+			for (const name of PR_BLOCKS) {
+				const b = blocks.find((x) => x.name === name);
+				if (!b) fail(item.n, `Item ${id} has no "##### ${name}"`);
+				else if (counts[name] === 0) fail(b.n, `Item ${id}: ${name} has no box`);
+			}
+			for (const name of OPTIONAL_BLOCKS) {
+				const b = blocks.find((x) => x.name === name);
+				if (b && counts[name] === 0) fail(b.n, `Item ${id}: ${name} has no box`);
+			}
+		}
+
+		const total = boxes(item.body).length;
+		const columns = [...PR_BLOCKS, ...OPTIONAL_BLOCKS].map((s) => `${s.split(" ")[0].toLowerCase()}=${counts[s] ?? 0}`);
+		report.push(`${id}  type=${row.type}  boxes=${total}  ${columns.join(" ")}`);
+	}
+}
+
+for (const row of rows) {
+	if (!seen.has(row.id)) fail(row.n, `Items row ${row.id} has no "### Item ${row.id}" section`);
+}
+
+for (const line of report) console.log(line);
+console.log(`${rows.length} items, ${problems.length} problems`);
+for (const p of problems) console.error(p);
+process.exit(problems.length ? 1 : 0);

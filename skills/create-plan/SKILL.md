@@ -31,6 +31,7 @@ You are in the final Plan Writing phase. Convert the design discussion (Standard
    - Include specific code examples for each change
    - Add both automated and manual success criteria
    - State `## Rollout` and `## Phase transitions` explicitly
+   - Every item carries a "You see" line, every `pr` item a Live Verification block, and every item that changes an interaction a review gate; `~/dev/skills/bin/check-plan {TASKDIR}/plan.md` verifies the file
 
 5. **Gate**: tell the user the review URL (`~/dev/skills/bin/gate --url {TASKDIR}/plan.md`), then run `~/dev/skills/bin/gate {TASKDIR}/plan.md`. This is plan approval, the last planning gate. Process annotations as feedback (step 1's revision rules), then run the gate again. Continue only on approval.
 
