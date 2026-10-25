@@ -198,6 +198,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `architect`, `interrogate` | user |
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 | `typescript-best-practices`, `show-me-your-work`, `no-comments` | model |
+| `codebase-design`, `domain-modeling` | model |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `setup-worktree` | model, Quick only |
 
@@ -208,6 +209,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `catch-up`, `recall`, `reflect`, `correct`, `eval` | user |
 | `sharpen`, `bro`, `teach`, `in-your-own-words` | user |
 | `worktree-cleanup`, `create-verification-skill`, `maintain-verification-skill` | user |
+| `improve-codebase-architecture`, `grilling` | user |
 
 `docs/skills.md` describes each one.
 

@@ -18,6 +18,14 @@ The repository is https://github.com/cursor/plugins/tree/main/pstack. The pinned
 
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
+### Matt Pocock
+
+The repository is https://github.com/mattpocock/skills. The pinned commit is `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, from 2026-10-19.
+
+The architecture skills were imported on 2026-10-25. Paths in the mapping table are relative to the repo root.
+
+To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
+
 ### Other
 
 - `handoff` is Matt Pocock's handoff skill, copied verbatim except the save path. Its repo and commit were not recorded.
@@ -90,6 +98,8 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/typescript-best-practices` | pstack | `skills/typescript-best-practices/SKILL.md`, `references/patterns.md` | verbatim | Principle names map to `principles/references/` paths. |
 | `skills/show-me-your-work` | pstack | `skills/show-me-your-work/SKILL.md`, `scripts/log.sh`, `references/decision-log-template.tsv` | modified | The log lives at `{TASKDIR}/decisions.tsv` and never in a code repo. |
 | `skills/no-comments` | pstack | `skills/no-comments/SKILL.md` | verbatim | Spawns `comment-sicko` with `delegate_task`. |
+| `skills/codebase-design` | Matt Pocock | `skills/engineering/codebase-design/` | verbatim | Byte-identical. |
+| `skills/domain-modeling` | Matt Pocock | `skills/engineering/domain-modeling/` | verbatim | Byte-identical. |
 | `skills/describe-pr` | HumanLayer | `plugins/visual-pr/skills/visual-pr/SKILL.md`, `plugins/visual-pr/skills/visual-pr/references/` | modified | From riptide `describe-pr`, with the walkthrough removed and screenshots, merge risk, and evidence added. |
 | `skills/review-loop` | pstack, Other | `skills/poteto-mode/playbooks/babysit.md`, `skills/poteto-mode/references/bugbot-triage.md` | own | Grew from local `pr-loop`, later adding babysit's steps and a renamed `bot-triage.md`. |
 | `skills/ci-commit` | HumanLayer | none | modified | From riptide `ci-commit`, which upstream dropped. |
@@ -107,6 +117,8 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/worktree-cleanup` | pstack | `skills/poteto-mode/playbooks/worktree-cleanup.md` | verbatim | Playbook promoted to a skill without the macOS and Cursor items. |
 | `skills/create-verification-skill` | pstack | `skills/create-verification-skill/SKILL.md`, `references/feature-map-example/` | modified | Skills go to `.claude/skills` and a cadence runs as a T3 scheduled task. |
 | `skills/maintain-verification-skill` | pstack | `skills/maintain-verification-skill/SKILL.md` | verbatim | `.cursor/skills` maps to `.claude/skills`. |
+| `skills/improve-codebase-architecture` | Matt Pocock | `skills/engineering/improve-codebase-architecture/` | verbatim | The report goes to `{TASKDIR}/html/` when a task exists and can render with `html_render`. |
+| `skills/grilling` | Matt Pocock | `skills/productivity/grilling/` | verbatim | Byte-identical. |
 | *Agents* | | | | |
 | `agents/codebase-locator.md` | HumanLayer | `plugins/rpi/agents/codebase-locator.md` | verbatim | Unchanged since the import, and upstream only reformatted the frontmatter. |
 | `agents/codebase-analyzer.md` | HumanLayer | `plugins/rpi/agents/codebase-analyzer.md` | verbatim | Unchanged since the import, and upstream swapped `LS` for `Bash` in tools. |
