@@ -64,6 +64,8 @@ repos: [repo basenames this plan touches]
 
 [What the item does. Files below are indicative of where the work lands, not a binding list.]
 
+**You see**: [One observable result a user or operator notices when the item is done, with the exact log line or screen state.]
+
 **File**: `path/to/file.ext`
 **Changes**: [Summary of changes] - [around line X | add after Y | etc etc]
 
@@ -96,6 +98,14 @@ export interface [name]{
 - [ ] [manual step 2]
 </optional>
 
+##### Live Verification:
+[Tests alone are not sufficient verification. Drive the real surface at the PR head via the repo's `verify-<app>` skill when the repo has one (`.claude/skills/verify-<app>/`), otherwise by driving the surface directly (T3 `preview_*` tools for web, the CLI itself for CLIs). One box per scenario, with the evidence it saves and its pass predicate.]
+- [ ] [Scenario.] Save `[slug].png`. Pass when [predicate].
+
+<optional if="the item changes an interaction (UI, CLI, API shape)">
+**Review gate**: [Who reviews what, with the screenshots or recording from Live Verification, before the item is In Review.]
+</optional>
+
 ### Item 1-2-[slug] — [title] (`[repo]`, pr)
 
 ...
@@ -114,8 +124,12 @@ export interface [name]{
 
 [Which pin or action, who runs it (the user), how it is validated]
 
+**You see**: [One observable result a user or operator notices when the item is done, with the exact log line or screen state.]
+
 ### Item 2-2-[slug] — [title] (test)
 
 [What is checked against the real system: logs, flows, dashboards]
+
+**You see**: [One observable result a user or operator notices when the item is done, with the exact log line or screen state.]
 
 ---
