@@ -188,6 +188,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `orchestrate` | user |
 | `autopilot-full`, `autopilot-stack` | user |
 | `figure-it-out` | user |
+| `eval` | user |
 | `worktree-cleanup` | user |
 | `create-verification-skill`, `maintain-verification-skill` | user |
 | `reflect` | user |
@@ -198,4 +199,4 @@ Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase
 
 ## Invoking skills
 
-Final-answer templates suggest the next skill as `/skill-name`. In Claude Code that is a slash command; in Codex, invoke the same skill by name.
+Final-answer templates suggest the next skill as `/skill-name`. In Claude Code that is a slash command; in Codex, invoke the same skill by name. Before opening a PR that adds or edits a skill, run `~/dev/skills/bin/check-skill skills/<name>`; when the change alters agent behavior rather than wiring, run `eval` first.
