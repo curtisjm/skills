@@ -188,6 +188,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `orchestrate` | user |
 | `autopilot-full`, `autopilot-stack` | user |
 | `figure-it-out` | user |
+| `create-verification-skill`, `maintain-verification-skill` | user |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
 
