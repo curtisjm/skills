@@ -1,0 +1,92 @@
+#!/bin/sh
+# Validate skill directories before a PR. Usage:
+#   check-skill skills/<name> [skills/<name> ...]
+# Checks: SKILL.md exists; frontmatter name matches the directory and
+# description is non-empty; relative links and backticked relative file paths
+# in the directory's markdown resolve; "the `x` skill" and
+# ~/dev/skills/skills/x/SKILL.md name a directory under skills/.
+# Prints one line per failure and exits 1 if any.
+set -eu
+[ $# -gt 0 ] || { echo "usage: check-skill skills/<name> ..." >&2; exit 2; }
+tab=$(printf '\t')
+
+# Emit "kind<TAB>token" for each link, code span, and skill reference outside
+# fenced code blocks.
+refs() {
+  awk '
+    /^[ \t]*(```|~~~)/ { fence = !fence; next }
+    fence { next }
+    {
+      line = $0
+      s = line
+      while (match(s, /the `[^`]+` skill/)) {
+        t = substr(s, RSTART + 5, RLENGTH - 12); print "skill\t" t
+        s = substr(s, RSTART + RLENGTH)
+      }
+      s = line
+      while (match(s, /~\/dev\/skills\/skills\/[^\/` )]+\/SKILL\.md/)) {
+        t = substr(s, RSTART + 20, RLENGTH - 29); print "skill\t" t
+        s = substr(s, RSTART + RLENGTH)
+      }
+      gsub(/``[^`]+``/, "", line)
+      s = line
+      while (match(s, /`[^`]+`/)) {
+        print "code\t" substr(s, RSTART + 1, RLENGTH - 2)
+        s = substr(s, RSTART + RLENGTH)
+      }
+      gsub(/`[^`]*`/, "", line)
+      while (match(line, /\]\([^)]*\)/)) {
+        print "link\t" substr(line, RSTART + 2, RLENGTH - 3)
+        line = substr(line, RSTART + RLENGTH)
+      }
+    }' "$1" | sort -u
+}
+
+check() {
+for dir in "$@"; do
+  dir=${dir%/}
+    name=$(basename "$dir")
+    root=$(cd "$dir/../.." && pwd)
+    skill="$dir/SKILL.md"
+    if [ ! -f "$skill" ]; then
+      echo "$dir: missing SKILL.md"
+      continue
+    fi
+  
+    front=$(awk 'NR == 1 && $0 != "---" { exit } NR > 1 && $0 == "---" { exit } NR > 1' "$skill")
+    fname=$(printf '%s\n' "$front" | sed -n 's/^name:[ \t]*//p' | sed 's/^["'\'']//; s/["'\'']$//')
+    fdesc=$(printf '%s\n' "$front" | sed -n 's/^description:[ \t]*//p' | sed 's/^["'\'']//; s/["'\'']$//')
+    [ "$fname" = "$name" ] || echo "$skill: frontmatter name \"$fname\" does not match directory \"$name\""
+    [ -n "$fdesc" ] || echo "$skill: frontmatter description is empty"
+  
+    find "$dir" -name '*.md' | sort | while read -r md; do
+      here=$(dirname "$md")
+      refs "$md" | while IFS="$tab" read -r kind tok; do
+        case $kind in
+          skill)
+            case $tok in *[\<\{]*) continue ;; esac
+            [ -d "$root/skills/$tok" ] || echo "$md: references missing skill \"$tok\""
+            ;;
+          link)
+            tok=${tok%%#*}
+            case $tok in ''|*:*|[\{\</~]*) continue ;; esac
+            case $tok in */*|*.*) ;; *) continue ;; esac
+            [ -e "$here/$tok" ] || echo "$md: broken link \"$tok\""
+            ;;
+          code)
+            case $tok in *[[:space:]]*|*[{}\<\>*\$:#\(\)]*|[/~]*) continue ;; esac
+            case $tok in */*.*) ;; *) continue ;; esac
+            case ${tok##*/} in *.*) ;; *) continue ;; esac
+            [ -e "$here/$tok" ] || [ -e "$dir/$tok" ] || [ -e "$root/$tok" ] ||
+              echo "$md: missing path \"$tok\""
+            ;;
+        esac
+      done
+    done
+  done
+  }
+  
+out=$(check "$@")
+[ -z "$out" ] && exit 0
+printf '%s\n' "$out"
+exit 1
