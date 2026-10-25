@@ -22,7 +22,7 @@ To check for drift, diff the upstream path at the pinned SHA against upstream HE
 
 The repository is https://github.com/mattpocock/skills. The pinned commit is `5beb35b040e3de97e54fa9e386d7e42d15c295c2`, from 2026-10-19.
 
-`handoff` was copied from here on 2026-10-05 before the source was recorded. Paths in the mapping table are relative to the repo root.
+`handoff` was copied from here on 2026-10-05 before the source was recorded. On 2026-10-25 our copy was diffed against the pinned commit; the only upstream change since the copy was the "suggested skills" sentence, which was carried over the same day, so the pin is a clean baseline. Paths in the mapping table are relative to the repo root.
 
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 

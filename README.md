@@ -6,7 +6,7 @@ Four paths carry a task to a merged PR. Quick runs small, understood work in one
 
 Playbooks are skills for work with a known shape: bug fixes, features, refactors, perf work, forensics, prototypes, and long autonomous runs. Building blocks are the skills the model reaches for mid-step, such as `how`, `why`, `architect`, `arena`, `swarm`, `interrogate`, `review-loop`, and `describe-pr`. User tools such as `catch-up`, `recall`, `reflect`, and `eval` are invoked by name. Every role runs on one of three model tiers, and `models.md` gives each role's family and effort.
 
-Start with `WORKFLOW.md`. It defines the paths, which skill runs each step, the placeholders, the `task.md` and `plan.md` shapes, the Linear mapping, and the gates. `docs/skills.md` describes every skill, agent, and script and when the workflow uses it. `docs/provenance.md` records which upstream each skill came from and the commit it was last checked against. `docs/workflow-map.html` draws the gated paths but predates the Auto path and the playbooks.
+Start with `WORKFLOW.md`. It defines the paths, which skill runs each step, the placeholders, the `task.md` and `plan.md` shapes, the Linear mapping, and the gates. `docs/skills.md` describes every skill, agent, and script and when the workflow uses it. [`docs/provenance.md`](docs/provenance.md) records which upstream each skill came from and the commit it was last checked against. `docs/workflow-map.html` draws the gated paths but predates the Auto path and the playbooks.
 
 ## Install
 
