@@ -23,7 +23,7 @@ Open a todolist with one entry per phase before launching anything.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one message as `delegate_task` children with `mode: async` and the step 3 model, each in its own worktree under `{TASKDIR}/repos/<task>-swarm-<n>`.
+Spawn all N workers in one message as `delegate_task` children with `mode: async` and the step 3 model, each in its own worktree under `{TASKDIR}/repos/{TASKSLUG}-swarm-<n>`.
 
 When a worker must start from a non-default pushed branch, create its worktree from that branch.
 
