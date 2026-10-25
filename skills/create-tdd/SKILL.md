@@ -109,7 +109,7 @@ npm install example
 <step index="3" name="system-design">
 
 <instructions>
-Design the cross-component architecture. System Design is about behavior *between* components - how services, endpoints, schemas, queues, stores, and external systems interact - not the code inside any one of them.
+Design the cross-component architecture. System Design is about behavior *between* components - how services, endpoints, schemas, queues, stores, and external systems interact - not the code inside any one of them. Before the first design question, read the Architecture group of `~/dev/skills/skills/principles/SKILL.md` and `~/dev/skills/skills/principles/references/design-red-flags.md`.
 
 Convey **how the system changes**: what exists today and what's new or different. Express the delta so the reader understands the change at a glance.
 
