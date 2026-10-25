@@ -168,6 +168,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `publish` | model, from `create-plan` |
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff`, `bro`, `sharpen`, `in-your-own-words`, `catch-up` | user |
+| `pause-safely`, `session-pickup` | user |
 | `teach`, `interrogate` | user |
 | `prototype`, `visual-parity` | user |
 | `investigation`, `runtime-forensics`, `trace-forensics` | user |
