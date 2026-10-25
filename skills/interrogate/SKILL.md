@@ -24,7 +24,7 @@ Before spawning reviewers, state the intent in one clear paragraph from the user
 
 ## Step 3, Spawn Reviewers
 
-Launch one `delegate_task` child per model family that `orchestrator_capabilities` reports as able to run child tasks (today Claude and Codex), labeled Reviewer A, B, and so on, each on the newest judgment model of its family at the effort the Relay rule in `~/dev/skills/WORKFLOW.md` gives item threads.
+By default, launch one `delegate_task` child per model family that `orchestrator_capabilities` reports as able to run child tasks (today Claude and Codex), labeled Reviewer A, B, and so on. Each runs on the highest tier model of its family (the Fable tier on Claude, the Astra tier on Codex; find the newest version in `orchestrator_capabilities`) at `xhigh` reasoning. The user may overrule the default and name a single model; then launch one reviewer on that model.
 
 Each reviewer's prompt says it must not edit files.
 
