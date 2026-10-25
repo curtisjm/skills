@@ -61,7 +61,7 @@ You are now in the Design Discussion phase. Based on the research findings and t
 <content_guidance>
 **Outline High-level product spec** - Current state, desired end state, what we're not doing in terms of user experience or functionality
 
-**Outline the proposed end state architecture** - Read the Architecture group of `~/dev/skills/skills/principles/SKILL.md` and `~/dev/skills/skills/principles/references/design-red-flags.md` first. Use focused before-and-after diagrams, trees, pseudocode, or other views from the `show-me` guidance. Prefer `diff` blocks when the key point is what changes, and show the full target shape when it makes ownership or order clearer.
+**Outline the proposed end state architecture** - Read the Architecture group of `~/dev/skills/skills/principles/SKILL.md` and `~/dev/skills/skills/principles/references/design-red-flags.md` first. When two architectures are live with no clear winner, run the `arena` skill (`~/dev/skills/skills/arena/SKILL.md`) on the design-sketch task before presenting the decision. Use focused before-and-after diagrams, trees, pseudocode, or other views from the `show-me` guidance. Prefer `diff` blocks when the key point is what changes, and show the full target shape when it makes ownership or order clearer.
 
 **Discuss design decisions**
    - For each major design choice, present options with pros/cons

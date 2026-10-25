@@ -177,6 +177,8 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `setup-worktree` | model, Quick only |
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 | `autonomous-run` | user |
+| `architect` | user |
+| `arena` | model |
 | `swarm` | model |
 
 Sub-agents are named by role (`codebase-locator`, `codebase-analyzer`, `codebase-pattern-finder`, `web-search-researcher`); use whatever name the current harness exposes for the role. Definitions live in `agents/`. Within a step, sub-work runs as `delegate_task` children, not new top-level threads. Children run with `runtimeMode: full-access` too.
