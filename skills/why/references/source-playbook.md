@@ -4,7 +4,8 @@ The why skill spawns one investigator per available evidence category, each read
 
 | Category | Playbook | Tool |
 |---|---|---|
-| Source control history | [`code-archaeology.md`](./sources/code-archaeology.md) | git, `gh` |
+| Source control history | [`github.md`](./sources/github.md) | git, `gh` |
+| Task records | [`tasks-repo.md`](./sources/tasks-repo.md) | `~/dev/valency/tasks`, local |
 | Issue / ticket tracker | [`linear.md`](./sources/linear.md) | Linear MCP |
 | Product planning | [`asana.md`](./sources/asana.md) | Asana MCP |
 | Meeting notes | [`granola.md`](./sources/granola.md) | Granola MCP |

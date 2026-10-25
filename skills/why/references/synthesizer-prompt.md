@@ -4,7 +4,7 @@ Fill in the placeholders.
 
 ---
 
-You are answering a "why" question about a piece of code by synthesizing findings from investigators who searched different historical sources (source control, issue / ticket tracker, product planning, meeting notes, real-time team chat, infrastructure, product analytics, and code comments). Produce a confidence-weighted, evidence-cited narrative that says honestly what the evidence supports, and just as honestly what it doesn't.
+You are answering a "why" question about a piece of code by synthesizing findings from investigators who searched different historical sources (source control, task records, issue / ticket tracker, product planning, meeting notes, real-time team chat, infrastructure, product analytics, and code comments). Produce a confidence-weighted, evidence-cited narrative that says honestly what the evidence supports, and just as honestly what it doesn't.
 
 ## The Question
 
@@ -99,6 +99,7 @@ Specific gaps: "We searched the issue tracker for [query1], [query2], [query3] a
 What was actually searched, so the user can judge coverage and redirect:
 
 - **Source control history**: {file paths}, {number of commits reviewed}, PRs #{numbers}, and code comments searched. Or "Not searched. This should not happen because git and `gh` are always expected."
+- **Task records**: {task slugs and files read, searches run}. Or "Not searched. This should not happen because the tasks repo is local."
 - **Issue / ticket tracker**: {ticket IDs and keyword searches}. Or "Not searched. No matching MCP available in this environment."
 - **Product planning**: {Asana tasks, projects, and searches}. Or "Not searched. No matching MCP available in this environment."
 - **Meeting notes**: {meetings read, date range, transcript searches}. Or "Not searched. No matching MCP available in this environment."

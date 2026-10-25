@@ -1,6 +1,6 @@
 ---
 name: why
-description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, product planning, meeting notes, real-time chat, infrastructure, product analytics) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior."
+description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, task records, issue tracker, product planning, meeting notes, real-time chat, infrastructure, product analytics) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior."
 ---
 
 # Why
@@ -36,14 +36,15 @@ Before spawning investigators, list the MCP servers and CLIs available in this s
 Map each available MCP to one evidence category:
 
 1. Source control history
-2. Issue / ticket tracker
-3. Product planning
-4. Meeting notes
-5. Real-time team chat
-6. Infrastructure
-7. Product analytics
+2. Task records
+3. Issue / ticket tracker
+4. Product planning
+5. Meeting notes
+6. Real-time team chat
+7. Infrastructure
+8. Product analytics
 
-Source control is always available through git and `gh`. For the other six, classify using the MCP name, server instructions, tool names, and resource descriptors. If an MCP could fit more than one category, choose the one matching its primary evidence. Record ambiguous cases in the coverage map.
+Source control is always available through git and `gh`, and task records through the local `~/dev/valency/tasks` repo. For the other six, classify using the MCP name, server instructions, tool names, and resource descriptors. If an MCP could fit more than one category, choose the one matching its primary evidence. Record ambiguous cases in the coverage map.
 
 Spawn one investigator per category that has a matching MCP, all in a single message so they run concurrently, each owning exactly one tool or MCP. Don't ask one agent to cover multiple MCPs.
 
@@ -55,13 +56,14 @@ Each investigator's prompt is `references/investigator-prompt.md` filled in, plu
 
 Each category below is uniquely positioned to surface one shape of "why", shown after "Best at". Use it to know what to expect back, to name a gap when a category returns empty, and, only in the rare provably-irrelevant case, to justify a skip.
 
-1. **Source control** (git history, `gh` for PRs, code comments, tests). Always spawn, the only guaranteed source. Best at *implementation-time rationale captured during review*.
-2. **Issue / ticket tracker** (Linear MCP). Best at *the engineering forcing function*: the bug, the request, the scope recorded when the work was planned.
-3. **Product planning** (Asana MCP). Best at *the product or business decision above the ticket*: the initiative, the customer, the launch, and what was cut. Strongest when the why is external to engineering.
-4. **Meeting notes** (Granola MCP). Best at *decisions made out loud and the alternatives rejected*, including customer calls in the customer's own words.
-5. **Real-time team chat** (Slack MCP). Best at *real-time deliberation that never reached a doc*. Especially important when the source control, ticket, and planning paper trail is thin.
-6. **Infrastructure** (`aws` CLI: CloudWatch logs, metrics and alarms, CloudTrail, deploy history). Best at *infrastructure and runtime reality that motivated the code*. Strongest when the target reacts to an infra signal (timeouts, retries, rate limits, circuit breakers) or handles a specific error.
-7. **Product analytics** (PostHog MCP: events, flags, experiments, error tracking, insights). Best at *product and data reality that shaped the code*. Strongest for flag-gated code, experiment-driven ships, and "where did this number come from" questions.
+1. **Source control** (git history, `gh` for PRs and issues, code comments, tests). Always spawn. Best at *implementation-time rationale captured during review*.
+2. **Task records** (`~/dev/valency/tasks`: task decisions, research and design documents, plans, item reports, decision trails). Always spawn. Best at *the planning that preceded the code*, including alternatives considered and rulings Curtis made.
+3. **Issue / ticket tracker** (Linear MCP). Best at *the engineering forcing function*: the bug, the request, the scope recorded when the work was planned.
+4. **Product planning** (Asana MCP). Best at *the product or business decision above the ticket*: the initiative, the customer, the launch, and what was cut. Strongest when the why is external to engineering.
+5. **Meeting notes** (Granola MCP). Best at *decisions made out loud and the alternatives rejected*, including customer calls in the customer's own words.
+6. **Real-time team chat** (Slack MCP). Best at *real-time deliberation that never reached a doc*. Especially important when the source control, ticket, and planning paper trail is thin.
+7. **Infrastructure** (`aws` CLI: CloudWatch logs, metrics and alarms, CloudTrail, deploy history). Best at *infrastructure and runtime reality that motivated the code*. Strongest when the target reacts to an infra signal (timeouts, retries, rate limits, circuit breakers) or handles a specific error.
+8. **Product analytics** (PostHog MCP: events, flags, experiments, error tracking, insights). Best at *product and data reality that shaped the code*. Strongest for flag-gated code, experiment-driven ships, and "where did this number come from" questions.
 
 ### When to skip an investigator
 
@@ -70,7 +72,7 @@ Only with an **explicit, written justification** that goes in the final Sources 
 - **No MCP is available for that category** in this environment. Flag it as a gap, not a choice: "Real-time team chat skipped. No matching MCP available, so the conversational record was not searchable."
 - **The source is provably irrelevant**, not just "probably irrelevant." A high bar: "Error / exception tracking skipped. Target is a build-time script with no runtime code path."
 
-If your scope assessment suggests a single-commit trivial target where the PR description already contains the complete answer, you may answer inline **only after** confirming all seven available category searches would be redundant. Say so explicitly. This should be rare.
+If your scope assessment suggests a single-commit trivial target where the PR description already contains the complete answer, you may answer inline **only after** confirming all eight available category searches would be redundant. Say so explicitly. This should be rare.
 
 ## Step 4. Synthesize
 
