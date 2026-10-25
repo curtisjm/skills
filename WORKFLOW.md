@@ -133,7 +133,7 @@ Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the
 
 Skills named here that are not yet in the Skills table arrive in later PRs.
 
-The Principles section below grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf under `skills/principles/references/` you read this session.
+The `principles` skill grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf under `skills/principles/references/` you read this session.
 
 Remaining triggers:
 
@@ -144,12 +144,12 @@ Remaining triggers:
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
 - Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
 - Nontrivial multi-step → write the throughput checkpoint (`feature` step 3).
-- Any prose surface, your reply to the user included → the **unslop** skill. Write the reply per **Writing the reply**.
+- Any prose surface, your reply to the user included → the **unslop** skill.
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
 - Before review → the **no-comments** skill (`/no-comments`).
 - Shipping UI or CLI → verify on the real surface via the repo's `verify-<app>` skill when it has one, otherwise by driving the surface directly. For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow `bug-fix` step 1 exception.
 - Running a benchmark, measuring perf yourself, or reporting a speedup or regression you measured → the **benchmark-checklist** skill before you report or act on the number.
-- Any PR-status request ("babysit this", "get it green", "address the bugbot comments", and most often "check on PR X" or "anything outstanding on X") → `review-loop`'s outer loop, which owns the request-to-mode mapping. Never triggered by merely opening a PR. Declare its mode before polling.
+- Any PR-status request ("babysit this", "get it green", "address the bot comments", and most often "check on PR X" or "anything outstanding on X") → `review-loop`'s outer loop, which owns the request-to-mode mapping. Never triggered by merely opening a PR. Declare its mode before polling.
 - CodeRabbit or Copilot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `skills/review-loop/references/bot-triage.md`.
 - Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
 - Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "run until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record. Keep it local otherwise.
