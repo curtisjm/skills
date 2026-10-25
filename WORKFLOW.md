@@ -129,6 +129,31 @@ Unattended: `publish`, Linear document sync, worktree creation, opening PRs, the
 
 `close-task` is user-invoked after the work is merged, promoted through staging and production where the plan says so, and validated at each step. It writes the retro to the Linear project. Quick has no close; the merge is the close.
 
+## Non-negotiables
+
+Skills named here that are not yet in the Skills table arrive in later PRs.
+
+The `principles` skill grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf under `skills/principles/references/` you read this session.
+
+Remaining triggers:
+
+- Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
+- About to ask the user on a "which approach", "how should I", or "what should this do" fork → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the `prototype` skill and let the result decide. If the task is a read-only `investigation` whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. Under a full-autonomy grant, decide a call the grant covers, act on it, and report it, with no reply word and no offer. Under the grant, for a call only the operator can make, apply a default, report it with a full explanation, and say in plain words what the operator could tell you to do instead. The operator answers in their own words. Never give a shorthand token to type back. Gates the operator named still need the operator.
+- Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
+- Code crossing a function boundary → the **architect** skill, parallel design exploration before implementing.
+- Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
+- Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
+- Nontrivial multi-step → write the throughput checkpoint (`feature` step 3).
+- Any prose surface, your reply to the user included → the **unslop** skill.
+- Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
+- Before review → the **no-comments** skill (`/no-comments`).
+- Shipping UI or CLI → verify on the real surface via the repo's `verify-<app>` skill when it has one, otherwise by driving the surface directly. For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow `bug-fix` step 1 exception.
+- Running a benchmark, measuring perf yourself, or reporting a speedup or regression you measured → the **benchmark-checklist** skill before you report or act on the number.
+- Any PR-status request ("babysit this", "get it green", "address the bot comments", and most often "check on PR X" or "anything outstanding on X") → `review-loop`'s outer loop, which owns the request-to-mode mapping. Never triggered by merely opening a PR. Declare its mode before polling.
+- CodeRabbit or Copilot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `skills/review-loop/references/bot-triage.md`.
+- Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
+- Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "run until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record. Keep it local otherwise.
+
 ## Skills
 
 User-invoked: entry points and step heads. Model-invoked: building blocks other skills call.
