@@ -20,7 +20,7 @@ The user has already created the T3 project for this task, rooted at `{TASKDIR}`
    - anything in the reference or their description that contradicts itself
    Skip the question for anything they already stated.
 
-3. **Write `{TASKDIR}/task.md`** from `{SKILLBASE}/references/task_template.md`. `## Goal` is one paragraph stating the goal in the user's terms, written by this skill; it is not a transcript of the prompt. Create `{TASKDIR}/html/`, `reports/`, `repos/` empty.
+3. **Write `{TASKDIR}/task.md`** from `{SKILLBASE}/references/task_template.md`. `## Goal` is one paragraph stating the goal in the user's terms, written by this skill; it is not a transcript of the prompt. It is written the way the `in-your-own-words` skill (`~/dev/skills/skills/in-your-own-words/SKILL.md`) asks, restating the goal and the problem before anything else. Create `{TASKDIR}/html/`, `reports/`, `repos/` empty.
 
 4. **Create the Linear project**: `save_project` named as confirmed in step 2, team per the user's default, state Researching, description = `## Goal`. Record its name as `linear_project`. If the source is a Linear issue, attach it to the project and leave its status alone; the orchestrator owns status writes later.
 
