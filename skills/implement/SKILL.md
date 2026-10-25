@@ -40,6 +40,8 @@ When every sub-issue of the phase is In Review or Done, the phase has converged:
 - **merge-first** next phase: list the PRs the user must merge, each as a link (`[repo#n](url)`), and end the turn. When the user reports the merges (or says continue): sub-issues → Done, phase issue → Done, dispatch the next phase.
 - no next phase: project → In Review. The user runs `close-task` when the work is merged, promoted, and validated.
 
+A status message the user has not seen for a while follows the `catch-up` skill's shape (`~/dev/skills/skills/catch-up/SKILL.md`).
+
 ## Guardrails
 
 - **Agents never merge.** The user merges every PR and runs every promotion action; an `ops` thread opens the pin PR, nothing more.
