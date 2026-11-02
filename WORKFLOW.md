@@ -210,7 +210,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `sharpen`, `bro`, `teach`, `show-me`, `in-your-own-words` | user |
 | `worktree-cleanup`, `create-verification-skill`, `maintain-verification-skill` | user |
 | `improve-codebase-architecture`, `grilling` | user |
-| `wizard` | user |
+| `wizard`, `statechart` | user |
 
 `docs/skills.md` describes each one.
 
