@@ -96,6 +96,7 @@ Reach for these by name when you want something for yourself rather than the tas
 - [`improve-codebase-architecture`](../skills/improve-codebase-architecture/SKILL.md) scans a codebase for deepening opportunities, presents them as an HTML report, and grills through the one you pick. Invoke it when a codebase has grown friction you want to refactor away.
 - [`grilling`](../skills/grilling/SKILL.md) interviews you in rounds of numbered questions, each with a recommended answer, until every branch of a plan's decision tree is settled. Invoke it to stress-test a plan or idea. Called by `improve-codebase-architecture`.
 - [`wizard`](../skills/wizard/SKILL.md) generates an interactive bash script from `template.sh` that walks you through manual steps only you can do, such as dashboard clicks, credentials, and CI secrets. Invoke it when a setup or cutover needs your hands in a browser.
+- [`statechart`](../skills/statechart/SKILL.md) draws how a system moves between states as a Mermaid statechart from a TLA+ model, with each bug as a numbered path to a state that breaks a rule, or turns an agreed chart into a TLA+ skeleton. Invoke it to show a bug as a path through states, to get a product flow or protocol agreed before it is built, or to audit code against its TLA+ spec. Its scripts install TLC and Java with `mise` on first run.
 
 ## Agents
 
