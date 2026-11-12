@@ -119,6 +119,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/improve-codebase-architecture` | Matt Pocock | `skills/engineering/improve-codebase-architecture/` | verbatim | The report goes to `{TASKDIR}/html/` when a task exists and can render with `html_render`. |
 | `skills/grilling` | Matt Pocock | `skills/productivity/grilling/` | verbatim | Byte-identical. |
 | `skills/wizard` | Matt Pocock | `skills/engineering/wizard/` | verbatim | Frontmatter only, with `template.sh` and `agents/openai.yaml` byte-identical. |
+| `skills/statechart` | pstack | `skills/statechart/` | verbatim | One sentence sends the working folder to `{TASKDIR}/statechart/`; `scripts/` is byte-identical. |
 | *Agents* | | | | |
 | `agents/codebase-locator.md` | HumanLayer | `plugins/rpi/agents/codebase-locator.md` | verbatim | Unchanged since the import, and upstream only reformatted the frontmatter. |
 | `agents/codebase-analyzer.md` | HumanLayer | `plugins/rpi/agents/codebase-analyzer.md` | verbatim | Unchanged since the import, and upstream swapped `LS` for `Bash` in tools. |

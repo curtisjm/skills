@@ -10,7 +10,7 @@ Start with `WORKFLOW.md`. It defines the paths, which skill runs each step, the 
 
 ## Install
 
-Clone to `~/dev/skills` (skills reference `~/dev/skills/WORKFLOW.md` by that path) and run `./install.sh`. It symlinks `skills/*` into `~/.claude/skills` and `~/.agents/skills`, and `agents/*.md` into `~/.claude/agents`, so a `git pull` updates everything. Re-run it after adding a skill. It also reports which of `gh`, `plannotator`, `roborev`, `coderabbit`, `bun`, `jq`, and `rg` are missing. `bin/orch` runs on Bun, so `orchestrate` needs `bun` on PATH.
+Clone to `~/dev/skills` (skills reference `~/dev/skills/WORKFLOW.md` by that path) and run `./install.sh`. It symlinks `skills/*` into `~/.claude/skills` and `~/.agents/skills`, and `agents/*.md` into `~/.claude/agents`, so a `git pull` updates everything. Re-run it after adding a skill. It also reports which of `gh`, `plannotator`, `roborev`, `coderabbit`, `bun`, `jq`, `rg`, and `mise` are missing. `bin/orch` runs on Bun, so `orchestrate` needs `bun` on PATH, and `statechart` uses `mise` to install TLC and Java on first run.
 
 The skills also expect repositories at `~/dev/valency/{REPOBASENAME}`, the tasks repo cloned at `~/dev/valency/tasks`, and the Linear and T3 MCP servers configured in each harness.
 
