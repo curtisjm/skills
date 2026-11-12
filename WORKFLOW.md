@@ -151,6 +151,7 @@ Remaining triggers:
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
 - Before review → the **no-comments** skill (`/no-comments`).
 - Shipping UI or CLI → verify on the real surface via the repo's `verify-<app>` skill when it has one, otherwise by driving the surface directly. For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow `bug-fix` step 1 exception.
+- Building or changing UI → the `better-*` skill that owns each part: `better-accessibility`, `better-layout`, `better-writing`, `better-typography`, `better-colors` and `better-ui`. Building from a Figma file or a design image → `build-design`.
 - Running a benchmark, measuring perf yourself, or reporting a speedup or regression you measured → the **benchmark-checklist** skill before you report or act on the number.
 - Any PR-status request ("babysit this", "get it green", "address the bot comments", and most often "check on PR X" or "anything outstanding on X") → `review-loop`'s outer loop, which owns the request-to-mode mapping. Never triggered by merely opening a PR. Declare its mode before polling.
 - CodeRabbit or Copilot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `skills/review-loop/references/bot-triage.md`.
@@ -199,6 +200,9 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 | `typescript-best-practices`, `show-me-your-work`, `no-comments` | model |
 | `codebase-design`, `domain-modeling` | model |
+| `better-interface`, `better-accessibility`, `better-layout`, `better-writing` | model |
+| `better-typography`, `better-colors`, `better-ui` | model |
+| `build-design`, `teardown` | model |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
 | `setup-worktree` | model, Quick only |
 
@@ -209,6 +213,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `catch-up`, `recall`, `reflect`, `correct`, `eval` | user |
 | `sharpen`, `bro`, `teach`, `show-me`, `in-your-own-words` | user |
 | `worktree-cleanup`, `create-verification-skill`, `maintain-verification-skill` | user |
+| `interface-review`, `explain-interface`, `variant`, `break`, `state-machine`, `afk` | user |
 | `improve-codebase-architecture`, `grilling` | user |
 | `wizard` | user |
 
