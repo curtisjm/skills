@@ -11,7 +11,7 @@ This is the one place roles map to a model family and effort, as the Relay rule 
 | Top | Reflect judgment, divergent, synthesizer | `reflect` | newest Fable (Claude) or Astra (Codex) | `xhigh` |
 | Top | Why synthesizer | `why` | newest Fable (Claude) or Astra (Codex) | `xhigh` |
 | Top | Judgment and prose | `auto-task` | newest Fable (Claude) or Astra (Codex) | `xhigh` |
-| General | Item thread | `implement-item` | newest Opus (Claude) or Sol (Codex), the item-thread model | `high` |
+| General | Item subagent | `implement-item` | newest Opus (Claude) or Sol (Codex), the item-thread model | `high` |
 | General | Code playbook delegates | `feature`, `refactoring`, `bug-fix`, `perf-issue`, `hillclimb`, `auto-task` | item-thread model | `high` |
 | General | Arena runners | `arena` | item-thread model, one runner per provider family that can run child tasks | `high` |
 | General | Architect runners | `architect` | item-thread model, one runner per provider family that can run child tasks | `high` |

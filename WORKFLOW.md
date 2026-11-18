@@ -2,7 +2,7 @@
 
 How a task moves from an idea to merged, promoted, validated code using the skills in this repo. Skills read this file for shared vocabulary; humans read it to know which skill to invoke next. The diagram at `docs/workflow-map.html` draws the same thing.
 
-T3 Code is the harness that runs the threads. A thread may run Claude or Codex; the skills do not care which. Skills refer to T3 tools by name (`t3_thread_launch`, `delegate_task`, `t3_thread_send`).
+T3 Code is the harness that runs the threads. A thread may run Claude or Codex; the skills do not care which. Skills refer to T3 tools by name (`t3_thread_launch`, `delegate_task`, `watch_pull_request`).
 
 ## Placeholders
 
@@ -29,7 +29,7 @@ Every entry skill (`triage`, `task-start`, `quick-task`, `auto-task`) accepts a 
 
 ### Relay
 
-Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes `title`, `message`, and `runtimeMode: full-access`; project and model are still inherited (`workspaceStrategy` is omitted too: planning steps run in the task project's root, `{TASKDIR}`). Planning threads inherit the launcher's model. The orchestrator runs on the newest Fable model (Claude) or Astra model (Codex) at medium reasoning; item threads run on the newest Opus model (Claude) or Sol model (Codex) at high reasoning, always on the launcher's provider. The launcher finds the newest version of the family by calling `orchestrator_capabilities` and passes it as `modelSelection` with the reasoning option set (`effort` on Claude, `reasoningEffort` on Codex); model ids are never hardcoded in a skill. The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. Thread titles follow one convention: `Label: {TASKSLUG}` for steps (`PRD: {TASKSLUG}`, `Plan: {TASKSLUG}`), `PR X.Y: title` for items. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again. Fact-gathering sub-work (explorers, investigators, transcript readers, the `agents/` roles) runs on the light model of the family (newest Sonnet on Claude, newest Luna on Codex) at `medium`; `~/dev/skills/models.md` lists every role.
+Each step runs in its own top-level thread. When a step passes its gate it launches the next step's thread with `t3_thread_launch` and ends. The launch passes `title`, `message`, and `runtimeMode: full-access`; project and model are still inherited (`workspaceStrategy` is omitted too: planning steps run in the task project's root, `{TASKDIR}`). Planning threads inherit the launcher's model. The orchestrator runs on the newest Fable model (Claude) or Astra model (Codex) at medium reasoning; item subagents run on the newest Opus model (Claude) or Sol model (Codex) at high reasoning, always on the launcher's provider; this is the item-thread model that other skills name. The launcher finds the newest version of the family by calling `orchestrator_capabilities` and passes it as `modelSelection` with the reasoning option set (`effort` on Claude, `reasoningEffort` on Codex); model ids are never hardcoded in a skill. The launch message names only the skill and `{TASKDIR}`; the skill reads `task.md` for everything else. Any step can also be started by hand the same way. Thread titles follow one convention: `Label: {TASKSLUG}` for steps (`PRD: {TASKSLUG}`, `Plan: {TASKSLUG}`), `PR X.Y: title` for item subagents. There are no `iterate-*` skills: a `create-*` skill whose document already exists revises it from the user's feedback instead of starting over, and gates it again. Fact-gathering sub-work (explorers, investigators, transcript readers, the `agents/` roles) runs on the light model of the family (newest Sonnet on Claude, newest Luna on Codex) at `medium`; `~/dev/skills/models.md` lists every role.
 
 ## `task.md`
 
@@ -44,7 +44,6 @@ repos: [valency-mcp-server, valency-hub]   # initial guess; create-research and 
 source: https://linear.app/.../CUR-123     # entry reference, any tracker
 linear_project: Hub source toggles         # Standard/Long only; Title Case name, not the slug
 linear_issue: CUR-123                      # Quick only, when source is a Linear issue; else absent
-orchestrator_thread: 4016b326-…             # written by `implement`; where item threads report
 created: 2026-10-04
 ---
 ```
@@ -86,16 +85,16 @@ The plan is read by the orchestrator, so it carries a table:
 
 After plan approval `create-plan` runs `publish` unattended: it creates the issue tree below from the plan table and moves the project to Implementing, then `create-plan` launches the orchestrator. Documents are already mirrored on the project by then (see Syncing to Linear).
 
-The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It launches one top-level thread per plan item with `t3_thread_launch` (`runtimeMode: full-access`), each with its own worktree:
+The **orchestrator** is one thread for everything after Publish, implementation and rollout alike. It spawns one `delegate_task` child per plan item, `mode: async`, each working in its own worktree:
 
-- thread title `PR 1.2: hub settings UI` (`PROMO 2.1: …` / `TEST 2.2: …` for ops and test items)
-- the orchestrator first runs `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-1-2 -b {TASKSLUG}/1-2-hub-settings-ui <base>`, base `origin/main` or the named parent PR branch when stacking (the task project is not the code repo, so T3's `worktree` strategy cannot create it)
-- `workspaceStrategy: {type: existing_worktree, worktreePath, branch}` binds the thread to that checkout (verified: a task project accepts a worktree of another repo)
-- T3 runs no setup script for it; the item thread runs the repo's own setup first. Nothing is copied between worktrees (secrets come from AWS)
+- child title `PR 1.2: hub settings UI` (`PROMO 2.1: …` / `TEST 2.2: …` for ops and test items)
+- the orchestrator first runs `git -C ~/dev/valency/{REPOBASENAME} worktree add {TASKDIR}/repos/{REPOBASENAME}-1-2 -b {TASKSLUG}/1-2-hub-settings-ui <base>`, base `origin/main` or the named parent PR branch when stacking (the task project is not the code repo, so `delegate_task`'s `worktree` isolation cannot create it)
+- the child shares the task checkout and its task names the worktree path, where it runs every repo command
+- the child runs the repo's own setup first. Nothing is copied between worktrees (secrets come from AWS)
 
-All items of a phase launch together; there is no concurrency cap.
+All items of a phase spawn together; there is no concurrency cap.
 
-An **item thread** (`implement-item`): read its plan row and sub-issue → implement → inner loop (roborev refine locally until clean) → `describe-pr`, push, open the PR → outer loop (address CodeRabbit/Copilot comments, re-run the inner loop after each fix round, until the bots are quiet and CI is green) → write `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) → tell the orchestrator with `t3_thread_send`.
+An **item subagent** (`implement-item`): read its plan row and sub-issue → implement → inner loop (roborev refine locally until clean) → `describe-pr`, push, open the PR → return `PR open`. A child cannot wait on bots, so the orchestrator links and watches the PR. Each time the bots have reviewed and CI has finished, it spawns a fresh child for one outer-loop round (address CodeRabbit/Copilot comments, re-run the inner loop after each fix, push), at most five rounds. The round whose stop check holds writes `{TASKDIR}/reports/<id>.md` (divergences from the plan, rulings, what later phases must know) and returns `done`. A blocked child returns a NEEDS FROM USER block, which the orchestrator relays.
 
 The orchestrator is the only writer of `plan.md`. After a phase it runs `revise-plan`: read the phase's reports, apply what they change to `plan.md` and the next phase's sub-issue bodies, then dispatch the next phase — on its own if the plan stacks, otherwise when the user says go after merging.
 
@@ -173,7 +172,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 |---|---|
 | `create-research-questions`, `create-research`, `create-design-discussion`, `create-prd`, `create-tdd`, `create-plan` | user |
 | `publish` | model, from `create-plan` |
-| `implement` (orchestrator), `implement-item` (item thread head) | user |
+| `implement` (orchestrator), `implement-item` (item subagent head) | user |
 | `revise-plan` (orchestrator, between phases) | model |
 | `close-task`, `handoff` | user |
 
