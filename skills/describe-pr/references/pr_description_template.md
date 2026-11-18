@@ -52,7 +52,15 @@
 
 ## Evidence
 
-{Concrete before/after proof that the change does what the body says. For UI changes, a screenshot of each changed screen or state, before/after when the shape already existed. For behaviour changes, the specific observation: a named test that failed before and passes now with the relevant assertion or output excerpt, a command and its before/after output, a log line that no longer appears, a measured number. Omit this section when there is nothing specific to show. Never write "all tests pass" or "x/x passing"; that is not evidence.}
+{Concrete before/after proof that the change does what the body says. For UI changes, a screenshot of each changed screen or state, framed wide enough to show the surrounding UI rather than cropped to one component, with arrows, circles or labels marking what changed. When the shape already existed, a table with `Before` and `After` columns and one row per screen or state:
+
+```markdown
+| Screen or state | Before | After |
+|---|---|---|
+| {name} | ![{alt}](./{before}.png) | ![{alt}](./{after}.png) |
+```
+
+For behaviour changes, the specific observation: a named test that failed before and passes now with the relevant assertion or output excerpt, a command and its before/after output, a log line that no longer appears, a measured number. Omit this section when there is nothing specific to show. Never write "all tests pass" or "x/x passing"; that is not evidence.}
 
 ## Merge risk
 
