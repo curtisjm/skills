@@ -20,5 +20,6 @@ The skills also expect repositories at `~/dev/valency/{REPOBASENAME}`, the tasks
 - `models.md` maps every role to a model tier, family, and effort.
 - `skills/<name>/SKILL.md` holds one skill per directory, with `references/` for templates, prompts, and final-answer text.
 - `agents/*.md` defines the sub-agents the skills dispatch via `delegate_task`.
+- `worker.md` holds the rules every started agent reads first. The first line of each agent's brief points at it.
 - `bin/` holds the scripts the steps run (`gate`, `check-plan`, `check-skill`, `worktree-audit`, and `orch`, whose source is in `bin/orch-src/`).
 - `docs/` holds the skill catalog (`skills.md`), the workflow map, and the item-thread diagram (standalone HTML), which predates item subagents.

@@ -26,7 +26,7 @@ For every item of the phase, together, with no concurrency cap:
 3. **Spawn** one `delegate_task` child, `mode: async`, default isolation:
    - title `PR X.Y: [title]` for `pr`, `PROMO X.Y: [title]` for `ops`, `TEST X.Y: [title]` for `test`
    - `target`: the newest Opus model when this thread runs on Claude, the newest Sol model when it runs on Codex, with effort `high` (see Relay in `~/dev/skills/WORKFLOW.md`)
-   - task: `Read ~/dev/skills/skills/implement-item/SKILL.md FULLY and run it for {TASKDIR} item {id}. Your worktree is {worktree path} on branch {branch}; run every repo command there. You may start delegate_task children wherever that skill or a skill it calls says to spawn.` Drop the worktree sentence for an item with no repo.
+   - task: `Read ~/dev/skills/worker.md before anything else. Read ~/dev/skills/skills/implement-item/SKILL.md FULLY and run it for {TASKDIR} item {id}. Your worktree is {worktree path} on branch {branch}; run every repo command there. You may start delegate_task children wherever that skill or a skill it calls says to spawn.` Drop the worktree sentence for an item with no repo.
 4. **Linear**: sub-issue → In Progress; phase issue → In Progress at its first item.
 
 Then end the turn. Each child's completion wakes this thread.
@@ -40,7 +40,7 @@ Its last line says which of these happened:
 - **`done`**: the report is written. For a PR item, `unwatch_pull_request`. Read `{TASKDIR}/reports/{id}.md`. Sub-issue → In Review (`pr`, `ops`: a PR is open and waiting on the user) or Done (`test`, when the checks passed).
 - **`blocked`**: relay its NEEDS FROM USER block to the user as numbered steps and stop there; the sub-issue stays In Progress. The user's answer goes to a new child for the item, with the answer in its task.
 
-**When a watched PR wakes this thread**, check that a review newer than the last push exists from each bot the repo has enabled and that CI has finished (`review-loop` outer loop, step 1, names the logins). If not, end the turn. If so, spawn a new child for the item, on the same model and title with ` round {n}` appended: `Read ~/dev/skills/skills/implement-item/SKILL.md FULLY and run its Outer-loop round for {TASKDIR} item {id}, PR {url}, round {n}. Your worktree is {worktree path} on branch {branch}.` After the fifth round, the next child writes the report with what is still open, as `review-loop` caps the loop at five rounds.
+**When a watched PR wakes this thread**, check that a review newer than the last push exists from each bot the repo has enabled and that CI has finished (`review-loop` outer loop, step 1, names the logins). If not, end the turn. If so, spawn a new child for the item, on the same model and title with ` round {n}` appended: `Read ~/dev/skills/worker.md before anything else. Read ~/dev/skills/skills/implement-item/SKILL.md FULLY and run its Outer-loop round for {TASKDIR} item {id}, PR {url}, round {n}. Your worktree is {worktree path} on branch {branch}.` After the fifth round, the next child writes the report with what is still open, as `review-loop` caps the loop at five rounds.
 
 When every sub-issue of the phase is In Review or Done, the phase has converged: run `revise-plan` (it reads the phase's reports and updates `plan.md`, `plan-changelog.md`, and the next phase's sub-issue bodies; a change beyond the approved outcome becomes a proposal to the user and a pause; their ruling is applied by running `revise-plan` again). Then:
 
