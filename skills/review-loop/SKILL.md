@@ -18,6 +18,8 @@ For a contested item, or when the user asks, run `interrogate` (`~/dev/skills/sk
 
 Before the PR opens, run `no-comments` (`~/dev/skills/skills/no-comments/SKILL.md`) over the diff.
 
+When the diff changes UI, run `interface-review` (`~/dev/skills/skills/interface-review/SKILL.md`) over the branch before the PR opens. Fix what keeps its verdict at `Block`. Fix its `MEDIUM` and `LOW` findings only where Proportionality says the PR warrants it.
+
 ## Proportionality
 
 Match review depth to the PR. Lockfile-only and pin PRs (ops items that bump a service pin in `valency-foundation`, lockfile-only changes) skip the inner loop entirely; CI green and zero unresolved bot threads is the gate. For every other PR, judge how many inner-loop passes the size and risk of the change warrant. A one-line fix does not need five passes.

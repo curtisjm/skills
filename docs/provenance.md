@@ -27,6 +27,14 @@ The architecture skills were imported on 2026-10-25. Paths in the mapping table 
 
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
+### Jakub Krehel
+
+The repository is https://github.com/jakubkrehel/skills, under the MIT license. The pinned commit is `8b254eb75dadf3615a6abce87aed28e1b6e4d77c`, from 2026-11-10. The interface skills were imported on 2026-11-12. Paths in the mapping table are relative to `skills/` in that repo.
+
+Upstream's `AGENTS.md` keeps two pairs of text identical: `variant/picker.md` with `state-machine/switcher.md`, and the throwaway-route paragraphs in `break` and `state-machine`. Change each pair together. Each user-invoked skill sets `disable-model-invocation: true` and `policy.allow_implicit_invocation: false` in `agents/openai.yaml`, and the two must move together.
+
+To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
+
 ### Other
 
 - `review-loop` grew from a local `pr-loop` skill that is not in any upstream.
@@ -98,8 +106,17 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/no-comments` | pstack | `skills/no-comments/SKILL.md` | verbatim | Spawns `comment-sicko` with `delegate_task`. |
 | `skills/codebase-design` | Matt Pocock | `skills/engineering/codebase-design/` | verbatim | Byte-identical. |
 | `skills/domain-modeling` | Matt Pocock | `skills/engineering/domain-modeling/` | verbatim | Byte-identical. |
+| `skills/better-interface` | Jakub Krehel | `better-interface/` | verbatim | Byte-identical. |
+| `skills/better-accessibility` | Jakub Krehel | `better-accessibility/` | verbatim | Byte-identical. |
+| `skills/better-layout` | Jakub Krehel | `better-layout/` | verbatim | Byte-identical. |
+| `skills/better-writing` | Jakub Krehel | `better-writing/` | verbatim | Byte-identical. |
+| `skills/better-typography` | Jakub Krehel | `better-typography/` | verbatim | Byte-identical. |
+| `skills/better-colors` | Jakub Krehel | `better-colors/` | verbatim | Byte-identical. |
+| `skills/better-ui` | Jakub Krehel | `better-ui/` | verbatim | Byte-identical. |
+| `skills/build-design` | Jakub Krehel | `build-design/` | verbatim | Byte-identical. |
+| `skills/teardown` | Jakub Krehel | `teardown/` | verbatim | Byte-identical. |
 | `skills/describe-pr` | HumanLayer | `plugins/visual-pr/skills/visual-pr/SKILL.md`, `plugins/visual-pr/skills/visual-pr/references/` | modified | From riptide `describe-pr`, with the walkthrough removed and screenshots, merge risk, and evidence added. |
-| `skills/review-loop` | pstack, Other | `skills/poteto-mode/playbooks/babysit.md`, `skills/poteto-mode/references/bugbot-triage.md` | own | Grew from local `pr-loop`, later adding babysit's steps and a renamed `bot-triage.md`. |
+| `skills/review-loop` | pstack, Other | `skills/poteto-mode/playbooks/babysit.md`, `skills/poteto-mode/references/bugbot-triage.md` | own | Grew from local `pr-loop`, later adding babysit's steps, a renamed `bot-triage.md`, and the `interface-review` step. |
 | `skills/ci-commit` | HumanLayer | none | modified | From riptide `ci-commit`, which upstream dropped. |
 | `skills/setup-worktree` | HumanLayer | none | modified | From riptide `setup-worktree`, trimmed hard and dropped upstream. |
 | *User tools* | | | | |
@@ -116,6 +133,12 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/worktree-cleanup` | pstack | `skills/poteto-mode/playbooks/worktree-cleanup.md` | verbatim | Playbook promoted to a skill without the macOS and Cursor items. |
 | `skills/create-verification-skill` | pstack | `skills/create-verification-skill/SKILL.md`, `references/feature-map-example/` | modified | Skills go to `.claude/skills` and a cadence runs as a T3 scheduled task. |
 | `skills/maintain-verification-skill` | pstack | `skills/maintain-verification-skill/SKILL.md` | verbatim | `.cursor/skills` maps to `.claude/skills`. |
+| `skills/interface-review` | Jakub Krehel | `interface-review/` | verbatim | Byte-identical. `review-loop` runs it by path before a PR that changes UI opens. |
+| `skills/explain-interface` | Jakub Krehel | `explain-interface/` | verbatim | One paragraph maps the scriptable browser to T3 `preview_*` tools. |
+| `skills/variant` | Jakub Krehel | `variant/` | verbatim | Byte-identical. |
+| `skills/break` | Jakub Krehel | `break/` | verbatim | Byte-identical. |
+| `skills/state-machine` | Jakub Krehel | `state-machine/` | verbatim | Byte-identical. |
+| `skills/afk` | Jakub Krehel | `afk/` | verbatim | One sentence forbids merging and deploying, since agents never merge. |
 | `skills/improve-codebase-architecture` | Matt Pocock | `skills/engineering/improve-codebase-architecture/` | verbatim | The report goes to `{TASKDIR}/html/` when a task exists and can render with `html_render`. |
 | `skills/grilling` | Matt Pocock | `skills/productivity/grilling/` | verbatim | Byte-identical. |
 | `skills/wizard` | Matt Pocock | `skills/engineering/wizard/` | verbatim | Frontmatter only, with `template.sh` and `agents/openai.yaml` byte-identical. |
