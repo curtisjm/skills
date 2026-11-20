@@ -16,6 +16,8 @@ To check for drift, diff the upstream path at the pinned SHA against upstream HE
 
 The repository is https://github.com/cursor/plugins/tree/main/pstack. The pinned commit is `9580c23696ac8d7abed0c166f2f9918800afb819`, from 2026-10-23, at plugin version 0.15.32. The skills were imported on 2026-10-24 and 2026-10-25. Paths in the mapping are relative to `pstack/` in that repo.
 
+Some rows were re-synced to `aaeb0ea3a0584995aa8f55ce44c6c5259414b896` (2026-11-19, plugin version 0.15.46) on 2026-11-20, and their Notes say so. The pin stays at `9580c23` because most playbook-derived skills have not taken that commit's edits. For a re-synced row, diff from `aaeb0ea`.
+
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
 ### Matt Pocock
@@ -73,7 +75,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/runtime-forensics` | pstack | `skills/poteto-mode/playbooks/runtime-forensics.md` | verbatim | Playbook promoted to a skill. |
 | `skills/trace-forensics` | pstack | `skills/poteto-mode/playbooks/trace-forensics.md` | verbatim | Playbook promoted to a skill. |
 | `skills/visual-parity` | pstack | `skills/poteto-mode/playbooks/visual-parity.md` | verbatim | Playbook promoted to a skill. |
-| `skills/autonomous-run` | pstack | `skills/poteto-mode/playbooks/autonomous-run.md` | verbatim | Playbook promoted to a skill. |
+| `skills/autonomous-run` | pstack | `skills/poteto-mode/playbooks/autonomous-run.md` | verbatim | Playbook promoted to a skill. Step 4's "that support the goal" re-synced from `aaeb0ea`. |
 | `skills/figure-it-out` | pstack | `skills/figure-it-out/SKILL.md` | verbatim | Paths map to `principles` and `{TASKDIR}`. |
 | `skills/orchestrate` | pstack | `skills/poteto-mode/playbooks/orchestrate.md` | modified | Agents never merge, so merges are not units. |
 | `skills/autopilot-full` | pstack | `skills/poteto-mode/playbooks/autopilot-full.md` | modified | Owners stop at merge-ready and `no-comments` replaces `deslop`. |
@@ -90,9 +92,9 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/tdd` | pstack | `skills/tdd/SKILL.md` | verbatim | Frontmatter only. |
 | `skills/blast-radius` | pstack | `skills/blast-radius/SKILL.md` | verbatim | Frontmatter only. |
 | `skills/benchmark-checklist` | pstack | `skills/benchmark-checklist/SKILL.md` | modified | One added bullet requires production evidence for deployed-service latency. |
-| `skills/principles` | pstack | `skills/principle-*/SKILL.md`, `skills/poteto-mode/SKILL.md` (Principles), `skills/architect/references/design-red-flags.md` | modified | A new `SKILL.md` frames the verbatim index and leaves. |
-| `skills/unslop` | pstack | `skills/unslop/SKILL.md` | verbatim | Frontmatter only. |
-| `skills/technical-writing` | pstack | `skills/technical-writing/SKILL.md` | verbatim | Frontmatter only. |
+| `skills/principles` | pstack | `skills/principle-*/SKILL.md`, `skills/poteto-mode/SKILL.md` (Principles), `skills/architect/references/design-red-flags.md` | modified | A new `SKILL.md` frames the verbatim index and leaves. Leaves and the Explain the Number index entry re-synced to `aaeb0ea`; `design-red-flags.md` stays from the pin. |
+| `skills/unslop` | pstack | `skills/unslop/SKILL.md` | verbatim | Frontmatter only. Re-synced to `aaeb0ea`. |
+| `skills/technical-writing` | pstack | `skills/technical-writing/SKILL.md` | verbatim | Frontmatter only. Re-synced to `aaeb0ea`. |
 | `skills/typescript-best-practices` | pstack | `skills/typescript-best-practices/SKILL.md`, `references/patterns.md` | verbatim | Principle names map to `principles/references/` paths. |
 | `skills/show-me-your-work` | pstack | `skills/show-me-your-work/SKILL.md`, `scripts/log.sh`, `references/decision-log-template.tsv` | modified | The log lives at `{TASKDIR}/decisions.tsv` and never in a code repo. |
 | `skills/no-comments` | pstack | `skills/no-comments/SKILL.md` | verbatim | Spawns `comment-sicko` with `delegate_task`. |
@@ -108,7 +110,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/reflect` | pstack | `skills/reflect/SKILL.md`, `skills/reflect/references/` | modified | The apply step opens a PR here and the backlog goes to Linear Triage. |
 | `skills/correct` | pstack | `skills/correct/SKILL.md` | modified | Mistakes come from review bot threads and fixes ship through `describe-pr` and `review-loop`. |
 | `skills/eval` | pstack | `skills/poteto-mode/playbooks/eval.md` | modified | One added sentence scopes it to behavior-changing PRs to this repo. |
-| `skills/sharpen` | pstack | `skills/sharpen/SKILL.md` | verbatim | Byte-identical. |
+| `skills/sharpen` | pstack | `skills/sharpen/SKILL.md` | verbatim | Byte-identical to `aaeb0ea`. |
 | `skills/bro` | pstack | `skills/bro/SKILL.md` | verbatim | Byte-identical. |
 | `skills/teach` | pstack | `skills/teach/SKILL.md` | verbatim | Byte-identical. |
 | `skills/show-me` | HumanLayer | `plugins/show-me/skills/show-me/SKILL.md` | verbatim | `open` maps to a `{TASKDIR}/html/` link or `html_render` in T3. |
@@ -119,7 +121,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/improve-codebase-architecture` | Matt Pocock | `skills/engineering/improve-codebase-architecture/` | verbatim | The report goes to `{TASKDIR}/html/` when a task exists and can render with `html_render`. |
 | `skills/grilling` | Matt Pocock | `skills/productivity/grilling/` | verbatim | Byte-identical. |
 | `skills/wizard` | Matt Pocock | `skills/engineering/wizard/` | verbatim | Frontmatter only, with `template.sh` and `agents/openai.yaml` byte-identical. |
-| `skills/statechart` | pstack | `skills/statechart/` | verbatim | One sentence sends the working folder to `{TASKDIR}/statechart/`; `scripts/` is byte-identical. |
+| `skills/statechart` | pstack | `skills/statechart/` | verbatim | One sentence sends the working folder to `{TASKDIR}/statechart/`; `scripts/` and `references/` are byte-identical to `aaeb0ea`. |
 | *Agents* | | | | |
 | `agents/codebase-locator.md` | HumanLayer | `plugins/rpi/agents/codebase-locator.md` | verbatim | Unchanged since the import, and upstream only reformatted the frontmatter. |
 | `agents/codebase-analyzer.md` | HumanLayer | `plugins/rpi/agents/codebase-analyzer.md` | verbatim | Unchanged since the import, and upstream swapped `LS` for `Bash` in tools. |

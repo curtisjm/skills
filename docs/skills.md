@@ -85,7 +85,7 @@ Reach for these by name when you want something for yourself rather than the tas
 - [`reflect`](../skills/reflect/SKILL.md) runs three reviewers over the transcript and routes each durable learning to an edit on an existing skill. Invoke it after a long task lands.
 - [`correct`](../skills/correct/SKILL.md) finds the mistakes agents keep repeating in a repo and makes each one impossible, preferring architecture, types, and lints over docs. Invoke it when you keep correcting agents for the same thing.
 - [`eval`](../skills/eval/SKILL.md) tests how a skill, structure, or prompt change affects agent behavior with blinded parallel candidates and a judge. Run it before opening a PR to this repo that changes what an agent does, per Invoking skills in `WORKFLOW.md`.
-- [`sharpen`](../skills/sharpen/SKILL.md) makes a task deeper rather than bigger, then rewrites the prompt. Invoke it on a prompt before you send it.
+- [`sharpen`](../skills/sharpen/SKILL.md) makes a task deeper rather than bigger, then rewrites the prompt so the agent prototypes any choice an experiment can settle. Invoke it on a prompt before you send it.
 - [`bro`](../skills/bro/SKILL.md) restates the last message in plain language with no jargon. Invoke it when a reply is too dense.
 - [`teach`](../skills/teach/SKILL.md) runs `how` and `why` and weaves what they find into one plain explanation at your pace. Invoke it when you want to understand a change or subsystem rather than change it.
 - [`show-me`](../skills/show-me/SKILL.md) explains the current topic with the smallest visual that makes the point, from pseudocode and call trees to Mermaid, diffs, or one HTML page. Invoke it when prose is not landing and you want to see the shape.
