@@ -16,6 +16,8 @@ To check for drift, diff the upstream path at the pinned SHA against upstream HE
 
 The repository is https://github.com/cursor/plugins/tree/main/pstack. The pinned commit is `9580c23696ac8d7abed0c166f2f9918800afb819`, from 2026-10-23, at plugin version 0.15.32. The skills were imported on 2026-10-24 and 2026-10-25. Paths in the mapping are relative to `pstack/` in that repo.
 
+`orchestrate`, `bin/orch` and `bin/orch-src/` were removed on 2026-11-20. Upstream deleted the `orch` scripts in cursor/plugins#1043 and the Orchestrate playbook in cursor/plugins#1249, and routes program-scale work to `figure-it-out`.
+
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
 ### Matt Pocock
@@ -75,7 +77,6 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/visual-parity` | pstack | `skills/poteto-mode/playbooks/visual-parity.md` | verbatim | Playbook promoted to a skill. |
 | `skills/autonomous-run` | pstack | `skills/poteto-mode/playbooks/autonomous-run.md` | verbatim | Playbook promoted to a skill. |
 | `skills/figure-it-out` | pstack | `skills/figure-it-out/SKILL.md` | verbatim | Paths map to `principles` and `{TASKDIR}`. |
-| `skills/orchestrate` | pstack | `skills/poteto-mode/playbooks/orchestrate.md` | modified | Agents never merge, so merges are not units. |
 | `skills/autopilot-full` | pstack | `skills/poteto-mode/playbooks/autopilot-full.md` | modified | Owners stop at merge-ready and `no-comments` replaces `deslop`. |
 | `skills/autopilot-stack` | pstack | `skills/poteto-mode/playbooks/autopilot-stack.md` | modified | Same merge-ready rule as `autopilot-full`. |
 | `skills/session-pickup` | pstack | `skills/poteto-mode/playbooks/session-pickup.md` | verbatim | Playbook promoted to a skill with trails under `{TASKDIR}`. |
@@ -132,8 +133,6 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `bin/check-plan.test.mjs` | pstack | `skills/poteto-mode/scripts/check-plan.test.ts` | modified | Tests rewritten with the port. |
 | `bin/check-skill` | pstack | `skills/poteto-mode/playbooks/authoring-a-skill.md` | borrowed | Written from step 2 of that playbook. |
 | `bin/worktree-audit` | pstack | `skills/poteto-mode/scripts/worktree-audit.sh` | modified | Transcript lookup scans `~/.claude/projects` and `~/.codex/sessions`. |
-| `bin/orch` | pstack | `skills/poteto-mode/scripts/orch/orch.ts` | verbatim | Symlink to `orch-src/orch/orch.ts`. |
-| `bin/orch-src/` | pstack | `skills/poteto-mode/scripts/` (`bootstrap.ts`, `package.json`, `bun.lock`, `orch/`) | verbatim | `package.json` drops the typecheck script and the watch-pr and check-plan tests. |
 | *Top-level files* | | | | |
 | `WORKFLOW.md` | pstack, HumanLayer | pstack `skills/poteto-mode/SKILL.md` (Non-negotiables); nearest HumanLayer `plugins/rpi/skills/rpi/references/workflow.md` | own | Written here, with a modified copy of pstack's Non-negotiables. |
 | `models.md` | pstack | `skills/setup-pstack/SKILL.md` | borrowed | Its role list seeded the rows and no text was copied. |

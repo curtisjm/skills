@@ -24,7 +24,7 @@ This thread runs in the task's T3 project, rooted at `{TASKDIR}`; `{TASKSLUG}` i
 
 Open a todolist whose first items are the matched playbook's steps, copied in verbatim, before any task-specific todos. A step you choose not to do stays in the list with a one-line `skip: <reason>`. Match the task to a playbook below and open the skill at `~/dev/skills/skills/<name>/SKILL.md`. Copy its steps in verbatim.
 
-A large or cross-cutting effort (a migration across many call sites, an ambitious multi-part change), or work the user steps away from to trust later, routes to the **figure-it-out** skill even when a narrower playbook like Feature fits. Use **figure-it-out** whenever no bundled playbook fits. It designs a bespoke, rigorous playbook for the task. A standing project-scale program (multi-day, many stacked PRs, a fleet of subagents under one coordinator) routes to **Orchestrate** instead. figure-it-out designs one bespoke run, orchestrate runs the program.
+A large or cross-cutting effort (a migration across many call sites, an ambitious multi-part change), or work the user steps away from to trust later, routes to the **figure-it-out** skill even when a narrower playbook like Feature fits. Use **figure-it-out** whenever no bundled playbook fits. It designs a bespoke, rigorous playbook for the task.
 
 - **Investigation (`investigation`).** Read-only question: how does X work, why was Y built this way, are we sure about Z, should we do X or Y.
 - **Bug fix (`bug-fix`).** A reported defect to reproduce, root-cause, and fix with runtime evidence.
@@ -38,7 +38,6 @@ A large or cross-cutting effort (a migration across many call sites, an ambitiou
 - **Visual parity (`visual-parity`).** Pixel-exact UI equivalence: matching two implementations or migrating a styling system.
 - **Babysit (`review-loop`'s outer loop).** Driving a PR or a stack to merge-ready: conflicts, review threads, CI.
 - **Autonomous run (`autonomous-run`).** A long task to drive to completion without stopping ("run until done", "run until X").
-- **Orchestrate (`orchestrate`).** A standing project handed to one coordinator chat: multi-day, many stacked PRs, dozens to hundreds of subagents, minimal human turns ("run this whole project", "own this migration until it lands"). Distinct from Autonomous run, which drives one task to a predicate. Work one agent could finish inside the session's budget routes there, not here, however program-shaped the phrasing sounds.
 - **Autopilot-full (`autopilot-full`).** A queue of independent PRs run to merge-ready with full autonomy. One owner per PR carries build through merge-ready, and the root swarm-verifies each PR before its owner reports it ("autopilot this queue", "full autopilot", one-owner-per-PR programs).
 - **Autopilot-stack (`autopilot-stack`).** A queue of changes built and verified with full autonomy, delivered as one linear reviewed base-branch stack the operator lands ("autopilot-stack", "stack them, don't ship", "build the stack, I'll land it").
 - **Session pickup (`session-pickup`).** Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.

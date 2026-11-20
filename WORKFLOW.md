@@ -184,7 +184,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `perf-issue`, `hillclimb` | user |
 | `investigation`, `runtime-forensics`, `trace-forensics` | user |
 | `prototype`, `visual-parity` | user |
-| `autonomous-run`, `figure-it-out`, `orchestrate` | user |
+| `autonomous-run`, `figure-it-out` | user |
 | `autopilot-full`, `autopilot-stack` | user |
 | `session-pickup`, `pause-safely` | user |
 
