@@ -47,4 +47,4 @@ After the stop check holds, sweep the run's triage decisions once. Offer any tea
 
 ## Report
 
-End with: the PR as a link (`[repo#n](url)`), rounds run, what was rejected and why, and anything still open if a limit was hit. The caller (the item thread or Quick thread) writes the task report; this skill only returns facts.
+End with: the PR as a link (`[repo#n](url)`), rounds run, what was rejected and why, and anything still open if a limit was hit. The caller (the item subagent or Quick thread) writes the task report; this skill only returns facts.
