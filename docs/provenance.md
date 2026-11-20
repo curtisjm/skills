@@ -25,6 +25,8 @@ The repository is https://github.com/mattpocock/skills. The pinned commit is `5b
 The architecture skills were imported on 2026-10-25. Paths in the mapping table are relative to the repo root.
 `handoff` was copied from here on 2026-10-05 before the source was recorded. On 2026-10-25 our copy was diffed against the pinned commit; the only upstream change since the copy was the "suggested skills" sentence, which was carried over the same day, so the pin is a clean baseline. Paths in the mapping table are relative to the repo root.
 
+`writing-for-agents` was imported on 2026-11-20 from `abeeaf95660ba9e8b7c753eb38f441ca707a8823`, which is newer than the pin. Several skills above changed upstream after the pin, so moving the pin would make their verbatim rows untrue until they are re-synced. Diff `writing-for-agents` from `abeeaf9`, and the other Matt Pocock skills from the pin.
+
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
 ### Other
@@ -93,6 +95,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/principles` | pstack | `skills/principle-*/SKILL.md`, `skills/poteto-mode/SKILL.md` (Principles), `skills/architect/references/design-red-flags.md` | modified | A new `SKILL.md` frames the verbatim index and leaves. |
 | `skills/unslop` | pstack | `skills/unslop/SKILL.md` | verbatim | Frontmatter only. |
 | `skills/technical-writing` | pstack | `skills/technical-writing/SKILL.md` | verbatim | Frontmatter only. |
+| `skills/writing-for-agents` | Matt Pocock | `skills/productivity/writing-for-agents/` (at `abeeaf9`) | verbatim | Byte-identical, `agents/openai.yaml` included. |
 | `skills/typescript-best-practices` | pstack | `skills/typescript-best-practices/SKILL.md`, `references/patterns.md` | verbatim | Principle names map to `principles/references/` paths. |
 | `skills/show-me-your-work` | pstack | `skills/show-me-your-work/SKILL.md`, `scripts/log.sh`, `references/decision-log-template.tsv` | modified | The log lives at `{TASKDIR}/decisions.tsv` and never in a code repo. |
 | `skills/no-comments` | pstack | `skills/no-comments/SKILL.md` | verbatim | Spawns `comment-sicko` with `delegate_task`. |

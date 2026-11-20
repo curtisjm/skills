@@ -148,6 +148,7 @@ Remaining triggers:
 - Nontrivial multi-step → write the throughput checkpoint (`feature` step 3).
 - Any prose surface, your reply to the user included → the **unslop** skill.
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
+- Writing or editing a skill, an agent definition in `agents/`, `AGENTS.md`, or `CLAUDE.md` → the **writing-for-agents** skill.
 - Before review → the **no-comments** skill (`/no-comments`).
 - Shipping UI or CLI → verify on the real surface via the repo's `verify-<app>` skill when it has one, otherwise by driving the surface directly. For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow `bug-fix` step 1 exception.
 - Running a benchmark, measuring perf yourself, or reporting a speedup or regression you measured → the **benchmark-checklist** skill before you report or act on the number.
@@ -195,7 +196,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `how`, `why` | model |
 | `arena`, `swarm` | model |
 | `architect`, `interrogate` | user |
-| `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
+| `unslop`, `technical-writing`, `writing-for-agents`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
 | `typescript-best-practices`, `show-me-your-work`, `no-comments` | model |
 | `codebase-design`, `domain-modeling` | model |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
