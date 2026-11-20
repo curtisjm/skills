@@ -16,6 +16,8 @@ To check for drift, diff the upstream path at the pinned SHA against upstream HE
 
 The repository is https://github.com/cursor/plugins/tree/main/pstack. The pinned commit is `9580c23696ac8d7abed0c166f2f9918800afb819`, from 2026-10-23, at plugin version 0.15.32. The skills were imported on 2026-10-24 and 2026-10-25. Paths in the mapping are relative to `pstack/` in that repo.
 
+`interrogate`, `architect`, and `reflect` follow the later commit `aaeb0ea3a0584995aa8f55ce44c6c5259414b896`, from 2026-11-19, at plugin version 0.15.46, where upstream cut each to one short file. Their mapping rows name paths at that commit. The pin for every other row stays at `9580c23`.
+
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
 ### Matt Pocock
@@ -84,9 +86,9 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/how` | pstack | `skills/how/SKILL.md`, `skills/how/references/` | modified | Explorers run as the `codebase-analyzer` role. |
 | `skills/why` | pstack | `skills/why/SKILL.md`, `skills/why/references/` | modified | Discovery is rewritten for our tools and most source files are new. |
 | `skills/arena` | pstack | `skills/arena/SKILL.md` | verbatim | Runners are `delegate_task` children in worktrees. |
-| `skills/architect` | pstack | `skills/architect/SKILL.md`, `skills/architect/references/` | modified | Runners are one per provider family and the checkpoint maps to our gate. |
+| `skills/architect` | pstack | `skills/architect/SKILL.md` at `aaeb0ea` | verbatim | Byte-identical. A large or contested design runs `arena`, which picks the runners. |
 | `skills/swarm` | pstack | `skills/swarm/SKILL.md` | verbatim | Workers are `delegate_task` children in worktrees. |
-| `skills/interrogate` | pstack | `skills/interrogate/SKILL.md`, `skills/interrogate/references/` | verbatim | Reviewers are one child per provider family. |
+| `skills/interrogate` | pstack | `skills/interrogate/SKILL.md` at `aaeb0ea` | verbatim | Adversaries are one child per provider family on its top model, or one on a model the user names. |
 | `skills/tdd` | pstack | `skills/tdd/SKILL.md` | verbatim | Frontmatter only. |
 | `skills/blast-radius` | pstack | `skills/blast-radius/SKILL.md` | verbatim | Frontmatter only. |
 | `skills/benchmark-checklist` | pstack | `skills/benchmark-checklist/SKILL.md` | modified | One added bullet requires production evidence for deployed-service latency. |
@@ -105,7 +107,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | *User tools* | | | | |
 | `skills/catch-up` | pstack | `skills/ketchup/SKILL.md` | verbatim | Renamed from `ketchup` with `/visualize` mapped to `html_render`. |
 | `skills/recall` | pstack | `skills/recall/SKILL.md` | modified | Transcript paths mapped and the `automate-me` routing dropped. |
-| `skills/reflect` | pstack | `skills/reflect/SKILL.md`, `skills/reflect/references/` | modified | The apply step opens a PR here and the backlog goes to Linear Triage. |
+| `skills/reflect` | pstack | `skills/reflect/SKILL.md` at `aaeb0ea` | modified | The apply step opens a PR here and the backlog goes to Linear Triage. |
 | `skills/correct` | pstack | `skills/correct/SKILL.md` | modified | Mistakes come from review bot threads and fixes ship through `describe-pr` and `review-loop`. |
 | `skills/eval` | pstack | `skills/poteto-mode/playbooks/eval.md` | modified | One added sentence scopes it to behavior-changing PRs to this repo. |
 | `skills/sharpen` | pstack | `skills/sharpen/SKILL.md` | verbatim | Byte-identical. |
