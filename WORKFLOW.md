@@ -149,6 +149,7 @@ Remaining triggers:
 - Any prose surface, your reply to the user included → the **unslop** skill.
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
 - Before review → the **no-comments** skill (`/no-comments`).
+- Starting any agent (a `delegate_task` child, a native subagent, or a new thread) → the first line of its brief is `Read ~/dev/skills/worker.md before anything else.` Skills reach a started agent only through its brief, so `worker.md` carries the rules every agent must keep. Keep the rest of the brief to the goal and the task.
 - Shipping UI or CLI → verify on the real surface via the repo's `verify-<app>` skill when it has one, otherwise by driving the surface directly. For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow `bug-fix` step 1 exception.
 - Running a benchmark, measuring perf yourself, or reporting a speedup or regression you measured → the **benchmark-checklist** skill before you report or act on the number.
 - Any PR-status request ("babysit this", "get it green", "address the bot comments", and most often "check on PR X" or "anything outstanding on X") → `review-loop`'s outer loop, which owns the request-to-mode mapping. Never triggered by merely opening a PR. Declare its mode before polling.
