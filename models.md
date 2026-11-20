@@ -4,7 +4,7 @@ This is the one place roles map to a model family and effort, as the Relay rule 
 
 | Tier | Role | Skills | Family | Effort |
 |---|---|---|---|---|
-| Top | Orchestrator threads | `implement`, `orchestrate` coordinator | newest Fable (Claude) or Astra (Codex) | `medium` |
+| Top | Orchestrator threads | `implement` | newest Fable (Claude) or Astra (Codex) | `medium` |
 | Top | Interrogate reviewers | `interrogate` | newest Fable (Claude) or Astra (Codex), one reviewer per provider family that can run child tasks | `xhigh` |
 | Top | Arena cross-judge | `arena` | newest Fable (Claude) or Astra (Codex), one judge, from a family other than the parent's when possible | `xhigh` |
 | Top | Eval judge | `eval` | newest Fable (Claude) or Astra (Codex), per `arena`'s cross-judge | `xhigh` |
@@ -20,7 +20,6 @@ This is the one place roles map to a model family and effort, as the Relay rule 
 | General | How explainer | `how` | item-thread model | `high` |
 | General | Comment Sicko | `no-comments` | item-thread model | `high` |
 | General | Eval candidates | `eval` | item-thread model, different models per `arena`'s runners | `high` |
-| General | Orchestrate workers | `orchestrate` | item-thread model | `high` |
 | Light | How explorers | `how` | newest Sonnet (Claude) or Luna (Codex), as the `codebase-analyzer` role | `medium` |
 | Light | Why investigators | `why` | newest Sonnet (Claude) or Luna (Codex) | `medium` |
 | Light | Agents | `agents/codebase-locator.md`, `agents/codebase-analyzer.md`, `agents/codebase-pattern-finder.md`, `agents/web-search-researcher.md` | Sonnet (`model: sonnet`) | `medium` |
