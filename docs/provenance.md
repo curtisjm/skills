@@ -27,6 +27,12 @@ The architecture skills were imported on 2026-10-25. Paths in the mapping table 
 
 To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
 
+### Sentry
+
+The repository is https://github.com/getsentry/skills, under the Apache License 2.0. The pinned commit is `a582c51ee29d0f35e6ac321340796f77d43da733`, from 2026-11-14. `find-bugs` was imported on 2026-11-21. Paths in the mapping table are relative to the repo root.
+
+To check for drift, diff the upstream path at the pinned SHA against upstream HEAD, then read our skill.
+
 ### Other
 
 - `review-loop` grew from a local `pr-loop` skill that is not in any upstream.
@@ -89,6 +95,7 @@ Rows follow the order of `docs/skills.md`. HumanLayer paths are relative to the 
 | `skills/interrogate` | pstack | `skills/interrogate/SKILL.md`, `skills/interrogate/references/` | verbatim | Reviewers are one child per provider family. |
 | `skills/tdd` | pstack | `skills/tdd/SKILL.md` | verbatim | Frontmatter only. |
 | `skills/blast-radius` | pstack | `skills/blast-radius/SKILL.md` | verbatim | Frontmatter only. |
+| `skills/find-bugs` | Sentry | `skills/find-bugs/SKILL.md`, `LICENSE` | verbatim | Byte-identical, with the repo's Apache 2.0 `LICENSE` beside it. |
 | `skills/benchmark-checklist` | pstack | `skills/benchmark-checklist/SKILL.md` | modified | One added bullet requires production evidence for deployed-service latency. |
 | `skills/principles` | pstack | `skills/principle-*/SKILL.md`, `skills/poteto-mode/SKILL.md` (Principles), `skills/architect/references/design-red-flags.md` | modified | A new `SKILL.md` frames the verbatim index and leaves. |
 | `skills/unslop` | pstack | `skills/unslop/SKILL.md` | verbatim | Frontmatter only. |

@@ -195,7 +195,7 @@ User-invoked: entry points and step heads. Model-invoked: building blocks other 
 | `how`, `why` | model |
 | `arena`, `swarm` | model |
 | `architect`, `interrogate` | user |
-| `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius` | model |
+| `unslop`, `technical-writing`, `principles`, `tdd`, `benchmark-checklist`, `blast-radius`, `find-bugs` | model |
 | `typescript-best-practices`, `show-me-your-work`, `no-comments` | model |
 | `codebase-design`, `domain-modeling` | model |
 | `describe-pr`, `review-loop`, `ci-commit` | model |
